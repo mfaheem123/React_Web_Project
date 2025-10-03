@@ -1,0 +1,411 @@
+import React, { useState } from "react";
+import {
+  Menu as LucideMenu,
+  X,
+  CalendarDays,
+  Users,
+  DollarSign,
+  MapPin,
+  Car,
+  Wallet,
+  FileText,
+  Truck,
+  BarChart3,
+  Settings,
+  Phone,
+  MessageSquare,
+  Bell,
+  LogOut,
+} from "lucide-react"; // icons
+import logo from "../Assests/logo.jpeg";
+import { NavLink, useNavigate } from "react-router-dom";
+
+// Ant Design imports
+import { Menu, Dropdown, Button } from "antd";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
+
+
+
+const navGroups = [
+  {
+    label: "Bookings",
+    value: "bookings",
+    icon: <CalendarDays className="w-4 h-4" />,
+    subItems: [
+      { label: "Create Bookings", value: "create_booking" },
+      { label: "Complete Bookings", value: "#" },
+      { label: "Pending Bookings", value: "#" },
+      { label: "Pre Bookings", value: "#" },
+      { label: "Web Bookings", value: "#" },
+      { label: "App Bookings", value: "#" },
+      { label: "Multi Bookings", value: "#" },
+      { label: "Trash Bookings", value: "#" },
+    ],
+  },
+  {
+    label: "Customer",
+    value: "customer",
+    icon: <Users className="w-4 h-4" />,
+    subItems: [
+      { label: "Add Customer", value: "#" },
+      { label: "Customers", value: "#" },
+      { label: "Create Lost Property", value: "#" },
+      { label: "Lost Properties", value: "#" },
+      { label: "Create Complaint", value: "#" },
+      { label: "Complaint", value: "#" },
+    ],
+  },
+  {
+    label: "Fares",
+    value: "#",
+    icon: <DollarSign className="w-4 h-4" />,
+    subItems: [
+      { label: "Create Fare Settings", value: "#" },
+      { label: "Create Fixed Fare Settings", value: "#" },
+      { label: "Create Plot Fare", value: "#" },
+      { label: "Create Fare By vehicle Settings", value: "#" },
+      { label: "Airport Charges", value: "#" },
+      { label: "Fare Increment", value: "#" },
+      { label: "Surcharges", value: "#" },
+      { label: "Fare Meter", value: "#" },
+    ],
+  },
+  {
+    label: "Location",
+    value: "#",
+    icon: <MapPin className="w-4 h-4" />,
+    subItems: [
+      { label: "Add Location", value: "#" },
+      { label: "Locations", value: "#" },
+      { label: "Create Zone", value: "#" },
+      { label: "Zones", value: "#" },
+      { label: "Localization", value: "#" },
+    ],
+  },
+  {
+    label: "Driver",
+    value: "#",
+    icon: <Car className="w-4 h-4" />,
+    subItems: [
+      {
+        label: "Driver Options",
+        value: "#",
+        subItems: [
+          { label: "Add Driver", value: "#" },
+          { label: "Drivers", value: "#" },
+          { label: "Login/Logout Driver", value: "#" },
+        ],
+      },
+      {
+        label: "Driver Commision",
+        value: "#",
+        subItems: [
+          { label: "Create Driver Commission", value: "#" },
+          { label: "Driver Commission", value: "#" },
+          { label: "Bulk Driver Commission", value: "#" },
+          { label: "Driver Commission Pay", value: "#" },
+        ],
+      },
+      {
+        label: "Driver Rent",
+        value: "#",
+        subItems: [
+          { label: "Create Driver Rent", value: "#" },
+          { label: "Driver Rent", value: "#" },
+          { label: "Bulk Driver Rent", value: "#" },
+          { label: "Driver Rent Pay", value: "#" },
+        ],
+      },
+      { label: "Driver App Features", value: "#" },
+      { label: "Driver Sin Bin", value: "#" },
+
+
+    ]
+  },
+  {
+    label: "Accounts",
+    value: "accounts",
+    icon: <Wallet className="w-4 h-4" />,
+    subItems: [
+      { label: "Create Account", value: "#" },
+      { label: "Accounts", value: "#" },
+      { label: "Create Escort", value: "#" },
+      { label: "Escort", value: "#" },
+    ],
+  },
+  {
+    label: "Invoices",
+    value: "invoices",
+    icon: <FileText className="w-4 h-4" />,
+    subItems: [
+      { label: "Create Customer Invoice", value: "add-vehicle" },
+      { label: "Customer Invoice", value: "#" },
+      { label: "Create Acount Invoice", value: "#" },
+      { label: "Acount Invoice", value: "#" },
+      { label: "Create Customer Pre Invoice", value: "add-vehicle" },
+      { label: "Customer Pre Invoice", value: "add-vehicle" },
+      { label: "Create Acount Pre Invoice", value: "#" },
+      { label: "Acount Pre Invoice", value: "#" },
+    ],
+  },
+  {
+    label: "Vehicles",
+    value: "vehicles",
+    icon: <Truck className="w-4 h-4" />,
+    subItems: [
+      { label: "Create Vehicle Type", value: "#" },
+      { label: "Vehicle Types", value: "#" },
+      { label: "Create Company Vehicle ", value: "#" },
+      { label: "Company Vehicle ", value: "#" },
+    ],
+  },
+  {
+    label: "Reports",
+    value: "reports",
+    icon: <BarChart3 className="w-4 h-4" />,
+    subItems: [
+      {
+        label: "Driver", value: "#",
+        subItems: [
+          { label: "Login", value: "#" },
+          { label: "Log", value: "#" },
+          { label: "Earnings & Info", value: "#" },
+          { label: "Statistics", value: "#" },
+          { label: "Feedback", value: "#" },
+        ],
+      },
+      {
+        label: "Bookings", value: "#",
+        subItems: [
+          { label: "All Bookings", value: "#" },
+          { label: "Transfered Bookings", value: "#" },
+
+        ],
+      },
+      {
+        label: "Employee", value: "#",
+        subItems: [
+          { label: "Activity", value: "#" },
+
+        ],
+      },
+      {
+        label: "Income", value: "#",
+        subItems: [
+          { label: "Income ", value: "#" },
+          { label: "Company Invoice", value: "#" },
+          { label: "credit Card Paid ", value: "#" },
+
+        ],
+      },
+      { label: "PCO", value: "#" },
+    ],
+  },
+  {
+    label: "Administration",
+    value: "administration",
+    icon: <Settings className="w-4 h-4" />,
+    subItems: [
+      { label: "Create User", value: "#" },
+      { label: "Users", value: "#" },
+      { label: "Create Subsdiary", value: "#" },
+      { label: "Authorization", value: "#" },
+    ],
+  },
+];
+
+
+const secondNav = [
+  { label: "Phone", icon: <Phone className="w-4 h-4" /> },
+  { label: "Messages", icon: <MessageSquare className="w-4 h-4" /> },
+  { label: "Notifications", icon: <Bell className="w-4 h-4" /> },
+  { label: "Settings", icon: <Settings className="w-4 h-4" /> },
+  { label: "Logout", icon: <LogOut className="w-4 h-4" /> },
+];
+
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openGroups, setOpenGroups] = useState({});
+  const navigate = useNavigate();
+
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const toggleGroup = (value) => setOpenGroups(prev => ({ ...prev, [value]: !prev[value] }));
+
+  // Recursive function for nested subItems
+  const renderMenuItems = (items) =>
+    items.map(item =>
+      item.subItems ? (
+        <Menu.SubMenu
+          key={item.value}
+          title={
+            <span className="flex items-center justify-between gap-2">
+              {item.icon && item.icon} {item.label}
+            </span>
+          }
+        >
+          {renderMenuItems(item.subItems)}
+        </Menu.SubMenu>
+      ) : (
+        <Menu.Item
+          key={item.value}
+          onClick={() => navigate(`/${item.value}`)}
+          style={{ backgroundColor: 'transparent', border: 'none', color: '#000' }}
+          className="hover:text-[#757cdd]"
+        >
+          {item.label}
+        </Menu.Item>
+      )
+    );
+
+
+  return (
+    <nav className="fixed top-0 left-0 w-full z-50 bg-[#424899] text-white shadow-md">
+      <div className="max-w-[100%] mx-auto px-6 lg:px-12">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <img src={logo} alt="logo" className="w-14 h-14 object-contain shadow-sm" />
+          </div>
+
+          {/* Desktop Nav Items (Large screens) */}
+          <div className="hidden lg:flex items-center space-x-2">
+            {navGroups.map(group =>
+              group.subItems ? (
+                <Dropdown
+                  key={group.value}
+                  overlay={<Menu mode="vertical">{renderMenuItems(group.subItems)}</Menu>}
+                  placement="bottomLeft"
+                  arrow
+                >
+                  <Button
+                    className="flex items-center gap-2 text-white hover:text-[#757cdd] border-none"
+                    style={{ backgroundColor: 'transparent', border: 'none' }}
+                  >
+                    {group.icon} {group.label} <DownOutlined />
+                  </Button>
+                </Dropdown>
+              ) : (
+                <Button
+                  key={group.value}
+                  className="flex items-center gap-2 text-white hover:text-[#757cdd] border-none"
+                  style={{ backgroundColor: 'transparent', border: 'none' }}
+                  onClick={() => navigate(`/${group.value}`)}
+                >
+                  {group.icon} {group.label}
+                </Button>
+              )
+            )}
+          </div>
+
+          {/* Desktop Secondary Nav (Large screens) */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {secondNav.map(({ label, icon }) => (
+              <button key={label} title={label} className="flex items-center gap-1 rounded-md text-white hover:text-[#757cdd] transition-colors duration-200">
+                {icon}
+              </button>
+            ))}
+          </div>
+
+          {/* Tablet Menu (Medium screens) */}
+          <div className="hidden md:flex lg:hidden items-center space-x-4">
+
+            {/* Hamburger for main navGroups */}
+            <div className="relative">
+              <button
+                onClick={() => setIsMenuOpen(prev => !prev)}
+                className="flex items-center justify-center px-4 py-2 bg-[#424899] text-white font-semibold rounded-md"
+              >
+                <LucideMenu className="w-6 h-6" />
+              </button>
+
+              {isMenuOpen && (
+                <div className="absolute top-full right-0 mt-2 w-64 bg-[#424899] shadow-md rounded-md z-50">
+                  <div className="flex flex-col">
+                    {navGroups.map(group => (
+                      <div key={group.value} className="border-b border-gray-600">
+                        {/* Top-level group */}
+                        <div
+                          onClick={() => toggleGroup(group.value)}
+                          className="flex justify-between items-center px-4 py-3 cursor-pointer hover:bg-[#757cdd] rounded-md"
+                        >
+                          <span className="flex items-center gap-2">
+                            {group.icon} {group.label}
+                          </span>
+                          {group.subItems?.length > 0 && (
+                            <span>{openGroups[group.value] ? <UpOutlined /> : <DownOutlined />}</span>
+                          )}
+                        </div>
+
+                        {/* First-level subItems only */}
+                        {openGroups[group.value] && group.subItems && (
+                          <div className="flex flex-col pl-8 bg-[#353a8c]">
+                            {group.subItems.map(sub => (
+                              <NavLink
+                                key={sub.value}
+                                to={`/${sub.value}`}
+                                onClick={() => setIsMenuOpen(false)}
+                                className="block px-4 py-2 text-white hover:bg-[#757cdd] rounded-md"
+                              >
+                                {sub.label}
+                              </NavLink>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+
+            </div>
+            {/* Show only secondary nav */}
+            {secondNav.map(({ label, icon }) => (
+              <button key={label} className="flex items-center gap-1 rounded-md text-white hover:text-[#757cdd] transition-colors duration-200">
+                {icon}
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile Menu (Small screens) */}
+          <div className="flex justify-end md:hidden items-center relative w-[60%]">
+            <button
+              onClick={() => setIsMenuOpen(prev => !prev)}
+              className="flex items-center justify-center px-4 py-2 bg-[#424899] text-white font-semibold rounded-md"
+            >
+              Bookings
+              <LucideMenu className="w-6 h-6 ml-2" />
+            </button>
+
+            {isMenuOpen && (
+              <div className="absolute top-full left-0 mt-2 w-56 bg-[#424899] shadow-md rounded-md z-50">
+                <div className="flex flex-col">
+                  {/* Only show selected top-level group like "Bookings" */}
+                  {navGroups
+                    .find(group => group.label.toLowerCase() === "bookings")
+                    ?.subItems?.[0] && (  // Sirf pehla item
+                      <NavLink
+                        key={navGroups.find(group => group.label.toLowerCase() === "bookings")?.subItems[0].value}
+                        to={`/${navGroups.find(group => group.label.toLowerCase() === "bookings")?.subItems[0].value}`}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block px-4 py-2 text-white hover:bg-[#757cdd] rounded-md"
+                      >
+                        {navGroups.find(group => group.label.toLowerCase() === "bookings")?.subItems[0].label}
+                      </NavLink>
+                    )}
+
+                </div>
+              </div>
+            )}
+          </div>
+
+
+
+        </div>
+      </div>
+
+    </nav >
+  );
+};
+
+export default Navbar;
