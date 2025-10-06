@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Menu as LucideMenu,
-  X,
   CalendarDays,
   Users,
   DollarSign,
@@ -17,13 +16,11 @@ import {
   Bell,
   LogOut,
 } from "lucide-react"; // icons
-import logo from "../Assests/logo.jpeg";
 import { NavLink, useNavigate } from "react-router-dom";
 
 // Ant Design imports
 import { Menu, Dropdown, Button } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
-
 
 
 const navGroups = [
@@ -223,12 +220,12 @@ const secondNav = [
   { label: "Logout", icon: <LogOut className="w-4 h-4" /> },
 ];
 
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openGroups, setOpenGroups] = useState({});
   const navigate = useNavigate();
 
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const toggleGroup = (value) => setOpenGroups(prev => ({ ...prev, [value]: !prev[value] }));
 
   // Recursive function for nested subItems
@@ -257,15 +254,18 @@ const Navbar = () => {
       )
     );
 
-
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-[#424899] text-white shadow-md">
       <div className="max-w-[100%] mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <img src={logo} alt="logo" className="w-14 h-14 object-contain shadow-sm" />
+
+          {/* Heading */}
+          <div className="flex items-center gap-2 flex-shrink-0 ">
+            <NavLink to={'/'}>
+              <h1 className="text-white font-extrabold text-5xl tracking-wide">Nexus</h1>
+            </NavLink>
           </div>
+
 
           {/* Desktop Nav Items (Large screens) */}
           <div className="hidden lg:flex items-center space-x-2">
@@ -403,7 +403,6 @@ const Navbar = () => {
 
         </div>
       </div>
-
     </nav >
   );
 };

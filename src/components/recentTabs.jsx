@@ -5,6 +5,14 @@ import { useLocation } from "react-router-dom";
 const RecentTabsHeader = () => {
     const location = useLocation(); // Detect page change
     const [recentTabs, setRecentTabs] = useState([]);
+    // const navigate = useNavigate()
+
+    // const Moveto = () => {
+    //     useEffect(() => { 
+             
+    //     })
+    // }
+
 
     const closeTab = (tab) => {
         setRecentTabs(recentTabs.filter((t) => t !== tab));

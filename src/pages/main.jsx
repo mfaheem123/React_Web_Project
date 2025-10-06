@@ -5,6 +5,7 @@ import DriverHeader from "../layout/driverHeader";
 import RecentTabsHeader from "../components/recentTabs";
 import { useEffect, useState } from "react";
 import BookingTable from "../layout/dataTables";
+import MissingJobsButton from "../components/JobsBtn";
 
 
 const MainPage = () => {
@@ -44,6 +45,11 @@ const MainPage = () => {
     setHidedashboard((prev) => !prev);
   };
 
+  const missingJobs = [
+    "Driver Ali missed Job #101",
+    "Driver Farhan missed Job #102",
+    "Driver Sara missed Job #103",
+  ];
 
 
 
@@ -102,18 +108,22 @@ const MainPage = () => {
             {/* Right Section */}
             <div className="w-full lg:w-1/2 flex flex-col gap-4 lg:flex-row">
               {/* Top / Left inside Right */}
+              <div className="w-full lg:w-3/4 flex flex-col gap-4">
+                <MapPlotSection className="w-full h-[400px] sm:h-[400px] md:h-[400px] lg:h-[600px] min-h-[400px] lg:min-h-[600px]" />
+              </div>
+
+
+              {/* Bottom / Right inside Right */}
               <div className="w-full lg:w-2/4">
                 <DriverHeader />
               </div>
 
-              {/* Bottom / Right inside Right */}
-              <div className="w-full lg:w-3/4 flex flex-col gap-4">
-                <MapPlotSection className="w-full h-[400px] sm:h-[400px] md:h-[400px] lg:h-[600px] min-h-[400px] lg:min-h-[600px]" />
-              </div>
             </div>
           </div>
         )}
 
+        {/* Jobs Floating Button */}
+        <MissingJobsButton missingJobs={missingJobs} />
 
       </div>
 
