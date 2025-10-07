@@ -19,209 +19,235 @@ import {
 import { NavLink, useNavigate } from "react-router-dom";
 
 // Ant Design imports
-import { Menu, Dropdown, Button } from "antd";
+import { Menu, Dropdown, Button, Modal } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { Checkbox, Form, Input } from 'antd';
 
-
-const navGroups = [
-  {
-    label: "Bookings",
-    value: "bookings",
-    icon: <CalendarDays className="w-4 h-4" />,
-    subItems: [
-      { label: "Create Bookings", value: "create_booking" },
-      { label: "Complete Bookings", value: "#" },
-      { label: "Pending Bookings", value: "#" },
-      { label: "Pre Bookings", value: "#" },
-      { label: "Web Bookings", value: "#" },
-      { label: "App Bookings", value: "#" },
-      { label: "Multi Bookings", value: "#" },
-      { label: "Trash Bookings", value: "#" },
-    ],
-  },
-  {
-    label: "Customer",
-    value: "customer",
-    icon: <Users className="w-4 h-4" />,
-    subItems: [
-      { label: "Add Customer", value: "#" },
-      { label: "Customers", value: "#" },
-      { label: "Create Lost Property", value: "#" },
-      { label: "Lost Properties", value: "#" },
-      { label: "Create Complaint", value: "#" },
-      { label: "Complaint", value: "#" },
-    ],
-  },
-  {
-    label: "Fares",
-    value: "#",
-    icon: <DollarSign className="w-4 h-4" />,
-    subItems: [
-      { label: "Create Fare Settings", value: "#" },
-      { label: "Create Fixed Fare Settings", value: "#" },
-      { label: "Create Plot Fare", value: "#" },
-      { label: "Create Fare By vehicle Settings", value: "#" },
-      { label: "Airport Charges", value: "#" },
-      { label: "Fare Increment", value: "#" },
-      { label: "Surcharges", value: "#" },
-      { label: "Fare Meter", value: "#" },
-    ],
-  },
-  {
-    label: "Location",
-    value: "#",
-    icon: <MapPin className="w-4 h-4" />,
-    subItems: [
-      { label: "Add Location", value: "#" },
-      { label: "Locations", value: "#" },
-      { label: "Create Zone", value: "#" },
-      { label: "Zones", value: "#" },
-      { label: "Localization", value: "#" },
-    ],
-  },
-  {
-    label: "Driver",
-    value: "#",
-    icon: <Car className="w-4 h-4" />,
-    subItems: [
-      {
-        label: "Driver Options",
-        value: "#",
-        subItems: [
-          { label: "Add Driver", value: "#" },
-          { label: "Drivers", value: "#" },
-          { label: "Login/Logout Driver", value: "#" },
-        ],
-      },
-      {
-        label: "Driver Commision",
-        value: "#",
-        subItems: [
-          { label: "Create Driver Commission", value: "#" },
-          { label: "Driver Commission", value: "#" },
-          { label: "Bulk Driver Commission", value: "#" },
-          { label: "Driver Commission Pay", value: "#" },
-        ],
-      },
-      {
-        label: "Driver Rent",
-        value: "#",
-        subItems: [
-          { label: "Create Driver Rent", value: "#" },
-          { label: "Driver Rent", value: "#" },
-          { label: "Bulk Driver Rent", value: "#" },
-          { label: "Driver Rent Pay", value: "#" },
-        ],
-      },
-      { label: "Driver App Features", value: "#" },
-      { label: "Driver Sin Bin", value: "#" },
-
-
-    ]
-  },
-  {
-    label: "Accounts",
-    value: "accounts",
-    icon: <Wallet className="w-4 h-4" />,
-    subItems: [
-      { label: "Create Account", value: "#" },
-      { label: "Accounts", value: "#" },
-      { label: "Create Escort", value: "#" },
-      { label: "Escort", value: "#" },
-    ],
-  },
-  {
-    label: "Invoices",
-    value: "invoices",
-    icon: <FileText className="w-4 h-4" />,
-    subItems: [
-      { label: "Create Customer Invoice", value: "add-vehicle" },
-      { label: "Customer Invoice", value: "#" },
-      { label: "Create Acount Invoice", value: "#" },
-      { label: "Acount Invoice", value: "#" },
-      { label: "Create Customer Pre Invoice", value: "add-vehicle" },
-      { label: "Customer Pre Invoice", value: "add-vehicle" },
-      { label: "Create Acount Pre Invoice", value: "#" },
-      { label: "Acount Pre Invoice", value: "#" },
-    ],
-  },
-  {
-    label: "Vehicles",
-    value: "vehicles",
-    icon: <Truck className="w-4 h-4" />,
-    subItems: [
-      { label: "Create Vehicle Type", value: "#" },
-      { label: "Vehicle Types", value: "#" },
-      { label: "Create Company Vehicle ", value: "#" },
-      { label: "Company Vehicle ", value: "#" },
-    ],
-  },
-  {
-    label: "Reports",
-    value: "reports",
-    icon: <BarChart3 className="w-4 h-4" />,
-    subItems: [
-      {
-        label: "Driver", value: "#",
-        subItems: [
-          { label: "Login", value: "#" },
-          { label: "Log", value: "#" },
-          { label: "Earnings & Info", value: "#" },
-          { label: "Statistics", value: "#" },
-          { label: "Feedback", value: "#" },
-        ],
-      },
-      {
-        label: "Bookings", value: "#",
-        subItems: [
-          { label: "All Bookings", value: "#" },
-          { label: "Transfered Bookings", value: "#" },
-
-        ],
-      },
-      {
-        label: "Employee", value: "#",
-        subItems: [
-          { label: "Activity", value: "#" },
-
-        ],
-      },
-      {
-        label: "Income", value: "#",
-        subItems: [
-          { label: "Income ", value: "#" },
-          { label: "Company Invoice", value: "#" },
-          { label: "credit Card Paid ", value: "#" },
-
-        ],
-      },
-      { label: "PCO", value: "#" },
-    ],
-  },
-  {
-    label: "Administration",
-    value: "administration",
-    icon: <Settings className="w-4 h-4" />,
-    subItems: [
-      { label: "Create User", value: "#" },
-      { label: "Users", value: "#" },
-      { label: "Create Subsdiary", value: "#" },
-      { label: "Authorization", value: "#" },
-    ],
-  },
-];
-
-
-const secondNav = [
-  { label: "Phone", icon: <Phone className="w-4 h-4" /> },
-  { label: "Messages", icon: <MessageSquare className="w-4 h-4" /> },
-  { label: "Notifications", icon: <Bell className="w-4 h-4" /> },
-  { label: "Settings", icon: <Settings className="w-4 h-4" /> },
-  { label: "Logout", icon: <LogOut className="w-4 h-4" /> },
-];
 
 
 const Navbar = () => {
+
+  // Extention Button Ka Modal Or Function
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const onFinish = values => {
+    console.log('Success:', values);
+  };
+ 
+
+
+  const navGroups = [
+    {
+      label: "Bookings",
+      value: "bookings",
+      icon: <CalendarDays className="w-4 h-4" />,
+      subItems: [
+        { label: "Create Bookings", value: "create_booking" },
+        { label: "Complete Bookings", value: "#" },
+        { label: "Pending Bookings", value: "#" },
+        { label: "Pre Bookings", value: "#" },
+        { label: "Web Bookings", value: "#" },
+        { label: "App Bookings", value: "#" },
+        { label: "Multi Bookings", value: "#" },
+        { label: "Trash Bookings", value: "#" },
+      ],
+    },
+    {
+      label: "Customer",
+      value: "customer",
+      icon: <Users className="w-4 h-4" />,
+      subItems: [
+        { label: "Add Customer", value: "#" },
+        { label: "Customers", value: "#" },
+        { label: "Create Lost Property", value: "#" },
+        { label: "Lost Properties", value: "#" },
+        { label: "Create Complaint", value: "#" },
+        { label: "Complaint", value: "#" },
+      ],
+    },
+    {
+      label: "Fares",
+      value: "#",
+      icon: <DollarSign className="w-4 h-4" />,
+      subItems: [
+        { label: "Create Fare Settings", value: "#" },
+        { label: "Create Fixed Fare Settings", value: "#" },
+        { label: "Create Plot Fare", value: "#" },
+        { label: "Create Fare By vehicle Settings", value: "#" },
+        { label: "Airport Charges", value: "#" },
+        { label: "Fare Increment", value: "#" },
+        { label: "Surcharges", value: "#" },
+        { label: "Fare Meter", value: "#" },
+      ],
+    },
+    {
+      label: "Location",
+      value: "#",
+      icon: <MapPin className="w-4 h-4" />,
+      subItems: [
+        { label: "Add Location", value: "#" },
+        { label: "Locations", value: "#" },
+        { label: "Create Zone", value: "#" },
+        { label: "Zones", value: "#" },
+        { label: "Localization", value: "#" },
+      ],
+    },
+    {
+      label: "Driver",
+      value: "#",
+      icon: <Car className="w-4 h-4" />,
+      subItems: [
+        {
+          label: "Driver Options",
+          value: "#",
+          subItems: [
+            { label: "Add Driver", value: "#" },
+            { label: "Drivers", value: "#" },
+            { label: "Login/Logout Driver", value: "#" },
+          ],
+        },
+        {
+          label: "Driver Commision",
+          value: "#",
+          subItems: [
+            { label: "Create Driver Commission", value: "#" },
+            { label: "Driver Commission", value: "#" },
+            { label: "Bulk Driver Commission", value: "#" },
+            { label: "Driver Commission Pay", value: "#" },
+          ],
+        },
+        {
+          label: "Driver Rent",
+          value: "#",
+          subItems: [
+            { label: "Create Driver Rent", value: "#" },
+            { label: "Driver Rent", value: "#" },
+            { label: "Bulk Driver Rent", value: "#" },
+            { label: "Driver Rent Pay", value: "#" },
+          ],
+        },
+        { label: "Driver App Features", value: "#" },
+        { label: "Driver Sin Bin", value: "#" },
+
+
+      ]
+    },
+    {
+      label: "Accounts",
+      value: "accounts",
+      icon: <Wallet className="w-4 h-4" />,
+      subItems: [
+        { label: "Create Account", value: "#" },
+        { label: "Accounts", value: "#" },
+        { label: "Create Escort", value: "#" },
+        { label: "Escort", value: "#" },
+      ],
+    },
+    {
+      label: "Invoices",
+      value: "invoices",
+      icon: <FileText className="w-4 h-4" />,
+      subItems: [
+        { label: "Create Customer Invoice", value: "add-vehicle" },
+        { label: "Customer Invoice", value: "#" },
+        { label: "Create Acount Invoice", value: "#" },
+        { label: "Acount Invoice", value: "#" },
+        { label: "Create Customer Pre Invoice", value: "add-vehicle" },
+        { label: "Customer Pre Invoice", value: "add-vehicle" },
+        { label: "Create Acount Pre Invoice", value: "#" },
+        { label: "Acount Pre Invoice", value: "#" },
+      ],
+    },
+    {
+      label: "Vehicles",
+      value: "vehicles",
+      icon: <Truck className="w-4 h-4" />,
+      subItems: [
+        { label: "Create Vehicle Type", value: "#" },
+        { label: "Vehicle Types", value: "#" },
+        { label: "Create Company Vehicle ", value: "#" },
+        { label: "Company Vehicle ", value: "#" },
+      ],
+    },
+    {
+      label: "Reports",
+      value: "reports",
+      icon: <BarChart3 className="w-4 h-4" />,
+      subItems: [
+        {
+          label: "Driver", value: "#",
+          subItems: [
+            { label: "Login", value: "#" },
+            { label: "Log", value: "#" },
+            { label: "Earnings & Info", value: "#" },
+            { label: "Statistics", value: "#" },
+            { label: "Feedback", value: "#" },
+          ],
+        },
+        {
+          label: "Bookings", value: "#",
+          subItems: [
+            { label: "All Bookings", value: "#" },
+            { label: "Transfered Bookings", value: "#" },
+
+          ],
+        },
+        {
+          label: "Employee", value: "#",
+          subItems: [
+            { label: "Activity", value: "#" },
+
+          ],
+        },
+        {
+          label: "Income", value: "#",
+          subItems: [
+            { label: "Income ", value: "#" },
+            { label: "Company Invoice", value: "#" },
+            { label: "credit Card Paid ", value: "#" },
+
+          ],
+        },
+        { label: "PCO", value: "#" },
+      ],
+    },
+    {
+      label: "Administration",
+      value: "administration",
+      icon: <Settings className="w-4 h-4" />,
+      subItems: [
+        { label: "Create User", value: "#" },
+        { label: "Users", value: "#" },
+        { label: "Create Subsdiary", value: "#" },
+        { label: "Authorization", value: "#" },
+      ],
+    },
+  ];
+
+
+  const secondNav = [
+    {
+      label: "Extention No", icon: <Button
+        onClick={showModal}
+        className="text-[#424899]"
+      >
+        Extention No
+      </Button>
+    },
+    { label: "Phone", icon: <Phone className="w-4 h-4" /> },
+    { label: "Messages", icon: <MessageSquare className="w-4 h-4" /> },
+    { label: "Notifications", icon: <Bell className="w-4 h-4" /> },
+    { label: "Settings", icon: <Settings className="w-4 h-4" /> },
+    { label: "Logout", icon: <LogOut className="w-4 h-4" /> },
+  ];
+
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openGroups, setOpenGroups] = useState({});
   const navigate = useNavigate();
@@ -254,10 +280,11 @@ const Navbar = () => {
       )
     );
 
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-[#424899] text-white shadow-md">
       <div className="max-w-[100%] mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 w-full">
 
           {/* Heading */}
           <div className="flex items-center gap-2 flex-shrink-0 ">
@@ -266,9 +293,8 @@ const Navbar = () => {
             </NavLink>
           </div>
 
-
           {/* Desktop Nav Items (Large screens) */}
-          <div className="hidden lg:flex items-center space-x-2">
+          <div className="hidden lg:flex items-center space-x-0">
             {navGroups.map(group =>
               group.subItems ? (
                 <Dropdown
@@ -297,14 +323,71 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Desktop Secondary Nav (Large screens) */}
-          <div className="hidden lg:flex items-center space-x-4">
-            {secondNav.map(({ label, icon }) => (
-              <button key={label} title={label} className="flex items-center gap-1 rounded-md text-white hover:text-[#757cdd] transition-colors duration-200">
-                {icon}
-              </button>
-            ))}
-          </div>
+          <>
+            {/* Desktop Secondary Nav (Large screens) */}
+            <div className="hidden lg:flex items-center space-x-3">
+              {secondNav.map(({ label, icon }) => (
+                <button
+                  key={label}
+                  title={label}
+                  className="flex items-center gap-1 rounded-md text-white hover:text-[#757cdd] transition-colors duration-200"
+                >
+                  {icon}
+                </button>
+              ))}
+            </div>
+
+            {/* Modal (should be outside of map) */}
+            <Modal
+              open={isModalOpen}
+              footer={null}
+              onCancel={handleCancel}
+            >
+              <Form
+                name="extension-form"
+                layout="vertical"
+                className="w-full max-w-md bg-white p-6 rounded-2xl shadow-md"
+                initialValues={{ remember: false }}
+                autoComplete="off"
+              >
+                <h2 className="text-xl font-semibold mb-4 text-[#757cdd] text-center">
+                  Extension Number
+                </h2>
+
+                <Form.Item
+                  label={<span className="font-medium text-gray-700">Extension No</span>}
+                  name="extensionNo"
+                  rules={[{ required: true, message: "Please input your extension number!" }]}
+                >
+                  <Input
+                    type="number"
+                    placeholder="Enter extension number"
+                    className="h-10"
+                  />
+                </Form.Item>
+
+                <Form.Item
+                  name="remember"
+                  valuePropName="checked"
+                  className="mb-3"
+                >
+                  <Checkbox>Permanent Save</Checkbox>
+                </Form.Item>
+
+                <Form.Item className="text-center mb-0">
+                  <Button
+                    onClick={onFinish}
+                    type="primary"
+                    htmlType="submit"
+                    className="bg-[#757cdd] border-none hover:!bg-[#5a60d1] px-8 py-2"
+                  >
+                    Save
+                  </Button>
+                </Form.Item>
+              </Form>
+
+            </Modal>
+          </>
 
           {/* Tablet Menu (Medium screens) */}
           <div className="hidden md:flex lg:hidden items-center space-x-4">
