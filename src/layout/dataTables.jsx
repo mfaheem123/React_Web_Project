@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Edit, Trash2, Share2 } from "lucide-react";
 
 const bookingData = [
@@ -351,6 +351,7 @@ const statusColors = {
     WAITING: "bg-green-500 text-white",
 };
 
+
 const BookingTable = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedRows, setSelectedRows] = useState([]);
@@ -387,20 +388,78 @@ const BookingTable = () => {
     const handleDelete = (row) => alert(`Delete → Ref: ${row.ref}, Customer: ${row.cust}`);
     const handleDispatch = (row) => alert(`Dispatch → Ref: ${row.ref}, Customer: ${row.cust}`);
 
+    const [altActive, setAltActive] = useState(false);
+    const buttons = [
+        "Booking",
+        "Pre Booking",
+        "Recent Booking",
+        "Quoted Booking",
+        "Web Booking",
+        "App Booking",
+        "IVR Booking",
+        "Today Booking",
+    ];
+
+
+
+    useEffect(() => {
+        let lastAltPressTime = 0;
+
+        const handleKeyDown = (e) => {
+            if (e.key === "Alt") {
+                const now = Date.now();
+                // Debounce thoda sa lagaya taki ek hi press mein 2 bar trigger na ho
+                if (now - lastAltPressTime > 200) {
+                    setAltActive((prev) => !prev); // toggle
+                }
+                lastAltPressTime = now;
+                e.preventDefault();
+            }
+
+            // Agar Alt active hai aur koi letter press hua
+            if (altActive && /^[a-zA-Z]$/.test(e.key)) {
+                const match = buttons.find(
+                    (btn) => btn[0].toLowerCase() === e.key.toLowerCase()
+                );
+                if (match) {
+                    alert(`Navigating to "${match}" button`);
+                    document.getElementById(match)?.click();
+                }
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [altActive]);
+
     return (
         <div className="w-full overflow-x-auto mt-6">
             {/* Top Buttons */}
             <div className="flex justify-between w-full mb-6 p-3 rounded-lg shadow-md">
                 <div className="flex flex-wrap gap-3">
-                    <button className="px-5 py-2 rounded-lg bg-gray-200 font-semibold hover:bg-gray-300 transition"> Booking </button>
-                    <button className="px-5 py-2 rounded-lg bg-gray-200 font-semibold hover:bg-gray-300 transition"> Pre Booking </button>
-                    <button className="px-5 py-2 rounded-lg bg-gray-200 font-semibold hover:bg-gray-300 transition"> Recent Booking </button>
-                    <button className="px-5 py-2 rounded-lg bg-gray-200 font-semibold hover:bg-gray-300 transition"> Quoted Booking </button>
-                    <button className="px-5 py-2 rounded-lg bg-gray-200 font-semibold hover:bg-gray-300 transition"> Web Booking </button>
-                    <button className="px-5 py-2 rounded-lg bg-gray-200 font-semibold hover:bg-gray-300 transition"> App Booking </button>
-                    <button className="px-5 py-2 rounded-lg bg-gray-200 font-semibold hover:bg-gray-300 transition"> IVR Booking </button>
-                    <button className="px-5 py-2 rounded-lg bg-gray-200 font-semibold hover:bg-gray-300 transition"> Today Booking </button>
-                    <select name="job due date" className="px-5 py-2 rounded-lg bg-gray-200 font-semibold hover:bg-gray-300 transition" >
+                    {buttons.map((btn, index) => (
+                        <button
+                            key={index}
+                            id={btn}
+                            className="px-5 py-2 rounded-lg bg-gray-200 font-semibold hover:bg-gray-300 transition"
+                        >
+                            {altActive ? (
+                                <span>
+                                    <span className="text-red-600 font-bold">
+                                        {btn[0].toUpperCase()}
+                                    </span>
+                                    {btn.slice(1)}
+                                </span>
+                            ) : (
+                                btn
+                            )}
+                        </button>
+                    ))}
+
+                    <select className="px-5 py-2 rounded-lg bg-gray-200 font-semibold hover:bg-gray-300 transition">
                         <option>Job Due By</option>
                         <option>15 Min</option>
                         <option>30 Min</option>

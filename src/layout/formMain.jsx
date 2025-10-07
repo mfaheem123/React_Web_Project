@@ -498,7 +498,7 @@ const BookingForm = () => {
                     name="fare"
                     value={formData.fare}
                     onChange={handleChange}
-                    className="sm:col-span-2 border border-gray-300 rounded px-2 py-1"
+                    className="sm:col-span-1 border border-gray-300 rounded px-2 py-1"
                     sx={{
                         '& .MuiOutlinedInput-root': {
                             height: 32, // height in px
