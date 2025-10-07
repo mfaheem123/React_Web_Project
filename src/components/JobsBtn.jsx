@@ -14,9 +14,9 @@ export default function MissingJobsButton({ missingJobs }) {
             <Button
                 type="button"
                 onClick={toggleModal}
-                className="fixed bottom-6 right-6 bg-red-600 text-white p-4 rounded-full shadow-lg hover:bg-red-4 00 transition-all duration-300 z-50 animate-bounce h-[8vh] mb-20"
+                className="fixed bottom-6 right-6 bg-red-600 text-white p-4 rounded-full shadow-lg hover:bg-red-4 00 transition-all duration-300 z-50 animate-bounce h-[7vh] mb-20"
             >
-                <FaExclamationCircle size={48} className="w-15 h-15" />
+                <FaExclamationCircle size={48} className="w-8 h-9" />
 
                 {/* Small badge count */}
                 {missingJobs.length > 0 && (

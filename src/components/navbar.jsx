@@ -39,7 +39,7 @@ const Navbar = () => {
   const onFinish = values => {
     console.log('Success:', values);
   };
- 
+
 
 
   const navGroups = [
@@ -91,8 +91,8 @@ const Navbar = () => {
       value: "#",
       icon: <MapPin className="w-4 h-4" />,
       subItems: [
-        { label: "Add Location", value: "#" },
-        { label: "Locations", value: "#" },
+        { label: "Add Location", value: "add_location" },
+        { label: "Locations", value: "location_list" },
         { label: "Create Zone", value: "#" },
         { label: "Zones", value: "#" },
         { label: "Localization", value: "#" },
@@ -323,8 +323,8 @@ const Navbar = () => {
             )}
           </div>
 
+          {/* Desktop Secondary Nav (Large screens) */}
           <>
-            {/* Desktop Secondary Nav (Large screens) */}
             <div className="hidden lg:flex items-center space-x-3">
               {secondNav.map(({ label, icon }) => (
                 <button
@@ -488,6 +488,7 @@ const Navbar = () => {
       </div>
     </nav >
   );
+  
 };
 
 export default Navbar;
