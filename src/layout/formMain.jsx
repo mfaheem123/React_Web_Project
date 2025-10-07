@@ -310,7 +310,7 @@ const BookingForm = () => {
                             value={formData.rPick}
                             onChange={handleChange}
                             placeholder="Enter R pickup location"
-                            className="sm:col-span-5 border border-gray-300 rounded px-2 py-1"
+                            className="sm:col-span-6 border border-gray-300 rounded px-2 py-1"
                             sx={{
                                 '& .MuiOutlinedInput-root': {
                                     height: 32, // height in px
@@ -333,7 +333,7 @@ const BookingForm = () => {
                             value={formData.rPickNotes}
                             onChange={handleChange}
                             placeholder="R Pickup Notes"
-                            className="sm:col-span-4 border border-gray-300 rounded px-2 py-1"
+                            className="sm:col-span-3 border border-gray-300 rounded px-2 py-1"
                             sx={{
                                 '& .MuiOutlinedInput-root': {
                                     height: 32, // height in px
@@ -348,7 +348,7 @@ const BookingForm = () => {
                             value={formData.rDrop}
                             onChange={handleChange}
                             placeholder="Enter R drop location"
-                            className="sm:col-span-5 border border-gray-300 rounded px-2 py-1"
+                            className="sm:col-span-6 border border-gray-300 rounded px-2 py-1"
                             sx={{
                                 '& .MuiOutlinedInput-root': {
                                     height: 32, // height in px
@@ -371,7 +371,7 @@ const BookingForm = () => {
                             value={formData.rDropNotes}
                             onChange={handleChange}
                             placeholder="R Drop Notes"
-                            className="sm:col-span-4 border border-gray-300 rounded px-2 py-1"
+                            className="sm:col-span-3 border border-gray-300 rounded px-2 py-1"
                             sx={{
                                 '& .MuiOutlinedInput-root': {
                                     height: 32, // height in px
