@@ -86,24 +86,21 @@ const ZoneList = () => {
                 <RecentTabsHeader />
             </div>
 
-            <div className="w-full overflow-x-auto mt-5">
-
-                <div className="flex items-center justify-between pointer-cursor">
-                    <h2 className="text-4xl py-3">Zones </h2>
-                    <Button
-                        className="bg-[#424899] text-white flex items-center w-[6%]"
-                    >
+            <div className="w-full overflow-x-auto mt-5 px-2 md:px-0">
+                {/* Heading Section */}
+                <div className="flex flex-col md:flex-row items-center justify-between mb-4 gap-3">
+                    <h2 className="text-3xl md:text-4xl py-3 text-center md:text-left">Zones</h2>
+                    <Button className="bg-[#424899] text-white flex items-center gap-2 px-4 py-2 w-full md:w-auto justify-center">
                         <FiRefreshCw size={20} /> Refresh
                     </Button>
-
                 </div>
 
-                <div className="w-[100%]">
+                {/* Table Section */}
+                <div className="w-full overflow-x-auto">
                     <DynamicTable data={enhancedData} />
                 </div>
-
-
             </div>
+
         </>
 
     );

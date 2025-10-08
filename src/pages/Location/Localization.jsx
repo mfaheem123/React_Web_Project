@@ -55,11 +55,14 @@ const LocalizationPage = () => {
                 <RecentTabsHeader />
             </div>
 
-            <div className="w-[50%] mx-auto mt-5 text-center bg-gray-300 p-4 rounded-lg shadow-lg">
+            <div className="w-full md:w-[50%] mx-auto mt-5 text-center bg-gray-300 p-4 rounded-lg shadow-lg">
                 <div>
                     {/* Heading Section */}
-                    <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-4xl py-3">Localization</h2>
+                    <div className="flex flex-col md:flex-row items-center justify-between mb-4 gap-3">
+                        <h2 className="text-2xl md:text-4xl py-3 text-center md:text-left">
+                            Localization
+                        </h2>
+
                         <Button
                             className="bg-[#424899] text-white flex items-center gap-2 px-4 py-2"
                             onClick={handleAdd} // Open modal on click
@@ -69,22 +72,18 @@ const LocalizationPage = () => {
                     </div>
 
                     {/* Table Section */}
-                    <div className="w-full flex justify-center">
+                    <div className="w-full flex justify-center overflow-x-auto">
                         <div className="w-full">
                             <DynamicTable data={enhancedData} />
                         </div>
                     </div>
 
                     {/* Modal */}
-                    <Modal
-                        open={isModalOpen}
-                        footer={null}
-                        onCancel={handleCancel}
-                    >
+                    <Modal open={isModalOpen} footer={null} onCancel={handleCancel}>
                         <Form
                             name="postcode-form"
                             layout="vertical"
-                            className="w-full max-w-md bg-white p-6 rounded-2xl shadow-md"
+                            className="w-full max-w-md bg-white p-6 rounded-2xl shadow-md mx-auto"
                             autoComplete="off"
                             onFinish={onFinish}
                         >
@@ -113,6 +112,7 @@ const LocalizationPage = () => {
                     </Modal>
                 </div>
             </div>
+
         </>
     );
 };

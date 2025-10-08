@@ -4,7 +4,7 @@ import { Edit, Trash2 } from "lucide-react";
 import Navbar from "../../components/navbar";
 import { Form, Checkbox } from "antd";
 import RecentTabsHeader from "../../components/recentTabs";
-import DynamicTable from "../../components/dynamicTable"; 
+import DynamicTable from "../../components/dynamicTable";
 
 const locationData = [
     {
@@ -75,22 +75,26 @@ const LocationTable = () => {
                 <RecentTabsHeader />
             </div>
 
-            <div className="w-full overflow-x-auto mt-5">
-                <div className="flex items-center justify-between w-[20%]">
-                    <h2 className="text-4xl py-3">
-                        Locations (<span className="text-green-600 mb-15">{data.length}</span>)
+            <div className="w-full overflow-x-auto mt-5 px-2 md:px-0">
+                {/* Heading Section */}
+                <div className="flex flex-col md:flex-row items-center justify-between mb-4 gap-3 w-full">
+                    <h2 className="text-2xl md:text-4xl py-3 text-center md:text-left">
+                        Locations (<span className="text-green-600">{data.length}</span>)
                     </h2>
 
-                    <div>
-                        <Form.Item name="remember" valuePropName="checked" className="mb-3">
+                    <div className="flex justify-center md:justify-start">
+                        <Form.Item name="remember" valuePropName="checked" className="mb-0">
                             <Checkbox className="text-red-600">Block List</Checkbox>
                         </Form.Item>
                     </div>
                 </div>
 
                 {/* Dynamic Table */}
-                <DynamicTable data={enhancedData} />
+                <div className="w-full overflow-x-auto">
+                    <DynamicTable data={enhancedData} />
+                </div>
             </div>
+
         </>
     );
 };
