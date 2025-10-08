@@ -39,11 +39,25 @@ export default function CreateZone() {
 
     // 🔹 Handle shape creation
     const _onCreate = (e) => {
-        const { layerType, layer } = e;
-        if (layerType === "polygon" || layerType === "rectangle") {
-            console.log("Shape coordinates:", layer.getLatLngs());
-        }
+        const layer = e.layer;
+        console.log("Created:", layer);
+        // agar state me save karna ho to yaha kar sakte ho
     };
+
+    const _onEdit = (e) => {
+        const layers = e.layers;
+        layers.eachLayer((layer) => {
+            console.log("Edited:", layer);
+        });
+    };
+
+    const _onDelete = (e) => {
+        const layers = e.layers;
+        layers.eachLayer((layer) => {
+            console.log("Deleted:", layer);
+        });
+    };
+
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -158,6 +172,8 @@ export default function CreateZone() {
                                 <EditControl
                                     position="topleft"
                                     onCreated={_onCreate}
+                                    onEdited={_onEdit}       // update hone par callback
+                                    onDeleted={_onDelete}    // delete hone par callback
                                     draw={{
                                         rectangle: {
                                             shapeOptions: { color: "#2E86DE" },
@@ -167,12 +183,27 @@ export default function CreateZone() {
                                             showArea: true,
                                             shapeOptions: { color: "#1976d2" },
                                         },
-                                        marker: false,
-                                        circle: false,
-                                        circlemarker: false,
-                                        polyline: false,
+                                        marker: true,
+                                        circle: {
+                                            shapeOptions: { color: "#f39c12" },
+                                        },
+                                        circlemarker: {
+                                            shapeOptions: { color: "#27ae60" },
+                                        },
+                                        polyline: {
+                                            shapeOptions: { color: "#e74c3c" },
+                                        },
+                                    }}
+                                    edit={{
+                                        edit: true,       // enable vertex editing
+                                        remove: true,     // enable delete
+                                        poly: {
+                                            allowIntersection: false
+                                        }
                                     }}
                                 />
+
+
                             </FeatureGroup>
                         </MapContainer>
                     </div>
