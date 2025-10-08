@@ -93,7 +93,7 @@ const Navbar = () => {
       subItems: [
         { label: "Add Location", value: "add_location" },
         { label: "Locations", value: "location_list" },
-        { label: "Create Zone", value: "#" },
+        { label: "Create Zone", value: "create_zone" },
         { label: "Zones", value: "#" },
         { label: "Localization", value: "#" },
       ],
@@ -488,7 +488,7 @@ const Navbar = () => {
       </div>
     </nav >
   );
-  
+
 };
 
 export default Navbar;

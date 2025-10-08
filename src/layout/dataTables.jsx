@@ -433,7 +433,7 @@ const BookingTable = () => {
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [altActive]);
+    });
 
     return (
         <div className="w-full overflow-x-auto mt-6">
