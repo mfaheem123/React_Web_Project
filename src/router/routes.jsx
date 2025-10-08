@@ -4,6 +4,7 @@ import CreateBooking from "../pages/Booking/CreateBooking.jsx";
 import AddLocation from "../pages/Location/AddLoc.jsx";
 import LocationTable from '../pages/Location/LocationList.jsx'
 import CraeteZone from "../pages/Location/createZone.jsx";
+import ZoneList from "../pages/Location/zoneList.jsx";
 
 
 function MyRoutes() {
@@ -15,6 +16,7 @@ function MyRoutes() {
         <Route path="/add_location" element={<AddLocation />} />
         <Route path="/location_list" element={<LocationTable />} />
         <Route path="/create_zone" element={<CraeteZone />} />
+        <Route path="/zone_list" element={<ZoneList />} />
       </Routes>
     </Router>
   );
