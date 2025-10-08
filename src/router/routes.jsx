@@ -1,10 +1,12 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import MainPage from "../pages/main";
 import CreateBooking from "../pages/Booking/CreateBooking.jsx";
+// Location Pages Import
 import AddLocation from "../pages/Location/AddLoc.jsx";
 import LocationTable from '../pages/Location/LocationList.jsx'
 import CraeteZone from "../pages/Location/createZone.jsx";
 import ZoneList from "../pages/Location/zoneList.jsx";
+import LocalizationPage from "../pages/Location/Localization.jsx";
 
 
 function MyRoutes() {
@@ -17,6 +19,7 @@ function MyRoutes() {
         <Route path="/location_list" element={<LocationTable />} />
         <Route path="/create_zone" element={<CraeteZone />} />
         <Route path="/zone_list" element={<ZoneList />} />
+        <Route path="/localization" element={<LocalizationPage />} />
       </Routes>
     </Router>
   );

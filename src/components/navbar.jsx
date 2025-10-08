@@ -95,7 +95,7 @@ const Navbar = () => {
         { label: "Locations", value: "location_list" },
         { label: "Create Zone", value: "create_zone" },
         { label: "Zones", value: "zone_list" },
-        { label: "Localization", value: "#" },
+        { label: "Localization", value: "localization" },
       ],
     },
     {
