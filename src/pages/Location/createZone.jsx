@@ -176,22 +176,22 @@ export default function CreateZone() {
                                     onDeleted={_onDelete}    // delete hone par callback
                                     draw={{
                                         rectangle: {
-                                            shapeOptions: { color: "#2E86DE" },
+                                            shapeOptions: { color: "#63b1ffff" },
                                         },
                                         polygon: {
                                             allowIntersection: false,
                                             showArea: true,
-                                            shapeOptions: { color: "#1976d2" },
+                                            shapeOptions: { color: "#63b1ffff" },
                                         },
-                                        marker: true,
+                                        marker: false,
                                         circle: {
-                                            shapeOptions: { color: "#f39c12" },
+                                            shapeOptions: { color: "#63b1ffff" },
                                         },
                                         circlemarker: {
-                                            shapeOptions: { color: "#27ae60" },
+                                            shapeOptions: { color: "#63b1ffff" },
                                         },
                                         polyline: {
-                                            shapeOptions: { color: "#e74c3c" },
+                                            shapeOptions: { color: "#63b1ffff" },
                                         },
                                     }}
                                     edit={{
