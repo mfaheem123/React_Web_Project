@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Edit, Trash2, Share2 } from "lucide-react";
 
 
+
 const bookingData = [
     {
         source: "WEB",
@@ -402,7 +403,6 @@ const BookingTable = () => {
     ];
 
 
-
     useEffect(() => {
         let lastAltPressTime = 0;
 
@@ -554,6 +554,8 @@ const BookingTable = () => {
                 </tbody>
             </table>
 
+
+
             {/* Pagination */}
             <div className="flex justify-center items-center gap-4 mt-4">
                 <button
@@ -588,6 +590,7 @@ const BookingTable = () => {
                     Last
                 </button>
             </div>
+
         </div>
     );
 };
