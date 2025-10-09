@@ -169,7 +169,7 @@ const Navbar = () => {
       value: "vehicles",
       icon: <Truck className="w-4 h-4" />,
       subItems: [
-        { label: "Create Vehicle Type", value: "#" },
+        { label: "Create Vehicle Type", value: "create_vehicle" },
         { label: "Vehicle Types", value: "#" },
         { label: "Create Company Vehicle ", value: "#" },
         { label: "Company Vehicle ", value: "#" },
