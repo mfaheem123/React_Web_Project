@@ -167,44 +167,47 @@ export default function CreateZone() {
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
-
                             <FeatureGroup>
                                 <EditControl
                                     position="topleft"
                                     onCreated={_onCreate}
-                                    onEdited={_onEdit}       // update hone par callback
-                                    onDeleted={_onDelete}    // delete hone par callback
+                                    onEdited={_onEdit}
+                                    onDeleted={_onDelete}
                                     draw={{
                                         rectangle: {
-                                            shapeOptions: { color: "#63b1ffff" },
+                                            shapeOptions: { color: "#63b1ff", weight: 5 },
                                         },
                                         polygon: {
                                             allowIntersection: false,
                                             showArea: true,
-                                            shapeOptions: { color: "#63b1ffff" },
+                                            shapeOptions: { color: "#63b1ff", weight: 8 },
                                         },
                                         marker: false,
                                         circle: {
-                                            shapeOptions: { color: "#63b1ffff" },
+                                            shapeOptions: { color: "#63b1ff", weight: 8, fillColor: "#63b1ff", fillOpacity: 0.5 },
+                                            radius: 100, // 👈 size of circle (adjust as needed)
                                         },
                                         circlemarker: {
-                                            shapeOptions: { color: "#63b1ffff" },
+                                            shapeOptions: {
+                                                color: "#63b1ff",
+                                                weight: 8,         // 👈 line thickness
+                                                radius: 8,         // 👈 point size (default ~5)
+                                                fillColor: "#63b1ff",
+                                                fillOpacity: 0.8
+                                            },
                                         },
                                         polyline: {
-                                            shapeOptions: { color: "#63b1ffff" },
+                                            shapeOptions: { color: "#63b1ff", weight: 5 }, // 👈 thicker line
                                         },
                                     }}
                                     edit={{
-                                        edit: true,       // enable vertex editing
-                                        remove: true,     // enable delete
-                                        poly: {
-                                            allowIntersection: false
-                                        }
+                                        edit: true,
+                                        remove: true,
+                                        poly: { allowIntersection: false },
                                     }}
                                 />
-
-
                             </FeatureGroup>
+
                         </MapContainer>
                     </div>
                 </div>
