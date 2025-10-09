@@ -239,6 +239,17 @@ export default function ResponsiveTransferList() {
                 </div>
             </div>
 
+            {/* Add Location Button */}
+            <div className="flex justify-center items-center p-4">
+                <Button style={{
+                    backgroundColor: '#424899',
+                    color: 'white'
+                }} className="w-3/4 sm:w-2/3 md:w-2/5 bg-[#424899] text-white py-2 rouded-full">
+                    Add Location
+                </Button>
+            </div>
+
+
 
 
 
