@@ -46,11 +46,39 @@ export default function AddLocation() {
                         </Form.Item>
 
                         <Form.Item
+                            label="Location Type"
+                            name="locationType"
+                            rules={[{ required: true, message: "Please select a Location Type!" }]}
+                        >
+                            <Select placeholder="Select Type">
+                                <Option value="sindh">Sindh</Option>
+                                <Option value="punjab">Punjab</Option>
+                                <Option value="kpk">KPK</Option>
+                            </Select>
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Latitude"
+                            name="latitude"
+                            rules={[{ required: true, message: "Please enter Latitude!" }]}
+                        >
+                            <Input className="border border-gray-300 rounded px-2 py-1" />
+                        </Form.Item>
+
+                        <Form.Item
                             label="Longitude"
                             name="longitude"
                             rules={[{ required: true, message: "Please input the Longitude!" }]}
                         >
                             <Input className="border border-gray-300 rounded px-2 py-1" />
+                        </Form.Item>
+
+                        <Form.Item
+                            label="Post Code"
+                            name="postCode"
+                            rules={[{ required: true, message: "Please enter Post Code!" }]}
+                        >
+                            <Input type="number" className="border border-gray-300 rounded px-2 py-1" />
                         </Form.Item>
 
                         <Form.Item
@@ -65,33 +93,8 @@ export default function AddLocation() {
                             </Select>
                         </Form.Item>
 
-                        <Form.Item
-                            label="Location Type"
-                            name="locationType"
-                            rules={[{ required: true, message: "Please select a Location Type!" }]}
-                        >
-                            <Select placeholder="Select Type">
-                                <Option value="sindh">Sindh</Option>
-                                <Option value="punjab">Punjab</Option>
-                                <Option value="kpk">KPK</Option>
-                            </Select>
-                        </Form.Item>
 
-                        <Form.Item
-                            label="Post Code"
-                            name="postCode"
-                            rules={[{ required: true, message: "Please enter Post Code!" }]}
-                        >
-                            <Input type="number" className="border border-gray-300 rounded px-2 py-1" />
-                        </Form.Item>
 
-                        <Form.Item
-                            label="Latitude"
-                            name="latitude"
-                            rules={[{ required: true, message: "Please enter Latitude!" }]}
-                        >
-                            <Input className="border border-gray-300 rounded px-2 py-1" />
-                        </Form.Item>
                     </div>
 
                     {/* Text Area - Full width */}
