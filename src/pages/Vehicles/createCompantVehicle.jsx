@@ -327,7 +327,7 @@ export default function CreateCompanyVehicle() {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            className="bg-[#757cdd] border-none hover:!bg-[#5a60d1] px-8 py-4 w-[40%]"
+                            className="bg-[#424899] border-none hover:!bg-[#5a60d1] px-8 py-4 w-[40%]"
                         >
                             Save
                         </Button>

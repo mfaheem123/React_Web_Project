@@ -11,6 +11,7 @@ import LocalizationPage from "../pages/Location/Localization.jsx";
 import CreateVehicle from "../pages/Vehicles/createVehicle.jsx";
 import VehicleTable from "../pages/Vehicles/vehicleList.jsx";
 import CreateCompanyVehicle from "../pages/Vehicles/createCompantVehicle.jsx";
+import CompanyVehicleTable from "../pages/Vehicles/companyVehicleList.jsx";
 
 
 function MyRoutes() {
@@ -29,6 +30,7 @@ function MyRoutes() {
         <Route path="/create_vehicle" element={<CreateVehicle />} />
         <Route path="/vehicle_list" element={<VehicleTable />} />
         <Route path="/create_company_Vehicle" element={<CreateCompanyVehicle />} />
+        <Route path="/company_Vehicle_list" element={<CompanyVehicleTable />} />
       </Routes>
     </Router>
   );

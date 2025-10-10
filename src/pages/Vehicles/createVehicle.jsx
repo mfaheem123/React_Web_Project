@@ -44,7 +44,7 @@ export default function CreateVehicle() {
                         <h2 className="text-3xl">Vehicle Type</h2>
                     </div>
 
-                    <div className=" bg-gray-300 p-5">
+                    <div className=" bg-gray-200 p-5">
 
                         <Form layout="vertical">
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

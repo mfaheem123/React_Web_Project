@@ -172,7 +172,7 @@ const Navbar = () => {
         { label: "Create Vehicle Type", value: "create_vehicle" },
         { label: "Vehicle Types", value: "vehicle_list" },
         { label: "Create Company Vehicle ", value: "create_company_Vehicle" },
-        { label: "Company Vehicle ", value: "#" },
+        { label: "Company Vehicle ", value: "company_Vehicle_list" },
       ],
     },
     {
