@@ -12,6 +12,9 @@ import CreateVehicle from "../pages/Vehicles/createVehicle.jsx";
 import VehicleTable from "../pages/Vehicles/vehicleList.jsx";
 import CreateCompanyVehicle from "../pages/Vehicles/createCompanyVehicle.jsx";
 import CompanyVehicleTable from "../pages/Vehicles/companyVehicleList.jsx";
+// Driver pages Import
+// Driver
+import AddDriver from "../pages/Driver/addDriver.jsx";
 
 
 function MyRoutes() {
@@ -31,6 +34,9 @@ function MyRoutes() {
         <Route path="/vehicle_list" element={<VehicleTable />} />
         <Route path="/create_company_Vehicle" element={<CreateCompanyVehicle />} />
         <Route path="/company_Vehicle_list" element={<CompanyVehicleTable />} />
+        {/* Driver Pages Routes */}
+        {/* Driver */}
+        <Route path="/add_driver" element={<AddDriver />} />
       </Routes>
     </Router>
   );

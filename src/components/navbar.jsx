@@ -100,14 +100,14 @@ const Navbar = () => {
     },
     {
       label: "Driver",
-      value: "#",
+      value: "drivermain",
       icon: <Car className="w-4 h-4" />,
       subItems: [
         {
-          label: "Driver Options",
-          value: "#",
+          label: "Driver",
+          value: "Driver",
           subItems: [
-            { label: "Add Driver", value: "#" },
+            { label: "Add Driver", value: "add_driver" },
             { label: "Drivers", value: "#" },
             { label: "Login/Logout Driver", value: "#" },
           ],
