@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Button } from "antd";
 import { Edit, Trash2 } from "lucide-react";
 import Navbar from "../../components/navbar";
-import { Form, Checkbox } from "antd";
 import RecentTabsHeader from "../../components/recentTabs";
 import DynamicTable from "../../components/dynamicTable";
+import { FiRefreshCw } from "react-icons/fi";
 
 const locationData = [
     {
@@ -36,7 +36,7 @@ const locationData = [
     },
 ];
 
-const LocationTable = () => {
+const VehicleTable = () => {
     const [data, setData] = useState(locationData);
 
     const handleUpdate = (record) => {
@@ -77,18 +77,15 @@ const LocationTable = () => {
 
             <div className="w-full overflow-x-auto mt-5 px-2 md:px-0">
                 {/* Heading Section */}
-                <div className="flex flex-col md:flex-row items-center justify-start mb-4 gap-3 w-full">
+                <div className="flex flex-col md:flex-row items-center justify-between mb-4 gap-3 w-full p-3">
                     <h2 className="text-2xl md:text-4xl py-3 text-center md:text-left">
-                        Locations (<span className="text-green-600">{data.length}</span>)
+                        Vehicle Types (<span className="text-green-600">{data.length}</span>)
                     </h2>
 
                     <div className="flex justify-center md:justify-start">
-                        <Form.Item
-                            name="block list"
-                            className="mb-0"
-                        >
-                            <Checkbox className="text-red-600">Block List</Checkbox>
-                        </Form.Item>
+                        <Button className="bg-[#424899] text-white flex items-center gap-2 px-4 py-2 w-full md:w-auto justify-center">
+                            <FiRefreshCw size={20} /> Refresh
+                        </Button>
                     </div>
                 </div>
 
@@ -102,4 +99,4 @@ const LocationTable = () => {
     );
 };
 
-export default LocationTable;
+export default VehicleTable;

@@ -1,9 +1,8 @@
 import Navbar from "../../components/navbar";
 import RecentTabsHeader from "../../components/recentTabs";
 import { PlusOutlined } from '@ant-design/icons';
-import { message, Upload, Form, Input, Button, Select, Checkbox, ColorPicker } from 'antd';
+import { message, Upload, Form, Input, Button, Checkbox, ColorPicker } from 'antd';
 
-const { Option } = Select;
 const { Dragger } = Upload;
 
 const props = {
