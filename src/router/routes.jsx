@@ -10,7 +10,7 @@ import LocalizationPage from "../pages/Location/Localization.jsx";
 // Vehicle Pages Import
 import CreateVehicle from "../pages/Vehicles/createVehicle.jsx";
 import VehicleTable from "../pages/Vehicles/vehicleList.jsx";
-import CreateCompanyVehicle from "../pages/Vehicles/createCompantVehicle.jsx";
+import CreateCompanyVehicle from "../pages/Vehicles/createCompanyVehicle.jsx";
 import CompanyVehicleTable from "../pages/Vehicles/companyVehicleList.jsx";
 
 

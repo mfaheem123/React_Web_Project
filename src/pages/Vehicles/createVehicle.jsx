@@ -49,14 +49,14 @@ export default function CreateVehicle() {
 
             <div className="w-full flex flex-col md:flex-row items-start justify-center gap-6 p-4">
 
-                {/* Image upload  */}
-                <div className="h-[60vh] w-[30%] flex flex-col justify-center p-4 relative">
+                {/* Image upload */}
+                <div className="h-[60vh] md:h-[60vh] sm:h-[30vh] w-[30%] lg:w-[30%] md:w-full sm:w-full flex flex-col justify-center p-4 relative">
                     {fileList.length > 0 ? (
                         <div className="relative h-full w-full">
                             <img
                                 src={fileList[0].thumbUrl || URL.createObjectURL(fileList[0].originFileObj)}
                                 alt="Uploaded"
-                                className="w-full h-full object-contain rounded"
+                                className="w-full sm:w-full h-full object-cover rounded"
                             />
                             <Button
                                 type="primary"
@@ -68,16 +68,22 @@ export default function CreateVehicle() {
                             />
                         </div>
                     ) : (
-                        <Dragger {...props} className="h-full flex flex-col justify-center p-4">
+                        <Dragger
+                            {...props}
+                            className="h-full flex flex-col justify-center p-4 w-full max-w-[100%] min-w-[250px]"
+                        >
                             <p className="ant-upload-drag-icon text-4xl text-white"><PlusOutlined /></p>
-                            <p className="text-xl font-semibold text-white">Upload Image</p>
-                            <p className="ant-upload-text text-white text-sm">Click or drag file to upload</p>
-                            <p className="ant-upload-hint text-white text-xs">
+                            <p className="text-4xl mb-4 font-semibold text-center">Upload Image</p>
+                            <p className="ant-upload-text text-white text-sm text-center">
+                                Click or drag file to upload
+                            </p>
+                            <p className="ant-upload-hint text-white text-xs text-center">
                                 Support for single or bulk upload. Prohibited from uploading company data.
                             </p>
                         </Dragger>
                     )}
                 </div>
+
 
                 {/* Form Section */}
                 <div className="w-full md:w-3/4 p-2">

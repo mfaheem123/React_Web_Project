@@ -327,12 +327,15 @@ const Navbar = () => {
           <>
             <div className="hidden lg:flex items-center space-x-3">
               {secondNav.map(({ label, icon }) => (
+
                 <button
                   key={label}
                   title={label}
                   className="flex items-center gap-1 rounded-md text-white hover:text-[#757cdd] transition-colors duration-200"
                 >
+
                   {icon}
+
                 </button>
               ))}
             </div>
@@ -359,11 +362,13 @@ const Navbar = () => {
                   name="extensionNo"
                   rules={[{ required: true, message: "Please input your extension number!" }]}
                 >
+
                   <Input
                     type="number"
                     placeholder="Enter extension number"
                     className="h-10"
                   />
+
                 </Form.Item>
 
                 <Form.Item
@@ -371,7 +376,9 @@ const Navbar = () => {
                   valuePropName="checked"
                   className="mb-3"
                 >
+
                   <Checkbox>Permanent Save</Checkbox>
+
                 </Form.Item>
 
                 <Form.Item className="text-center mb-0">
@@ -383,7 +390,9 @@ const Navbar = () => {
                   >
                     Save
                   </Button>
+
                 </Form.Item>
+
               </Form>
 
             </Modal>
@@ -482,13 +491,10 @@ const Navbar = () => {
             )}
           </div>
 
-
-
         </div>
       </div>
     </nav >
-  );
-
+  )
 };
 
 export default Navbar;

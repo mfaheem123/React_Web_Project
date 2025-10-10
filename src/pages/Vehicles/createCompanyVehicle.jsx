@@ -60,7 +60,7 @@ export default function CreateCompanyVehicle() {
                         <div className="grid grid-cols-6 gap-1 ">
 
                             <Form.Item
-                                label="Vehicle"
+                                label="Vehicle Number"
                                 name="vehicle"
                                 rules={[{ required: true, message: "Please input the Vehicle!" }]}
                                 className="col-span-3" // 👈 2 columns lega
@@ -112,7 +112,7 @@ export default function CreateCompanyVehicle() {
                             </Form.Item>
 
                             <Form.Item
-                                label="Log Book"
+                                label="Log Book Numberz"
                                 name="logBook"
                                 rules={[{ required: true, message: "Please Enter the Log Book !" }]}
                                 className="col-span-3" // 👈 2 columns lega
