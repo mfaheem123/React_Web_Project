@@ -118,7 +118,7 @@ const Navbar = () => {
           subItems: [
             { label: "Create Driver Commission", value: "create_driver_commission" },
             { label: "Driver Commission", value: "driver_commission_list" },
-            { label: "Bulk Driver Commission", value: "#" },
+            { label: "Bulk Driver Commission", value: "bulk_driver_commission" },
             { label: "Driver Commission Pay", value: "#" },
           ],
         },

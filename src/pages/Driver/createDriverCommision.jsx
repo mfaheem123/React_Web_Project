@@ -173,59 +173,60 @@ export default function CreateDriverCommission() {
                                 Save
                             </Button>
                         </div>
-                    </div>
-                    <div className="w-[30%] flex flex-col md:flex-row justify-between items-start md:items-center gap-6 p-2  mt-1">
+                    </div>  
+                    <div className="w-full md:w-[30%] lg:w-[30%] flex flex-col md:flex-row justify-start items-start gap-6 p-4 mt-2 mx-auto">
 
-                        {/* Left Section */}
-                        <div className="flex-1 w-[50%]">
+                        {/* Left Section - Totals */}
+                        <div className="flex-1 w-full md:w-[48%]">
                             <h2 className="text-lg font-semibold text-[#424899] mb-2">Totals</h2>
                             <div className="flex flex-col gap-2">
-                                <p className="flex justify-between bg-white px-2 py-1 rounded shadow-sm text-sm">
+                                <p className="flex justify-between bg-white px-3 py-2 rounded-lg shadow-sm text-sm">
                                     <span>Total Cash:</span>
                                     <span className="font-semibold text-[#424899]">0.00</span>
                                 </p>
-                                <p className="flex justify-between bg-white px-2 py-1 rounded shadow-sm text-sm">
+                                <p className="flex justify-between bg-white px-3 py-2 rounded-lg shadow-sm text-sm">
                                     <span>Total:</span>
                                     <span className="font-semibold text-[#424899]">0.00</span>
                                 </p>
-                                <p className="flex justify-between bg-white px-2 py-1 rounded shadow-sm text-sm">
+                                <p className="flex justify-between bg-white px-3 py-2 rounded-lg shadow-sm text-sm">
                                     <span>Owed:</span>
                                     <span className="font-semibold text-[#424899]">0.00</span>
                                 </p>
-                                <p className="flex justify-between bg-white px-2 py-1 rounded shadow-sm text-sm">
+                                <p className="flex justify-between bg-white px-3 py-2 rounded-lg shadow-sm text-sm">
                                     <span>Old Balance:</span>
                                     <span className="font-semibold text-[#424899]">0.00</span>
                                 </p>
-                                <p className="flex justify-between bg-white px-2 py-1 rounded shadow-sm text-sm">
+                                <p className="flex justify-between bg-white px-3 py-2 rounded-lg shadow-sm text-sm">
                                     <span>New Balance:</span>
                                     <span className="font-semibold text-[#424899]">0.00</span>
                                 </p>
                             </div>
                         </div>
 
-                        {/* Right Section */}
-                        <div className="flex-1 w-[50%]">
+                        {/* Right Section - Account Summary */}
+                        <div className="flex-1 w-full md:w-[48%]">
                             <h2 className="text-lg font-semibold text-[#424899] mb-2">Account Summary</h2>
                             <div className="flex flex-col gap-2">
-                                <p className="flex justify-between bg-white px-2 py-1 rounded shadow-sm text-sm">
+                                <p className="flex justify-between bg-white px-3 py-2 rounded-lg shadow-sm text-sm">
                                     <span>Account W-Comm:</span>
                                     <span className="font-semibold text-[#424899]">0.00</span>
                                 </p>
-                                <p className="flex justify-between bg-white px-2 py-1 rounded shadow-sm text-sm">
+                                <p className="flex justify-between bg-white px-3 py-2 rounded-lg shadow-sm text-sm">
                                     <span>Account WO-Comm:</span>
                                     <span className="font-semibold text-[#424899]">0.00</span>
                                 </p>
-                                <p className="flex justify-between bg-white px-2 py-1 rounded shadow-sm text-sm">
+                                <p className="flex justify-between bg-white px-3 py-2 rounded-lg shadow-sm text-sm">
                                     <span>Parking/Congestion Total:</span>
                                     <span className="font-semibold text-[#424899]">0.00</span>
                                 </p>
-                                <p className="flex justify-between bg-white px-2 py-1 rounded shadow-sm text-sm">
+                                <p className="flex justify-between bg-white px-3 py-2 rounded-lg shadow-sm text-sm">
                                     <span>Commission:</span>
                                     <span className="font-semibold text-[#424899]">0.00</span>
                                 </p>
                             </div>
                         </div>
                     </div>
+
 
                 </Form>
 
