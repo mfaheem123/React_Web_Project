@@ -16,6 +16,7 @@ import CompanyVehicleTable from "../pages/Vehicles/companyVehicleList.jsx";
 // Driver
 import AddDriver from "../pages/Driver/addDriver.jsx";
 import DriverList from "../pages/Driver/driverList.jsx";
+import Login_Logout from "../pages/Driver/Login-Logout.jsx";
 
 
 function MyRoutes() {
@@ -39,6 +40,7 @@ function MyRoutes() {
         {/* Driver */}
         <Route path="/add_driver" element={<AddDriver />} />
         <Route path="/driver_list" element={<DriverList />} />
+        <Route path="/Login_Logout" element={<Login_Logout />} />
       </Routes>
     </Router>
   );

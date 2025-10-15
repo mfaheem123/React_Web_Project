@@ -109,7 +109,7 @@ const Navbar = () => {
           subItems: [
             { label: "Add Driver", value: "add_driver" },
             { label: "Drivers", value: "driver_list" },
-            { label: "Login/Logout Driver", value: "#" },
+            { label: "Login/Logout Driver", value: "Login_Logout" },
           ],
         },
         {
