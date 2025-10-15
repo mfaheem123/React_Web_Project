@@ -119,7 +119,7 @@ const Navbar = () => {
             { label: "Create Driver Commission", value: "create_driver_commission" },
             { label: "Driver Commission", value: "driver_commission_list" },
             { label: "Bulk Driver Commission", value: "bulk_driver_commission" },
-            { label: "Driver Commission Pay", value: "#" },
+            { label: "Driver Commission Pay", value: "driver_commission_pay" },
           ],
         },
         {

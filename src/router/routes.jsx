@@ -21,6 +21,7 @@ import LoginLogout from "../pages/Driver/Login-Logout.jsx";
 import CreateDriverCommission from "../pages/Driver/createDriverCommision.jsx";
 import DriverCommision from "../pages/Driver/driverCommision.jsx";
 import BulkDriverCommission from "../pages/Driver/bulkDriverCommission.jsx";
+import CommissionPay from "../pages/Driver/commissionPay.jsx";
 
 
 function MyRoutes() {
@@ -48,6 +49,7 @@ function MyRoutes() {
         <Route path="/create_driver_commission" element={<CreateDriverCommission />} />
         <Route path="/driver_commission_list" element={<DriverCommision />} />
         <Route path="/bulk_driver_commission" element={<BulkDriverCommission />} />
+        <Route path="/driver_commission_pay" element={<CommissionPay />} />
       </Routes>
     </Router>
   );
