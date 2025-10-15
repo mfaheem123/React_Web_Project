@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { Button } from "antd";
+import { Form, Button, Select } from "antd";
 import { Edit, Trash2 } from "lucide-react";
 import Navbar from "../../components/navbar";
-import { Form, Checkbox } from "antd";
 import RecentTabsHeader from "../../components/recentTabs";
 import DynamicTable from "../../components/dynamicTable";
 import { FiRefreshCw } from "react-icons/fi";
 
 
 export default function DriverCommision() {
+
+    const { Option } = Select;
+
 
     const locationData = [
         {
@@ -70,6 +72,14 @@ export default function DriverCommision() {
             </div>
         ),
     }));
+
+
+    const [type, setType] = useState("Commission");
+
+    const handleTypeChange = (value) => {
+        setType(value);
+    };
+
     return (
         <div>
             <Navbar />
@@ -81,8 +91,24 @@ export default function DriverCommision() {
                 {/* Heading Section */}
                 <div className="flex flex-col md:flex-row items-center justify-between mb-4 gap-3 w-full">
                     <h2 className="text-2xl md:text-4xl py-3 text-center md:text-left p-5">
-                        Driver Commission (<span className="text-green-600">{data.length}</span>)
+                        Driver {type} (<span className="text-green-600">{data.length}</span>)
                     </h2>
+                    <div className="w-[30%]">
+                        <Form.Item
+                            label="Type"
+                            name="type"
+                            rules={[{ required: true, message: "Please select a Type!" }]}
+                        >
+                            <Select
+                                placeholder="Select Commission / Rent"
+                                onChange={handleTypeChange}
+                                value={type}
+                            >
+                                <Option value="Commission">Commission</Option>
+                                <Option value="Rent">Rent</Option>
+                            </Select>
+                        </Form.Item>
+                    </div>
                     <Button className="bg-[#424899] text-white flex items-center gap-2 px-4 py-2 w-full md:w-auto justify-center">
                         <FiRefreshCw size={20} /> Refresh
                     </Button>

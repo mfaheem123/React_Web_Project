@@ -80,6 +80,12 @@ export default function BulkDriverCommission() {
         ),
     }));
 
+    const [type, setType] = useState("Commission");
+
+    const handleTypeChange = (value) => {
+        setType(value);
+    };
+
     return (
         <div>
             <Navbar />
@@ -88,8 +94,25 @@ export default function BulkDriverCommission() {
                 <RecentTabsHeader />
             </div>
 
-            <div className="bg-gray-200 p-5 text-3xl">
-                <h1>Bulk Driver Commission</h1>
+            <div className="bg-gray-200 p-5 text-3xl flex justify-between w-full">
+                <h1>Bulk Driver {type}</h1>
+
+                <div className="w-[30%]">
+                    <Form.Item
+                        label="Type"
+                        name="type"
+                        rules={[{ required: true, message: "Please select a Type!" }]}
+                    >
+                        <Select
+                            placeholder="Select Commission / Rent"
+                            onChange={handleTypeChange}
+                            value={type}
+                        >
+                            <Option value="Commission">Commission</Option>
+                            <Option value="Rent">Rent</Option>
+                        </Select>
+                    </Form.Item>
+                </div>
             </div>
 
             <div className="w-full min-h-full flex flex-col lg:flex-row items-start justify-center gap-6 p-4 bg-gray-50">
@@ -112,7 +135,6 @@ export default function BulkDriverCommission() {
                             <Form.Item
                                 label="Subsidiary"
                                 name="subsidiary"
-                                rules={[{ required: true, message: "Please select a Subsidiary!" }]}
                             >
                                 <Select placeholder="Select Subsidiary">
                                     <Option value="sindh">Demo Company</Option>
@@ -122,7 +144,6 @@ export default function BulkDriverCommission() {
                             <Form.Item
                                 label="From"
                                 name="from"
-                                rules={[{ required: true, message: "Please input the From!" }]}
                             >
                                 <Input type="date" />
                             </Form.Item>
@@ -130,7 +151,6 @@ export default function BulkDriverCommission() {
                             <Form.Item
                                 label="To"
                                 name="to"
-                                rules={[{ required: true, message: "Please input the To!" }]}
                             >
                                 <Input type="date" />
                             </Form.Item>
@@ -182,13 +202,12 @@ export default function BulkDriverCommission() {
                             <Form.Item
                                 label="Email"
                                 name="email"
-                                rules={[{ required: true, message: "Please input the Email!" }]}
                             >
                                 <Input type="email" placeholder="Enter Email" />
                             </Form.Item>
 
                             {/* Buttons */}
-                            <div className="flex justify-center sm:justify-start mt-6">
+                            <div className="flex justify-center items-center sm:justify-start mt-2">
                                 <Button
                                     type="primary"
                                     htmlType="submit"

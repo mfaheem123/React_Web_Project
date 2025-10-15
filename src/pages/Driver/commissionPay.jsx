@@ -1,16 +1,27 @@
-import { Button, Form, Input, Select } from "antd"
-import Navbar from "../../components/navbar"
-import RecentTabsHeader from "../../components/recentTabs"
+import { Button, Form, Input, Select, message } from "antd";
+import Navbar from "../../components/navbar";
+import RecentTabsHeader from "../../components/recentTabs";
 import DynamicTable from "../../components/dynamicTable";
 import { useState } from "react";
 import { Edit, Trash2 } from "lucide-react";
 
 export default function CommissionPay() {
-
     const { Option } = Select;
+    const [form] = Form.useForm();
+    const [type, setType] = useState("Commission");
+
+    const handleTypeChange = (value) => {
+        setType(value);
+        form.setFieldValue("type", value); // sync value in main form
+    };
 
     const onFinish = (values) => {
-        console.log("Personal Info:", values);
+        if (!values.type) {
+            message.error("Please select a Type before submitting!");
+            return;
+        }
+        message.success(`${values.type} Pay Saved Successfully!`);
+        console.log("Form Values:", values);
     };
 
     // Table
@@ -44,7 +55,6 @@ export default function CommissionPay() {
         },
     ];
 
-
     const [data, setData] = useState(locationData);
 
     const handleUpdate = (record) => {
@@ -56,7 +66,7 @@ export default function CommissionPay() {
         setData(data.filter((item) => item.key !== record.key));
     };
 
-    // Dynamic table ke liye action column add karna
+    // Table with actions
     const enhancedData = data.map((row) => ({
         ...row,
         action: (
@@ -78,17 +88,41 @@ export default function CommissionPay() {
     return (
         <div>
             <Navbar />
-
             <div className="mt-20">
                 <RecentTabsHeader />
             </div>
 
-            <div className="bg-gray-200 p-5 text-3xl">
-                <h1>Driver Commission Pay</h1>
-            </div>
-            <div className="w-full min-h-full flex items-center justify-center p-4 bg-gray-50">
+            {/* Header */}
+            <div className="bg-gray-200 p-5 text-3xl flex flex-wrap gap-4 justify-between w-full">
+                <h1>
+                    Driver {type} Pay
+                </h1>
 
+                {/* Type Select Form */}
+                <div className="w-full sm:w-[50%] md:w-[30%]">
+                    <Form form={form} name="typeForm" autoComplete="off">
+                        <Form.Item
+                            label='Type'
+                            name="type"
+                            rules={[{ required: true, message: "Please select a Type!" }]}
+                        >
+                            <Select
+                                placeholder="Select Commission / Rent"
+                                onChange={handleTypeChange}
+                                value={type}
+                            >
+                                <Option value="Commission">Commission</Option>
+                                <Option value="Rent">Rent</Option>
+                            </Select>
+                        </Form.Item>
+                    </Form>
+                </div>
+            </div>
+
+            {/* Main Form */}
+            <div className="w-full min-h-full flex items-center justify-center p-4 bg-gray-50">
                 <Form
+                    form={form}
                     name="durationForm"
                     layout="vertical"
                     className="w-full p-6 shadow-md bg-gray-200 rounded-xl"
@@ -101,13 +135,10 @@ export default function CommissionPay() {
 
                     {/* Single Responsive Row */}
                     <div className="flex flex-wrap gap-4 items-center">
-
-                        {/* Driver */}
                         <Form.Item
                             label="Driver"
                             name="driver"
                             className="w-full sm:w-[45%] md:w-[25%] lg:w-[15%]"
-                            rules={[{ required: true, message: "Please select a Driver!" }]}
                         >
                             <Select placeholder="Select Subsidiary">
                                 <Option value="demo1">Demo Company 1</Option>
@@ -116,52 +147,42 @@ export default function CommissionPay() {
                             </Select>
                         </Form.Item>
 
-                        {/* Commission Due */}
                         <Form.Item
-                            label="Commission Due"
-                            name="commissionPay"
+                            label={`${type} Due`}
+                            name="due"
                             className="w-full sm:w-[45%] md:w-[20%] lg:w-[10%]"
-                            rules={[{ required: true, message: "Please input the Commission Due!" }]}
                         >
-                            <Input type="number" placeholder="0.00" />
+                            <Input type="number" placeholder={`Enter ${type} Due`} />
                         </Form.Item>
 
-                        {/* Amount */}
                         <Form.Item
                             label="Amount"
                             name="amount"
                             className="w-full sm:w-[45%] md:w-[20%] lg:w-[10%]"
-                            rules={[{ required: true, message: "Please input the Amount!" }]}
                         >
                             <Input type="number" placeholder="0.00" />
                         </Form.Item>
 
-                        {/* Current Balance */}
                         <Form.Item
                             label="Current Balance"
                             name="currentBalance"
                             className="w-full sm:w-[45%] md:w-[20%] lg:w-[10%]"
-                            rules={[{ required: true, message: "Please input the Current Balance!" }]}
                         >
                             <Input type="number" placeholder="0.00" />
                         </Form.Item>
 
-                        {/* Description */}
                         <Form.Item
                             label="Description"
                             name="description"
                             className="w-full sm:w-[45%] md:w-[25%] lg:w-[25%]"
-                            rules={[{ required: true, message: "Please input the Description!" }]}
                         >
                             <Input placeholder="Short note..." />
                         </Form.Item>
 
-                        {/* Payment */}
                         <Form.Item
                             label="Payment"
                             name="payment"
                             className="w-full sm:w-[45%] md:w-[25%] lg:w-[10%]"
-                            rules={[{ required: true, message: "Please select a Payment!" }]}
                         >
                             <Select placeholder="Select">
                                 <Option value="credit">Credit</Option>
@@ -169,7 +190,6 @@ export default function CommissionPay() {
                             </Select>
                         </Form.Item>
 
-                        {/* Save Button */}
                         <div className="w-full sm:w-[45%] md:w-[20%] lg:w-[8%] flex justify-center items-center lg:justify-end">
                             <Button
                                 type="primary"
@@ -179,18 +199,14 @@ export default function CommissionPay() {
                                 Save
                             </Button>
                         </div>
-
                     </div>
                 </Form>
-
             </div>
-
 
             {/* Dynamic Table */}
             <div className="w-full overflow-x-auto p-5">
                 <DynamicTable data={enhancedData} />
             </div>
-
         </div>
-    )
+    );
 }

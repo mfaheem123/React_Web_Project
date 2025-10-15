@@ -76,6 +76,12 @@ export default function CreateDriverCommission() {
             </div>
         ),
     }));
+
+    const [type, setType] = useState("Commission");
+
+    const handleTypeChange = (value) => {
+        setType(value);
+    };
     return (
         <div>
             <Navbar />
@@ -85,7 +91,7 @@ export default function CreateDriverCommission() {
             </div>
 
             <div>
-                <h1 className="bg-gray-200 p-5 text-3xl">Driver Commisison</h1>
+                <h1 className="bg-gray-200 p-5 text-3xl">Driver {type}</h1>
             </div>
             <div className="w-full flex justify-center">
                 <Form
@@ -96,11 +102,10 @@ export default function CreateDriverCommission() {
                     autoComplete="off"
                 >
                     {/* Top Section */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-8 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-9 gap-6">
                         <Form.Item
                             label="Driver"
                             name="driver"
-                            rules={[{ required: true, message: "Please select a Driver!" }]}
                         >
                             <Select placeholder="Select Driver">
                                 <Option value="sindh">Sindh</Option>
@@ -112,23 +117,51 @@ export default function CreateDriverCommission() {
                         <Form.Item
                             label="Transaction Date"
                             name="transactionDate"
-                            rules={[{ required: true, message: "Please input the Transaction Date!" }]}
                         >
                             <Input type="date" />
                         </Form.Item>
 
+                        {/* Commission Or Rent Wala drop down or field */}
                         <Form.Item
-                            label="Commission"
-                            name="commission"
-                            rules={[{ required: true, message: "Please input the Commission!" }]}
+                            label="Type"
+                            name="type"
+                            rules={[{ required: true, message: "Please select a Type!" }]}
                         >
-                            <Input placeholder="Enter Commission" />
+                            <Select
+                                placeholder="Select Commission / Rent"
+                                onChange={handleTypeChange}
+                                value={type}
+                            >
+                                <Option value="Commission">Commission</Option>
+                                <Option value="Rent">Rent</Option>
+                            </Select>
                         </Form.Item>
+
+                        <Form.Item
+                            label={type === "Commission" ? "Commission Amount" : "Rent Amount"}
+                            name="amount"
+                            rules={[
+                                {
+                                    required: true,
+                                    message:
+                                        type === "Commission"
+                                            ? "Please enter commission amount!"
+                                            : "Please enter rent amount!",
+                                },
+                            ]}
+                        >
+                            <Input
+                                type="number"
+                                placeholder={
+                                    type === "Commission" ? "Enter Commission" : "Enter Rent"
+                                }
+                            />
+                        </Form.Item>
+
 
                         <Form.Item
                             label="PDA Rent (Per Week)"
                             name="pdaRent"
-                            rules={[{ required: true, message: "Please enter PDA Rent!" }]}
                         >
                             <Input placeholder="Enter Rent" />
                         </Form.Item>
@@ -145,7 +178,6 @@ export default function CreateDriverCommission() {
                             className="mb-2"
                             label="Payment Type"
                             name="paymenttype"
-                            rules={[{ required: true, message: "Please select a Payment Type!" }]}
                         >
                             <Select placeholder="Select Payment Type">
                                 <Option value="Cash">Cash</Option>
@@ -156,7 +188,7 @@ export default function CreateDriverCommission() {
                         </Form.Item>
 
                         {/* Buttons */}
-                        <div className="flex items-center mb-3">
+                        <div className="flex items-center mb-3 justify-between">
                             <Button
                                 type="primary"
                                 htmlType="submit"
@@ -173,7 +205,7 @@ export default function CreateDriverCommission() {
                                 Save
                             </Button>
                         </div>
-                    </div>  
+                    </div>
                     <div className="w-full md:w-[30%] lg:w-[30%] flex flex-col md:flex-row justify-start items-start gap-6 p-4 mt-2 mx-auto">
 
                         {/* Left Section - Totals */}
@@ -220,7 +252,7 @@ export default function CreateDriverCommission() {
                                     <span className="font-semibold text-[#424899]">0.00</span>
                                 </p>
                                 <p className="flex justify-between bg-white px-3 py-2 rounded-lg shadow-sm text-sm">
-                                    <span>Commission:</span>
+                                    <span>{type}:</span>
                                     <span className="font-semibold text-[#424899]">0.00</span>
                                 </p>
                             </div>

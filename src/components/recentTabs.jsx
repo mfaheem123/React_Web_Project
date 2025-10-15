@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Home, X } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { Button } from "antd";
 
 const RecentTabsHeader = () => {
     const location = useLocation(); // Detect page change
@@ -9,7 +10,7 @@ const RecentTabsHeader = () => {
 
     // const Moveto = () => {
     //     useEffect(() => { 
-             
+
     //     })
     // }
 
@@ -46,9 +47,9 @@ const RecentTabsHeader = () => {
             </div>
 
             {/* Recent Tabs */}
-            <div className="flex flex-wrap gap-2">
+            <div className="w-full flex flex-wrap gap-2 ">
                 {recentTabs.map((tab, index) => (
-                    <div
+                    <Button
                         key={index}
                         className="flex items-center bg-gray-200 px-3 py-1 rounded-md gap-1"
                     >
@@ -58,7 +59,7 @@ const RecentTabsHeader = () => {
                             className="cursor-pointer hover:text-red-500"
                             onClick={() => closeTab(tab)}
                         />
-                    </div>
+                    </Button>
                 ))}
             </div>
         </div>
