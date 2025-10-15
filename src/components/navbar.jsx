@@ -73,7 +73,7 @@ const Navbar = () => {
     },
     {
       label: "Fares",
-      value: "#",
+      value: "fares",
       icon: <DollarSign className="w-4 h-4" />,
       subItems: [
         { label: "Create Fare Settings", value: "#" },
@@ -88,7 +88,7 @@ const Navbar = () => {
     },
     {
       label: "Location",
-      value: "#",
+      value: "location",
       icon: <MapPin className="w-4 h-4" />,
       subItems: [
         { label: "Add Location", value: "add_location" },
@@ -114,9 +114,9 @@ const Navbar = () => {
         },
         {
           label: "Driver Commision",
-          value: "#",
+          value: "DriverCommision",
           subItems: [
-            { label: "Create Driver Commission", value: "#" },
+            { label: "Create Driver Commission", value: "create_driver_commission" },
             { label: "Driver Commission", value: "#" },
             { label: "Bulk Driver Commission", value: "#" },
             { label: "Driver Commission Pay", value: "#" },

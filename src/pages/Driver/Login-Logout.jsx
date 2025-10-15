@@ -79,7 +79,7 @@ export default function Login_Logout() {
             <div className="w-full overflow-x-auto mt-5 px-2 md:px-0">
                 {/* Heading Section */}
                 <div className="flex flex-col md:flex-row items-center justify-start mb-4 gap-3 w-full">
-                    <h2 className="text-2xl md:text-4xl py-3 text-center md:text-left">
+                    <h2 className="text-2xl md:text-4xl py-3 text-center md:text-left p-5">
                         Drivers (<span className="text-green-600">{data.length}</span>)
                     </h2>
 
@@ -101,7 +101,7 @@ export default function Login_Logout() {
                 </div>
 
                 {/* Dynamic Table */}
-                <div className="w-full overflow-x-auto">
+                <div className="w-full overflow-x-auto p-5">
                     <DynamicTable data={enhancedData} />
                 </div>
             </div>

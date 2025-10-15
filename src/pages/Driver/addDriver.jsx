@@ -53,7 +53,7 @@ export default function AddDriver() {
             {/* Heading Section */}
             <div className="flex flex-col md:flex-row items-center justify-between mb-5 px-4 md:px-8 gap-3 w-full mt-5">
                 <h2 className="text-2xl md:text-4xl font-semibold text-center md:text-left text-gray-800">
-                    Driver
+                    Driver Information
                 </h2>
 
                 <div className="flex flex-wrap justify-center md:justify-start gap-2">
