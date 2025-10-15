@@ -17,7 +17,9 @@ import CompanyVehicleTable from "../pages/Vehicles/companyVehicleList.jsx";
 import AddDriver from "../pages/Driver/addDriver.jsx";
 import DriverList from "../pages/Driver/driverList.jsx";
 import LoginLogout from "../pages/Driver/Login-Logout.jsx";
+// Driver Commission
 import CreateDriverCommission from "../pages/Driver/createDriverCommision.jsx";
+import DriverCommision from "../pages/Driver/driverCommision.jsx";
 
 
 function MyRoutes() {
@@ -43,6 +45,7 @@ function MyRoutes() {
         <Route path="/driver_list" element={<DriverList />} />
         <Route path="/Login_Logout" element={<LoginLogout />} />
         <Route path="/create_driver_commission" element={<CreateDriverCommission />} />
+        <Route path="/driver_commission_list" element={<DriverCommision />} />
       </Routes>
     </Router>
   );
