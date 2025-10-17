@@ -31,6 +31,7 @@ import CreateFaresSettings from "../pages/Fares/createFaresSettings.jsx";
 import CreateFixedFaresSettings from "../pages/Fares/fixedFare.jsx";
 import CreatePlotFares from "../pages/Fares/plotfare.jsx";
 import CreateFaresByvehicle from "../pages/Fares/fareByVehicle.jsx";
+import AirportCharges from "../pages/Fares/airportcharges.jsx";
 
 function MyRoutes() {
   return (
@@ -68,6 +69,7 @@ function MyRoutes() {
         <Route path="/create_fixed_fares_settings" element={<CreateFixedFaresSettings />} />
         <Route path="/create_plot_fares" element={<CreatePlotFares />} />
         <Route path="/create_fare_by_vehicle" element={<CreateFaresByvehicle />} />
+        <Route path="/airport_charges" element={<AirportCharges />} />
 
 
       </Routes>
