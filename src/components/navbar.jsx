@@ -123,9 +123,7 @@ const Navbar = () => {
           ],
         },
         { label: "Driver App Features", value: "driver_app_feature" },
-        { label: "Driver Sin Bin", value: "#" },
-
-
+        { label: "Driver Sin Bin", value: "driver_sin_Bin" },
       ]
     },
     {

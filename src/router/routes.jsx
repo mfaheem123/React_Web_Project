@@ -24,7 +24,8 @@ import BulkDriverCommission from "../pages/Driver/bulkDriverCommission.jsx";
 import CommissionPay from "../pages/Driver/commissionPay.jsx";
 // Driver App Features
 import DriverAppFeature from "../pages/Driver/driverAppfeature.jsx";
-
+// Driver Sin Bin
+import DriverSinBin from "../pages/Driver/driverSinBin.jsx";
 
 function MyRoutes() {
   return (
@@ -55,6 +56,9 @@ function MyRoutes() {
         <Route path="/driver_commission_and_rent_pay" element={<CommissionPay />} />
         {/* Driver App Feature */}
         <Route path="/driver_app_feature" element={<DriverAppFeature />} />
+        {/* Driver Sin Bin */}
+        <Route path="/driver_sin_Bin" element={<DriverSinBin />} />
+
       </Routes>
     </Router>
   );
