@@ -113,26 +113,16 @@ const Navbar = () => {
           ],
         },
         {
-          label: "Driver Commision",
-          value: "DriverCommision",
+          label: "Driver Commision And Rent",
+          value: "DriverCommisionAndRent",
           subItems: [
-            { label: "Create Driver Commission", value: "create_driver_commission" },
-            { label: "Driver Commission", value: "driver_commission_list" },
-            { label: "Bulk Driver Commission", value: "bulk_driver_commission" },
-            { label: "Driver Commission Pay", value: "driver_commission_pay" },
+            { label: "Create Driver Commission And Rent", value: "create_driver_commission_and_rent" },
+            { label: "Driver Commission And Rent", value: "driver_commission_list_and_rent" },
+            { label: "Bulk Driver Commission And Rent", value: "bulk_driver_commission_and_rent" },
+            { label: "Driver Commission And Rent Pay", value: "driver_commission_and_rent_pay" },
           ],
         },
-        {
-          label: "Driver Rent",
-          value: "#",
-          subItems: [
-            { label: "Create Driver Rent", value: "#" },
-            { label: "Driver Rent", value: "#" },
-            { label: "Bulk Driver Rent", value: "#" },
-            { label: "Driver Rent Pay", value: "#" },
-          ],
-        },
-        { label: "Driver App Features", value: "#" },
+        { label: "Driver App Features", value: "driver_app_feature" },
         { label: "Driver Sin Bin", value: "#" },
 
 
