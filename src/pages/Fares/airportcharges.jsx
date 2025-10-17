@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "antd";
 import { Edit, Trash2 } from "lucide-react";
 import Navbar from "../../components/navbar";
-import { Form, Checkbox } from "antd";
 import RecentTabsHeader from "../../components/recentTabs";
 import DynamicTable from "../../components/dynamicTable";
 
@@ -85,10 +84,13 @@ export default function AirportCharges() {
                         </h2>
                     </div>
 
-                    {/* Dynamic Table */}
-                    <div className="w-full overflow-x-auto p-5">
-                        <DynamicTable data={enhancedData} />
+                    {/* Table fare Config */}
+                    <div className="w-full flex justify-center px-2 sm:px-4 md:px-6 lg:px-10 mt-5">
+                        <div className="w-full max-w-[95vw] sm:max-w-[90vw] md:max-w-[85vw] lg:max-w-[80vw] xl:max-w-[70vw] overflow-x-auto rounded-xl">
+                            <DynamicTable data={enhancedData} />
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

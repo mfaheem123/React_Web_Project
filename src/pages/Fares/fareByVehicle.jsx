@@ -106,12 +106,6 @@ export default function CreateFaresByvehicle() {
         console.log("Fares Configration:", values);
     }
 
-    const onClear = () => {
-        Form.resetFields(); // Clear form inputs
-    }
-
-
-
 
     return (
         <div>
