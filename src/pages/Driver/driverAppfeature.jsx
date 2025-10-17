@@ -103,7 +103,7 @@ export default function DriverAppFeature() {
 
             <div className="w-full min-h-[60vh] flex flex-col lg:flex-row justify-center items-start p-4 gap-4 bg-gray-30">
                 {/* Left Section */}
-                <div className="w-full lg:w-[20%] bg-white rounded-xl p-5 shadow-md ">
+                <div className="w-full lg:w-[30%] bg-white rounded-xl p-5 shadow-md ">
                     <h2 className="text-lg font-semibold mb-3 text-center text-[#424899]">
                         Drivers
                     </h2>
@@ -119,7 +119,7 @@ export default function DriverAppFeature() {
                 </div>
 
                 {/* Right Section */}
-                <div className="w-full lg:w-[80%] min-h-[100%] rounded-xl p-5 shadow-md mt-5">
+                <div className="w-full lg:w-[70%] min-h-[100%] rounded-xl p-5 shadow-md mt-5">
                     <h2 className="text-3xl font-semibold mb-10">App Version Settings</h2>
                     <Form layout="vertical" onFinish={onFinishAppVersion}>
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">

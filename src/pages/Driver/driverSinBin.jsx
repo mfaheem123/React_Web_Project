@@ -89,7 +89,7 @@ export default function DriverSinBin() {
                 <Form
                     name="personalForm"
                     layout="vertical"
-                    className="w-full max-w-[90%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%] bg-gray-200 p-6 rounded-2xl shadow-md flex flex-col items-center"
+                    className="w-full max-w-[90%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[70%] bg-gray-200 p-6 rounded-2xl shadow-md flex flex-col items-center"
                     onFinish={onFinishPersonal}
                     autoComplete="off"
                 >
@@ -141,7 +141,7 @@ export default function DriverSinBin() {
                 <div className="w-full sm:w-[90%] md:w-[80%] lg:w-[70%] bg-white rounded-xl shadow-md p-3 sm:p-5 overflow-x-auto">
                     <DynamicTable data={enhancedData} />
                 </div>
-            </div>
+            </div>  
 
 
         </div>
