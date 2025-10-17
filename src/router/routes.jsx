@@ -28,6 +28,8 @@ import DriverAppFeature from "../pages/Driver/driverAppfeature.jsx";
 import DriverSinBin from "../pages/Driver/driverSinBin.jsx";
 // fares
 import CreateFaresSettings from "../pages/Fares/createFaresSettings.jsx";
+import CreateFixedFaresSettings from "../pages/Fares/fixedFare.jsx";
+import CreatePlotFares from "../pages/Fares/plotfare.jsx";
 
 function MyRoutes() {
   return (
@@ -62,6 +64,8 @@ function MyRoutes() {
         <Route path="/driver_sin_Bin" element={<DriverSinBin />} />
         {/* Fares */}
         <Route path="/create_fares_settings" element={<CreateFaresSettings />} />
+        <Route path="/create_fixed_fares_settings" element={<CreateFixedFaresSettings />} />
+        <Route path="/create_plot_fares" element={<CreatePlotFares />} />
 
 
       </Routes>
