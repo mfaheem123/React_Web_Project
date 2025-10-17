@@ -26,6 +26,8 @@ import CommissionPay from "../pages/Driver/commissionPay.jsx";
 import DriverAppFeature from "../pages/Driver/driverAppfeature.jsx";
 // Driver Sin Bin
 import DriverSinBin from "../pages/Driver/driverSinBin.jsx";
+// fares
+import CreateFaresSettings from "../pages/Fares/createFaresSettings.jsx";
 
 function MyRoutes() {
   return (
@@ -58,6 +60,9 @@ function MyRoutes() {
         <Route path="/driver_app_feature" element={<DriverAppFeature />} />
         {/* Driver Sin Bin */}
         <Route path="/driver_sin_Bin" element={<DriverSinBin />} />
+        {/* Fares */}
+        <Route path="/create_fares_settings" element={<CreateFaresSettings />} />
+
 
       </Routes>
     </Router>

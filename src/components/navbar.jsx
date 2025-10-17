@@ -76,7 +76,7 @@ const Navbar = () => {
       value: "fares",
       icon: <DollarSign className="w-4 h-4" />,
       subItems: [
-        { label: "Create Fare Settings", value: "#" },
+        { label: "Create Fare Settings", value: "create_fares_settings" },
         { label: "Create Fixed Fare Settings", value: "#" },
         { label: "Create Plot Fare", value: "#" },
         { label: "Create Fare By vehicle Settings", value: "#" },
