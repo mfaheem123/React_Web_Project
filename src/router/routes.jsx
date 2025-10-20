@@ -35,6 +35,8 @@ import AirportCharges from "../pages/Fares/airportcharges.jsx";
 import FareIncrement from "../pages/Fares/fareIncrement.jsx";
 import SurCharges from "../pages/Fares/surcharges.jsx";
 import FareMeter from "../pages/Fares/fareMeter.jsx";
+// Administration
+import CreateUser from "../pages/Administration/createUser.jsx";
 
 
 function MyRoutes() {
@@ -77,6 +79,9 @@ function MyRoutes() {
         <Route path="/fare_increment" element={<FareIncrement />} />
         <Route path="/surcharges" element={<SurCharges />} />
         <Route path="/faremeter" element={<FareMeter />} />
+        {/* Administration */}
+        <Route path="/create_user" element={<CreateUser />} />
+
 
 
 
