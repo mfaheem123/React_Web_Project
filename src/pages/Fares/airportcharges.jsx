@@ -68,6 +68,7 @@ export default function AirportCharges() {
             </div>
         ),
     }));
+
     return (
         <div>
             <Navbar />
