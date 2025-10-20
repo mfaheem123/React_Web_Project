@@ -33,6 +33,8 @@ import CreatePlotFares from "../pages/Fares/plotfare.jsx";
 import CreateFaresByvehicle from "../pages/Fares/fareByVehicle.jsx";
 import AirportCharges from "../pages/Fares/airportcharges.jsx";
 import FareIncrement from "../pages/Fares/fareIncrement.jsx";
+import SurCharges from "../pages/Fares/surcharges.jsx";
+
 
 function MyRoutes() {
   return (
@@ -72,6 +74,7 @@ function MyRoutes() {
         <Route path="/create_fare_by_vehicle" element={<CreateFaresByvehicle />} />
         <Route path="/airport_charges" element={<AirportCharges />} />
         <Route path="/fare_increment" element={<FareIncrement />} />
+        <Route path="/surcharges" element={<SurCharges />} />
 
 
       </Routes>

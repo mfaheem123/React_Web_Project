@@ -82,7 +82,7 @@ const Navbar = () => {
         { label: "Create Fare By vehicle Settings", value: "create_fare_by_vehicle" },
         { label: "Airport Charges", value: "airport_charges" },
         { label: "Fare Increment", value: "fare_increment" },
-        { label: "Surcharges", value: "#" },
+        { label: "Surcharges", value: "surcharges" },
         { label: "Fare Meter", value: "#" },
       ],
     },
