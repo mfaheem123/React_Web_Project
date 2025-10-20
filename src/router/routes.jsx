@@ -37,7 +37,8 @@ import SurCharges from "../pages/Fares/surcharges.jsx";
 import FareMeter from "../pages/Fares/fareMeter.jsx";
 // Administration
 import CreateUser from "../pages/Administration/createUser.jsx";
-
+import UserList from "../pages/Administration/userList.jsx";
+import SubsidiaryList from "../pages/Administration/subsidiaryList.jsx";
 
 function MyRoutes() {
   return (
@@ -81,6 +82,9 @@ function MyRoutes() {
         <Route path="/faremeter" element={<FareMeter />} />
         {/* Administration */}
         <Route path="/create_user" element={<CreateUser />} />
+        <Route path="/users" element={<UserList />} />
+        <Route path="/subsidiaries" element={<SubsidiaryList />} />
+
 
 
 

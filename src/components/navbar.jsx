@@ -211,8 +211,9 @@ const Navbar = () => {
       icon: <Settings className="w-4 h-4" />,
       subItems: [
         { label: "Create User", value: "create_user" },
-        { label: "Users", value: "#" },
+        { label: "Users", value: "users" },
         { label: "Create Subsdiary", value: "#" },
+        { label: "Subsdiary", value: "subsidiaries" },
         { label: "Authorization", value: "#" },
       ],
     },
