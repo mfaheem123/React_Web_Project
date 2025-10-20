@@ -272,17 +272,17 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-[#424899] text-white shadow-md">
       <div className="max-w-[100%] mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-evenly h-16 w-full">
+        <div className="flex items-center justify-between h-16 w-full">
 
           {/* Heading */}
-          <div className="flex items-center gap-2 flex-shrink-0 ">
+          <div className="flex items-center flex-shrink-0 w-[10%]">
             <NavLink to={'/'}>
-              <h1 className="text-white font-extrabold text-5xl tracking-wide">Nexus</h1>
+              <h1 className="text-white font-extrabold text-4xl tracking-wide">Nexus</h1>
             </NavLink>
           </div>
 
           {/* Desktop Nav Items (Large screens) */}
-          <div className="hidden lg:flex items-center space-x-1 lg:space-x-1">
+          <div className="hidden lg:flex flex-wrap items-center gap-2 w-[80%]">
             {navGroups.map(group =>
               group.subItems ? (
                 <Dropdown
@@ -292,28 +292,32 @@ const Navbar = () => {
                   arrow
                 >
                   <Button
-                    className="flex items-center gap-1 lg:gap-1 text-white lg:text-sm hover:text-[#757cdd] border-none"
-                    style={{ backgroundColor: 'transparent', border: 'none', padding: '0.2rem 0.3rem' }}
+                    className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-white lg:text-sm hover:text-[#757cdd] border-none p-1 min-w-[80px]"
+                    style={{ backgroundColor: 'transparent', border: 'none' }}
                   >
-                    {group.icon} {group.label} <DownOutlined />
+                    {group.icon}
+                    <span className="whitespace-nowrap">{group.label}</span>
+                    <DownOutlined className="mt-1 sm:mt-0" />
                   </Button>
                 </Dropdown>
               ) : (
                 <Button
                   key={group.value}
-                  className="flex items-center gap-1 lg:gap-1 text-white lg:text-sm hover:text-[#757cdd] border-none"
-                  style={{ backgroundColor: 'transparent', border: 'none', padding: '0.5rem 0.2rem' }}
+                  className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-white lg:text-sm hover:text-[#757cdd] border-none p-1 min-w-[80px]"
+                  style={{ backgroundColor: 'transparent', border: 'none' }}
                   onClick={() => navigate(`/${group.value}`)}
                 >
-                  {group.icon} {group.label}
+                  {group.icon}
+                  <span className="whitespace-nowrap">{group.label}</span>
                 </Button>
               )
             )}
           </div>
- 
+
+
           {/* Desktop Secondary Nav (Large screens) */}
           <>
-            <div className="hidden lg:flex items-center space-x-2">
+            <div className="hidden lg:flex items-center space-x-2 w-[20%]">
               {secondNav.map(({ label, icon }) => (
 
                 <button
