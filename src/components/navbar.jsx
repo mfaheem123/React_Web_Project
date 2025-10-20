@@ -83,7 +83,7 @@ const Navbar = () => {
         { label: "Airport Charges", value: "airport_charges" },
         { label: "Fare Increment", value: "fare_increment" },
         { label: "Surcharges", value: "surcharges" },
-        { label: "Fare Meter", value: "#" },
+        { label: "Fare Meter", value: "faremeter" },
       ],
     },
     {
@@ -271,8 +271,8 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-[#424899] text-white shadow-md">
-      <div className="max-w-[100%] mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-16 w-full">
+      <div className="max-w-[100%] mx-auto px-4 lg:px-8">
+        <div className="flex items-center justify-evenly h-16 w-full">
 
           {/* Heading */}
           <div className="flex items-center gap-2 flex-shrink-0 ">
@@ -282,7 +282,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Nav Items (Large screens) */}
-          <div className="hidden lg:flex items-center space-x-0">
+          <div className="hidden lg:flex items-center space-x-1 lg:space-x-1">
             {navGroups.map(group =>
               group.subItems ? (
                 <Dropdown
@@ -292,8 +292,8 @@ const Navbar = () => {
                   arrow
                 >
                   <Button
-                    className="flex items-center gap-2 text-white hover:text-[#757cdd] border-none"
-                    style={{ backgroundColor: 'transparent', border: 'none' }}
+                    className="flex items-center gap-1 lg:gap-1 text-white lg:text-sm hover:text-[#757cdd] border-none"
+                    style={{ backgroundColor: 'transparent', border: 'none', padding: '0.2rem 0.3rem' }}
                   >
                     {group.icon} {group.label} <DownOutlined />
                   </Button>
@@ -301,8 +301,8 @@ const Navbar = () => {
               ) : (
                 <Button
                   key={group.value}
-                  className="flex items-center gap-2 text-white hover:text-[#757cdd] border-none"
-                  style={{ backgroundColor: 'transparent', border: 'none' }}
+                  className="flex items-center gap-1 lg:gap-1 text-white lg:text-sm hover:text-[#757cdd] border-none"
+                  style={{ backgroundColor: 'transparent', border: 'none', padding: '0.5rem 0.2rem' }}
                   onClick={() => navigate(`/${group.value}`)}
                 >
                   {group.icon} {group.label}
@@ -310,10 +310,10 @@ const Navbar = () => {
               )
             )}
           </div>
-
+ 
           {/* Desktop Secondary Nav (Large screens) */}
           <>
-            <div className="hidden lg:flex items-center space-x-3">
+            <div className="hidden lg:flex items-center space-x-2">
               {secondNav.map(({ label, icon }) => (
 
                 <button
