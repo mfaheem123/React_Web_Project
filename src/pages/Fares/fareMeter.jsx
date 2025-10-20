@@ -3,6 +3,8 @@ import { ClockCircleOutlined, DashboardOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import Navbar from "../../components/navbar";
 import RecentTabsHeader from "../../components/recentTabs";
+import DynamicTable from "../../components/dynamicTable";
+import { Trash2 } from "lucide-react";
 
 export default function FareMeter() {
     const { Option } = Select;
@@ -30,6 +32,47 @@ export default function FareMeter() {
         setModalTitle(`${vehicleType === "normalDays" ? "Normal Days" : "Special Days"} Waiting Configration`);
         setModalVisible(true);
     };
+
+
+    // Table 
+
+    const waitingData = [
+        { day: "Monday", time: "08:00 - 09:00", charges: 50 },
+        { day: "Tuesday", time: "10:00 - 11:00", charges: 60 },
+        { day: "Wednesday", time: "12:00 - 13:30", charges: 55 },
+        { day: "Thursday", time: "14:00 - 15:00", charges: 65 },
+        { day: "Friday", time: "16:00 - 17:00", charges: 70 },
+        { day: "Saturday", time: "09:00 - 10:30", charges: 60 },
+        { day: "Sunday", time: "11:00 - 12:00", charges: 75 },
+        { day: "Monday", time: "13:00 - 14:00", charges: 50 },
+        { day: "Tuesday", time: "15:00 - 16:30", charges: 65 },
+        { day: "Wednesday", time: "17:00 - 18:00", charges: 55 },
+    ];
+
+
+
+    const [data, setData] = useState(waitingData);
+
+    const handleDelete = (record) => {
+        console.log("Delete", record);
+        setData(data.filter((item) => item.key !== record.key));
+    };
+
+    // Dynamic table ke liye action column add karna
+    const enhancedData = data.map((row) => ({
+        ...row,
+        action: (
+            <div className="flex gap-2 justify-center">
+
+                <Button
+                    className="bg-red-700 text-white"
+                    icon={<Trash2 size={16} />}
+                    onClick={() => handleDelete(row)}
+                />
+            </div>
+        ),
+    }));
+
 
     return (
         <div>
@@ -141,50 +184,64 @@ export default function FareMeter() {
             >
                 <Form form={form} layout="vertical" onFinish={onFinish}>
                     {selectedVehicle === "normalDays" ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-4 items-end">
-                            {/* Fare Active */}
-                            <Form.Item label="Fare Active" name="fareActive" valuePropName="checked">
-                                <Switch />
-                            </Form.Item>
+                        <div>
 
-                            {/* Day */}
-                            <Form.Item label="Day" name="day">
-                                <Select placeholder="Select Day" className="w-full">
-                                    <Option value="monday">Monday</Option>
-                                    <Option value="tuesday">Tuesday</Option>
-                                    <Option value="wednesday">Wednesday</Option>
-                                    <Option value="thursday">Thursday</Option>
-                                    <Option value="friday">Friday</Option>
-                                    <Option value="saturday">Saturday</Option>
-                                    <Option value="sunday">Sunday</Option>
-                                </Select>
-                            </Form.Item>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-4 items-end">
+                                {/* Fare Active */}
+                                <Form.Item label="Fare Active" name="fareActive" valuePropName="checked">
+                                    <Switch />
+                                </Form.Item>
 
-                            {/* From Time */}
-                            <Form.Item label="From Time" name="fromTime">
-                                <Input type="time" />
-                            </Form.Item>
+                                {/* Day */}
+                                <Form.Item label="Day" name="day">
+                                    <Select placeholder="Select Day" className="w-full">
+                                        <Option value="monday">Monday</Option>
+                                        <Option value="tuesday">Tuesday</Option>
+                                        <Option value="wednesday">Wednesday</Option>
+                                        <Option value="thursday">Thursday</Option>
+                                        <Option value="friday">Friday</Option>
+                                        <Option value="saturday">Saturday</Option>
+                                        <Option value="sunday">Sunday</Option>
+                                    </Select>
+                                </Form.Item>
 
-                            {/* To Time */}
-                            <Form.Item label="To Time" name="toTime">
-                                <Input type="time" />
-                            </Form.Item>
+                                {/* From Time */}
+                                <Form.Item label="From Time" name="fromTime">
+                                    <Input type="time" />
+                                </Form.Item>
 
-                            {/* Charges */}
-                            <Form.Item label="Charges" name="charges">
-                                <Input
-                                    type="number"
-                                    placeholder="Enter Charges"
-                                />
-                            </Form.Item>
+                                {/* To Time */}
+                                <Form.Item label="To Time" name="toTime">
+                                    <Input type="time" />
+                                </Form.Item>
 
-                            {/* Add Button */}
-                            <Form.Item className="mb-6">
-                                <Button type="default" className="w-full h-full">
-                                    Save
-                                </Button>
-                            </Form.Item>
+                                {/* Charges */}
+                                <Form.Item label="Charges" name="charges">
+                                    <Input
+                                        type="number"
+                                        placeholder="Enter Charges"
+                                    />
+                                </Form.Item>
+
+                                {/* Add Button */}
+                                <Form.Item className="mb-6">
+                                    <Button type="default" className="w-full h-full">
+                                        Save
+                                    </Button>
+                                </Form.Item>
+
+                            </div>
+
+                            <div className="w-full flex justify-center px-2 sm:px-4 md:px-6 lg:px-10 mt-5">
+                                <div className="w-full max-w-[95vw] sm:max-w-[90vw] md:max-w-[85vw] lg:max-w-[80vw] xl:max-w-[70vw] overflow-x-auto rounded-xl">
+                                    <DynamicTable data={enhancedData} />
+                                </div>
+                            </div>
                         </div>
+
+
+
+
                     ) : (
                         <p>Select vehicle type first</p>
                     )}
