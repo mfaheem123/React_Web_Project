@@ -212,7 +212,7 @@ const Navbar = () => {
       subItems: [
         { label: "Create User", value: "create_user" },
         { label: "Users", value: "users" },
-        { label: "Create Subsdiary", value: "#" },
+        { label: "Create Subsdiary", value: "create_subsidiary" },
         { label: "Subsdiary", value: "subsidiaries" },
         { label: "Authorization", value: "#" },
       ],
