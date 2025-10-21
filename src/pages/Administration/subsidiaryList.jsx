@@ -86,7 +86,6 @@ const SubsidiaryList = () => {
         setData(data.filter((item) => item.key !== record.key));
     };
 
-    // Dynamic table ke liye action column add karna
     const enhancedData = data.map((row) => ({
         ...row,
         action: (
