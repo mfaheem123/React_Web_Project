@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "antd";
 import { Edit, Trash2 } from "lucide-react";
 import Navbar from "../../components/navbar";
-import { Form, Checkbox } from "antd";
 import RecentTabsHeader from "../../components/recentTabs";
 import DynamicTable from "../../components/dynamicTable";
 
