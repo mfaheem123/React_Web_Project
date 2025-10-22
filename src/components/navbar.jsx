@@ -133,7 +133,7 @@ const Navbar = () => {
       subItems: [
         { label: "Create Account", value: "create_account" },
         { label: "Accounts", value: "account_list" },
-        { label: "Create Escort", value: "#" },
+        { label: "Create Escort", value: "escort_list" },
         { label: "Escort", value: "#" },
       ],
     },
