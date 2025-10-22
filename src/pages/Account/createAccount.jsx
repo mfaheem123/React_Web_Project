@@ -1,16 +1,75 @@
-import { Button, Checkbox, Form, Input, Select } from "antd";
+import { Button, Checkbox, Form, Input, Select, Modal } from "antd";
 import Navbar from "../../components/navbar";
 import RecentTabsHeader from "../../components/recentTabs";
 import TextArea from "antd/es/input/TextArea";
+import { useState } from "react";
+import WebLogin from "../../components/Accounts/webLogin";
+import Departments from "../../components/Accounts/department";
+import Contact from "../../components/Accounts/contact";
+import Order from "../../components/Accounts/order";
+import CompanyAddress from "../../components/Accounts/companyAddress";
+
+
 
 export default function CreateAccount() {
-    const { Option } = Select
+    const { Option } = Select;
 
-    // Form Values
+    const onFinish = (v) => {
+        console.log("Values", v);
+    };
 
-    const onFinish = (v) => { 
-        console.log('Values' , v);
-    }
+    // ✅ States
+    const [comp, setComp] = useState("");
+    const [modalWidth, setModalWidth] = useState("30%");
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // ✅ Show modal + set both component and width
+    const showModal = (componentName) => {
+        setComp(componentName);
+
+        switch (componentName) {
+            case "Web Logins":
+                setModalWidth("70%");
+                break;
+            case "Departments":
+                setModalWidth("30%");
+                break;
+            case "Contacts":
+                setModalWidth("70%");
+                break;
+            case "Order":
+                setModalWidth("30%");
+                break;
+            case "Company Address":
+                setModalWidth("30%");
+                break;
+            default:
+                setModalWidth("30%");
+        }
+
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => setIsModalOpen(false);
+    const handleCancel = () => setIsModalOpen(false);
+
+    // ✅ Render component based on comp
+    const renderComponent = () => {
+        switch (comp) {
+            case "Web Logins":
+                return <WebLogin />;
+            case "Departments":
+                return <Departments />;
+            case "Contacts":
+                return <Contact />;
+            case "Order":
+                return <Order />;
+            case "Company Address":
+                return <CompanyAddress />;
+            default:
+                return null;
+        }
+    };
 
     return (
         <div>
@@ -34,11 +93,11 @@ export default function CreateAccount() {
                                 User
                             </h2>
                             <div className="flex flex-wrap justify-center md:justify-evenly w-full md:w-[60%] gap-2">
-                                <Button>Web Logins</Button>
-                                <Button>Web Logins</Button>
-                                <Button>Web Logins</Button>
-                                <Button>Web Logins</Button>
-                                <Button>Web Logins</Button>
+                                <Button onClick={() => showModal("Web Logins")}>Web Logins</Button>
+                                <Button onClick={() => showModal("Departments")}>Departments</Button>
+                                <Button onClick={() => showModal("Contacts")}>Contacts</Button>
+                                <Button onClick={() => showModal("Order")}>Order</Button>
+                                <Button onClick={() => showModal("Company Address")}>Company Address</Button>
                             </div>
                         </div>
 
@@ -361,8 +420,8 @@ export default function CreateAccount() {
 
                 </div>
 
+                {/* Submit Button */}
                 <div>
-                    {/* Submit Button */}
                     <Form.Item className="mt-8 text-center">
                         <Button
                             type="primary"
@@ -374,6 +433,18 @@ export default function CreateAccount() {
                     </Form.Item>
                 </div>
             </Form>
+
+
+            <Modal
+                title={comp}
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                footer={null}
+                width={modalWidth}
+            >
+                {renderComponent()}
+            </Modal>
 
 
         </div >
