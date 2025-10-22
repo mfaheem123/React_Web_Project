@@ -40,6 +40,10 @@ import CreateUser from "../pages/Administration/createUser.jsx";
 import UserList from "../pages/Administration/userList.jsx";
 import SubsidiaryList from "../pages/Administration/subsidiaryList.jsx";
 import CreateSubssidiary from "../pages/Administration/createSubsidiary.jsx";
+// Account
+import CreateAccount from "../pages/Account/createAccount.jsx";
+
+
 
 function MyRoutes() {
   return (
@@ -86,7 +90,8 @@ function MyRoutes() {
         <Route path="/users" element={<UserList />} />
         <Route path="/subsidiaries" element={<SubsidiaryList />} />
         <Route path="/create_subsidiary" element={<CreateSubssidiary />} />
-
+        {/* Account */}
+        <Route path="/create_account" element={<CreateAccount />} />
 
 
 
