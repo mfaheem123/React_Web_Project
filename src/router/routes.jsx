@@ -42,6 +42,7 @@ import SubsidiaryList from "../pages/Administration/subsidiaryList.jsx";
 import CreateSubssidiary from "../pages/Administration/createSubsidiary.jsx";
 // Account
 import CreateAccount from "../pages/Account/createAccount.jsx";
+import AccountList from "../pages/Account/accountList.jsx";
 
 
 
@@ -92,6 +93,7 @@ function MyRoutes() {
         <Route path="/create_subsidiary" element={<CreateSubssidiary />} />
         {/* Account */}
         <Route path="/create_account" element={<CreateAccount />} />
+        <Route path="/account_list" element={<AccountList />} />
 
 
 

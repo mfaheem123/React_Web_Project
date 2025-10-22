@@ -132,7 +132,7 @@ const Navbar = () => {
       icon: <Wallet className="w-4 h-4" />,
       subItems: [
         { label: "Create Account", value: "create_account" },
-        { label: "Accounts", value: "#" },
+        { label: "Accounts", value: "account_list" },
         { label: "Create Escort", value: "#" },
         { label: "Escort", value: "#" },
       ],
