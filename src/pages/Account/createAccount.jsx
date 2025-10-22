@@ -90,7 +90,7 @@ export default function CreateAccount() {
                         {/* Heading Section */}
                         <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#424899] p-3">
                             <h2 className="text-2xl md:text-3xl font-semibold w-full md:w-[30%] text-center md:text-left">
-                                User
+                                Accounts
                             </h2>
                             <div className="flex flex-wrap justify-center md:justify-evenly w-full md:w-[60%] gap-2">
                                 <Button onClick={() => showModal("Web Logins")}>Web Logins</Button>
