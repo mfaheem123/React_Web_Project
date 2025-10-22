@@ -64,7 +64,7 @@ const Navbar = () => {
       icon: <Users className="w-4 h-4" />,
       subItems: [
         { label: "Add Customer", value: "#" },
-        { label: "Customers", value: "#" },
+        { label: "Customers", value: "customers" },
         { label: "Create Lost Property", value: "#" },
         { label: "Lost Properties", value: "#" },
         { label: "Create Complaint", value: "#" },
