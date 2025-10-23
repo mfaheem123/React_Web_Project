@@ -46,6 +46,7 @@ import AccountList from "../pages/Account/accountList.jsx";
 import EscortList from "../pages/Account/escortList.jsx";
 import AddEscort from "../pages/Account/createEscort.jsx";
 // Customer
+import AddCustomer from '../pages/Customer/addCustomer.jsx'
 import CustomerList from "../pages/Customer/customerList.jsx";
 
 
@@ -101,6 +102,7 @@ function MyRoutes() {
         <Route path="/create_escort" element={<AddEscort />} />
         <Route path="/escort_list" element={<EscortList />} />
         {/* Customer */}
+        <Route path="/add_customers" element={<AddCustomer />} />
         <Route path="/customers" element={<CustomerList />} />
         
 
