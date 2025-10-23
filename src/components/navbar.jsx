@@ -67,7 +67,7 @@ const Navbar = () => {
         { label: "Customers", value: "customers" },
         { label: "Create Lost Property", value: "add_lost_property" },
         { label: "Lost Properties", value: "lost_property" },
-        { label: "Create Complaint", value: "#" },
+        { label: "Create Complaint", value: "add_complaint" },
         { label: "Complaint", value: "#" },
       ],
     },

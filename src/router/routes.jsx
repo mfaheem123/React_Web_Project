@@ -50,6 +50,7 @@ import AddCustomer from '../pages/Customer/addCustomer.jsx'
 import CustomerList from "../pages/Customer/customerList.jsx";
 import AddLostProperty from "../pages/Customer/addLostProperty.jsx";
 import LostPropertyList from "../pages/Customer/lostPropertyList.jsx";
+import AddComplaint from "../pages/Customer/addComplaint.jsx";
 
 
 
@@ -108,6 +109,7 @@ function MyRoutes() {
         <Route path="/customers" element={<CustomerList />} />
         <Route path="/add_lost_property" element={<AddLostProperty />} />
         <Route path="/lost_property" element={<LostPropertyList />} />
+        <Route path="/add_complaint" element={<AddComplaint />} />
         
 
 
