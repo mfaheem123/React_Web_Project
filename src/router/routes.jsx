@@ -48,6 +48,7 @@ import AddEscort from "../pages/Account/createEscort.jsx";
 // Customer
 import AddCustomer from '../pages/Customer/addCustomer.jsx'
 import CustomerList from "../pages/Customer/customerList.jsx";
+import AddLostProperty from "../pages/Customer/addLostProperty.jsx";
 
 
 
@@ -104,6 +105,7 @@ function MyRoutes() {
         {/* Customer */}
         <Route path="/add_customers" element={<AddCustomer />} />
         <Route path="/customers" element={<CustomerList />} />
+        <Route path="/add_lost_property" element={<AddLostProperty />} />
         
 
 

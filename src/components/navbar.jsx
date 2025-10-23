@@ -65,7 +65,7 @@ const Navbar = () => {
       subItems: [
         { label: "Add Customer", value: "add_customers" },
         { label: "Customers", value: "customers" },
-        { label: "Create Lost Property", value: "#" },
+        { label: "Create Lost Property", value: "add_lost_property" },
         { label: "Lost Properties", value: "#" },
         { label: "Create Complaint", value: "#" },
         { label: "Complaint", value: "#" },
