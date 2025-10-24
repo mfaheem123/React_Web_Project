@@ -8,6 +8,8 @@ const RecentTabsHeader = () => {
     const navigate = useNavigate();
     const [recentTabs, setRecentTabs] = useState([]);
 
+    const MAX_TABS = 10; // 🔹 Set your dynamic tab limit here
+
     // Load tabs from localStorage initially
     useEffect(() => {
         const storedTabs = JSON.parse(localStorage.getItem("recentTabs")) || [];
@@ -33,7 +35,8 @@ const RecentTabsHeader = () => {
 
         setRecentTabs((prevTabs) => {
             if (!prevTabs.includes(label)) {
-                const updatedTabs = [...prevTabs, label];
+                // 🔹 Keep only last MAX_TABS items
+                const updatedTabs = [...prevTabs, label].slice(-MAX_TABS);
                 localStorage.setItem("recentTabs", JSON.stringify(updatedTabs));
                 return updatedTabs;
             }
@@ -66,20 +69,18 @@ const RecentTabsHeader = () => {
     return (
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-2 mt-[-15px] bg-gray-100 rounded-md shadow-md gap-4">
             {/* Home */}
-            {/* Home */}
             <div
                 className={`flex items-center gap-2 cursor-pointer ${location.pathname === "/" ? "text-[#757cdd]" : "hover:text-[#757cdd]"
                     }`}
                 onClick={() => {
-                    localStorage.removeItem("recentTabs"); // Clear local storage
-                    setRecentTabs([]); // Clear state
-                    navigate("/"); // Go to home
+                    localStorage.removeItem("recentTabs");
+                    setRecentTabs([]);
+                    navigate("/");
                 }}
             >
                 <Home size={20} />
                 <span className="font-semibold">Home</span>
             </div>
-
 
             {/* Scrollable Recent Tabs */}
             <div className="w-full overflow-x-auto flex gap-2 py-1">

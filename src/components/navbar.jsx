@@ -278,9 +278,19 @@ const Navbar = () => {
 
           {/* Heading */}
           <div className="flex items-center flex-shrink-0 w-[10%]">
-            <NavLink to={'/'}>
-              <h1 className="text-white font-extrabold text-4xl tracking-wide">Nexus</h1>
+            <NavLink
+              to="/"
+              onClick={() => {
+                localStorage.removeItem("recentTabs"); // remove saved tabs
+                // optional: agar tum useState se manage kar rahe ho:
+                // setRecentTabs([]);
+              }}
+            >
+              <h1 className="text-white font-extrabold text-4xl tracking-wide">
+                Nexus
+              </h1>
             </NavLink>
+
           </div>
 
           {/* Desktop Nav Items (Large screens) */}
