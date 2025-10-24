@@ -73,7 +73,7 @@ const usersData = [
 ];
 
 
-const CustomerInvoices = () => {
+const AccountInvoices = () => {
     const [data, setData] = useState(usersData);
 
     const handleUpdate = (record) => {
@@ -118,7 +118,7 @@ const CustomerInvoices = () => {
                     {/* Left side: Title + Checkbox */}
                     <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
                         <h2 className="text-2xl md:text-3xl font-semibold text-center md:text-left">
-                            Customer Invoices  (<span className="text-green-600">{data.length}</span>)
+                            Account Invoices  (<span className="text-green-600">{data.length}</span>)
                         </h2>
                     </div>
 
@@ -141,4 +141,4 @@ const CustomerInvoices = () => {
     );
 };
 
-export default CustomerInvoices;
+export default AccountInvoices;
