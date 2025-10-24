@@ -53,7 +53,9 @@ import LostPropertyList from "../pages/Customer/lostPropertyList.jsx";
 import AddComplaint from "../pages/Customer/addComplaint.jsx";
 import ComplaintList from "../pages/Customer/complaintList.jsx";
 // Invoices
-import CreateInvoice from "../pages/Invoices/createInvoice.jsx";
+import CreateInvoice from "../pages/Invoices/createCustomerInvoice.jsx";
+import CustomerInvoices from "../pages/Invoices/customerInvoices.jsx";
+import CreateAccountInvoice from "../pages/Invoices/createAccountInvoice.jsx";
 
 
 
@@ -116,6 +118,8 @@ function MyRoutes() {
         <Route path="/complaints" element={<ComplaintList />} />
         {/* Invoice */}
         <Route path="/create_invoice" element={<CreateInvoice />} />
+        <Route path="/invoices" element={<CustomerInvoices />} />
+        <Route path="/account_invoices" element={<CreateAccountInvoice />} />
         
 
 

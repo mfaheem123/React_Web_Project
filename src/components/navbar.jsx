@@ -143,8 +143,8 @@ const Navbar = () => {
       icon: <FileText className="w-4 h-4" />,
       subItems: [
         { label: "Create Customer Invoice", value: "create_invoice" },
-        { label: "Customer Invoice", value: "#" },
-        { label: "Create Acount Invoice", value: "#" },
+        { label: "Customer Invoice", value: "invoices" },
+        { label: "Create Acount Invoice", value: "account_invoices" },
         { label: "Acount Invoice", value: "#" },
         { label: "Create Customer Pre Invoice", value: "add-vehicle" },
         { label: "Customer Pre Invoice", value: "add-vehicle" },
