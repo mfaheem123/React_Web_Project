@@ -8,20 +8,41 @@ const RecentTabsHeader = () => {
     const navigate = useNavigate();
     const [recentTabs, setRecentTabs] = useState([]);
 
-    const MAX_TABS = 10; // 🔹 Set your dynamic tab limit here
+    const MAX_TABS = 10;
 
-    // 🔹 Load tabs from localStorage initially
     useEffect(() => {
         const storedTabs = JSON.parse(localStorage.getItem("recentTabs")) || [];
         setRecentTabs(storedTabs);
 
-        // Navigate to last tab if on home
-        if (storedTabs.length > 0 && location.pathname === "/") {
-            const lastTab = storedTabs[storedTabs.length - 1];
-            const path = `/${lastTab.toLowerCase().split(" ").join("-")}`;
-            navigate(path);
+        // 🟡 Before refresh → ask confirmation
+        const handleBeforeUnload = (event) => {
+            const message = "Do you want to clear your recent tabs before reloading?";
+            event.preventDefault();
+            event.returnValue = message; // shows browser dialog
+
+            // Browser dialog to confirm reload
+            const userConfirmed = window.confirm(message);
+            if (userConfirmed) {
+                localStorage.setItem("shouldClearTabs", "true");
+            } else {
+                localStorage.removeItem("shouldClearTabs");
+            }
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        // 🟢 After reload, check flag and clear tabs + go to home
+        if (localStorage.getItem("shouldClearTabs") === "true") {
+            localStorage.removeItem("recentTabs");
+            localStorage.removeItem("shouldClearTabs");
+            navigate("/"); // redirect to dashboard/home
         }
-    }, [location.pathname, navigate]); // ✅ Added dependencies to fix ESLint warning
+
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, [navigate]);
+
 
     // 🔹 Update recentTabs on location change
     useEffect(() => {
@@ -35,7 +56,6 @@ const RecentTabsHeader = () => {
 
         setRecentTabs((prevTabs) => {
             if (!prevTabs.includes(label)) {
-                // Keep only last MAX_TABS items
                 const updatedTabs = [...prevTabs, label].slice(-MAX_TABS);
                 localStorage.setItem("recentTabs", JSON.stringify(updatedTabs));
                 return updatedTabs;
@@ -70,8 +90,7 @@ const RecentTabsHeader = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 bg-gray-100 rounded-md shadow-md gap-3 sm:gap-4 mt-[-15px]">
             {/* 🔹 Home Button */}
             <div
-                className={`flex items-center gap-2 cursor-pointer transition-colors duration-200 ${location.pathname === "/" ? "text-[#757cdd]" : "hover:text-[#757cdd]"
-                    }`}
+                className={`flex items-center gap-2 cursor-pointer transition-colors duration-200 ${location.pathname === "/" ? "text-[#757cdd]" : "hover:text-[#757cdd]"}`}
                 onClick={() => {
                     localStorage.removeItem("recentTabs");
                     setRecentTabs([]);
@@ -82,7 +101,7 @@ const RecentTabsHeader = () => {
                 <span className="font-semibold text-sm sm:text-base">Home</span>
             </div>
 
-            {/* 🔹 Scrollable & Responsive Tabs */}
+            {/* 🔹 Scrollable Tabs */}
             <div className="w-full flex overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 gap-2 py-1">
                 {recentTabs.map((tab, index) => {
                     const tabPath = `/${tab.toLowerCase().split(" ").join("-")}`;

@@ -73,7 +73,7 @@ const BookingForm = () => {
     };
 
     return (
-        <div className="p-6 bg-gray-50 rounded-md shadow-md max-w-[1000px] mx-auto mt-8">
+        <div className="p-6 bg-gray-50 rounded-md shadow-md max-w-[100%] mx-auto mt-8">
 
             {/* Header */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4 md:gap-0">
