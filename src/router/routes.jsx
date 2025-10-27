@@ -1,6 +1,8 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import MainPage from "../pages/main";
+// Booking
 import CreateBooking from "../pages/Booking/CreateBooking.jsx";
+import CompleteBooking from "../pages/Booking/completeBooking.jsx";
 // Location Pages Import
 import AddLocation from "../pages/Location/AddLoc.jsx";
 import LocationTable from '../pages/Location/LocationList.jsx'
@@ -65,7 +67,9 @@ function MyRoutes() {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        {/* Booking */}
         <Route path="/create_booking" element={<CreateBooking />} />
+        <Route path="/complete_booking" element={<CompleteBooking />} />
         {/* Location pages Routes */}
         <Route path="/add_location" element={<AddLocation />} />
         <Route path="/location_list" element={<LocationTable />} />

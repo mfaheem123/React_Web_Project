@@ -49,7 +49,7 @@ const Navbar = () => {
       icon: <CalendarDays className="w-4 h-4" />,
       subItems: [
         { label: "Create Bookings", value: "create_booking" },
-        { label: "Complete Bookings", value: "#" },
+        { label: "Complete Bookings", value: "complete_booking" },
         { label: "Pending Bookings", value: "#" },
         { label: "Pre Bookings", value: "#" },
         { label: "Web Bookings", value: "#" },
