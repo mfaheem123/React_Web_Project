@@ -50,7 +50,7 @@ const Navbar = () => {
       subItems: [
         { label: "Create Bookings", value: "create_booking" },
         { label: "Complete Bookings", value: "complete_booking" },
-        { label: "Pending Bookings", value: "#" },
+        { label: "Pending Bookings", value: "pending_booking" },
         { label: "Pre Bookings", value: "#" },
         { label: "Web Bookings", value: "#" },
         { label: "App Bookings", value: "#" },
