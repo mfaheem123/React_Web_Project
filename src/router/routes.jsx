@@ -4,6 +4,7 @@ import MainPage from "../pages/main";
 import OpenCreateBooking from "../pages/openCreateBooking.jsx";
 import CompleteBooking from "../pages/Booking/completeBooking.jsx";
 import PendingBooking from "../pages/Booking/pendingBooking.jsx";
+import PreBooking from "../pages/Booking/preBooking.jsx";
 // Location Pages Import
 import AddLocation from "../pages/Location/AddLoc.jsx";
 import LocationTable from '../pages/Location/LocationList.jsx'
@@ -72,6 +73,7 @@ function MyRoutes() {
         <Route path="/open_create_booking" element={<OpenCreateBooking />} />
         <Route path="/complete_booking" element={<CompleteBooking />} />
         <Route path="/pending_booking" element={<PendingBooking />} />
+        <Route path="/pre_booking" element={<PreBooking />} />
 
         {/* Location pages Routes */}
         <Route path="/add_location" element={<AddLocation />} />

@@ -51,7 +51,7 @@ const Navbar = () => {
         { label: "Create Bookings", value: "open_create_booking" },
         { label: "Complete Bookings", value: "complete_booking" },
         { label: "Pending Bookings", value: "pending_booking" },
-        { label: "Pre Bookings", value: "#" },
+        { label: "Pre Bookings", value: "pre_booking" },
         { label: "Web Bookings", value: "#" },
         { label: "App Bookings", value: "#" },
         { label: "Multi Bookings", value: "#" },
