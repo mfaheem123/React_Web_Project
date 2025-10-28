@@ -48,7 +48,7 @@ const Navbar = () => {
       value: "bookings",
       icon: <CalendarDays className="w-4 h-4" />,
       subItems: [
-        { label: "Create Bookings", value: "create_bookings" },
+        { label: "Create Bookings", value: "open_create_booking" },
         { label: "Complete Bookings", value: "complete_booking" },
         { label: "Pending Bookings", value: "pending_booking" },
         { label: "Pre Bookings", value: "#" },
@@ -263,20 +263,18 @@ const Navbar = () => {
         <Menu.Item
           key={item.value}
           onClick={() => {
-            if (item.value === "create_bookings") {
-              // Absolute URL ya relative to current host
-              const url = `${window.location.origin}/create_bookings`;
-              window.open(url, "_blank"); // "_blank" = new tab
+            if (item.value === "open_create_bookinghh") {
+              window.open(`${window.location.origin}/open_create_booking`, "_blank");
             } else {
-              navigate(`/${item.value}`);
+              navigate(`/${item.value}`); // Normal navigation
             }
           }}
-
           style={{ backgroundColor: 'transparent', border: 'none', color: '#000' }}
           className="hover:text-[#757cdd]"
         >
           {item.label}
         </Menu.Item>
+
       )
     );
 

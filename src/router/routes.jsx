@@ -1,7 +1,7 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import MainPage from "../pages/main";
 // Booking
-import CreateBooking from "../pages/Booking/CreateBooking.jsx";
+import OpenCreateBooking from "../pages/openCreateBooking.jsx";
 import CompleteBooking from "../pages/Booking/completeBooking.jsx";
 import PendingBooking from "../pages/Booking/pendingBooking.jsx";
 // Location Pages Import
@@ -69,7 +69,7 @@ function MyRoutes() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         {/* Booking */}
-        <Route path="/create_bookings" element={<CreateBooking />} />
+        <Route path="/open_create_booking" element={<OpenCreateBooking />} />
         <Route path="/complete_booking" element={<CompleteBooking />} />
         <Route path="/pending_booking" element={<PendingBooking />} />
 
