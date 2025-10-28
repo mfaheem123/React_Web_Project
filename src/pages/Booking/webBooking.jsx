@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Checkbox, DatePicker, Form, Input, Select, TimePicker } from "antd";
+import { Button } from "antd";
 import { Edit, Trash2 } from "lucide-react";
 import Navbar from "../../components/navbar";
 import RecentTabsHeader from "../../components/recentTabs";
