@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "antd";
+import { Button, Checkbox, DatePicker, Form, Input, Select, TimePicker } from "antd";
 import { Edit, Trash2 } from "lucide-react";
 import Navbar from "../../components/navbar";
 import RecentTabsHeader from "../../components/recentTabs";
@@ -128,6 +128,64 @@ const PendingBooking = () => {
                             Refresh
                         </Button>
                     </div>
+                </div>
+
+                <div className="w-full mx-auto p-2">
+                    <Form layout="vertical">
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+
+                            {/* Text Input */}
+                            <Form.Item label="Name" name="name">
+                                <Input placeholder="Enter name" />
+                            </Form.Item>
+
+                            {/* Select */}
+                            <Form.Item label="Category" name="category">
+                                <Select placeholder="Select category">
+                                    <Select.Option value="a">Option A</Select.Option>
+                                    <Select.Option value="b">Option B</Select.Option>
+                                    <Select.Option value="c">Option C</Select.Option>
+                                </Select>
+                            </Form.Item>
+
+                            <Form.Item label="Start Date & Time">
+                                <div className="flex gap-2">
+                                    <DatePicker className="flex-1" />
+                                    <TimePicker className="flex-1" />
+                                </div>
+                            </Form.Item>
+
+                            <Form.Item label="End Date & Time">
+                                <div className="flex gap-2">
+                                    <DatePicker className="flex-1" />
+                                    <TimePicker className="flex-1" />
+                                </div>
+                            </Form.Item>
+
+                            {/* Right side: Refresh Button */}
+                            <div className="flex justify-center md:justify-end w-full md:w-auto mt-8 gap-4">
+                                <Button type="primary" className="bg-[#4B5FD4] hover:!bg-[#3a4bb0] px-6 py-2">
+                                    Search
+                                </Button>
+                                <Button type="primary" className="bg-[#4B5FD4] hover:!bg-[#3a4bb0] px-6 py-2">
+                                    Clear
+                                </Button>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <Form.Item>
+                                <div className="flex gap-4 flex-wrap">
+                                    <Checkbox className="flex-1 text-center" value="Cancled">Cancled</Checkbox>
+                                    <Checkbox className="flex-1 text-center" value="Incomplete">Incomplete</Checkbox>
+                                    <Checkbox className="flex-1 text-center" value="Missed">Missed</Checkbox>
+                                    <Checkbox className="flex-1 text-center" value="Declined">Declined</Checkbox>
+                                </div>
+                            </Form.Item>
+                        </div>
+
+                    </Form>
                 </div>
 
 
