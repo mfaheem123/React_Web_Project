@@ -48,7 +48,7 @@ const Navbar = () => {
       value: "bookings",
       icon: <CalendarDays className="w-4 h-4" />,
       subItems: [
-        { label: "Create Bookings", value: "create_booking" },
+        { label: "Create Bookings", value: "create_bookings" },
         { label: "Complete Bookings", value: "complete_booking" },
         { label: "Pending Bookings", value: "pending_booking" },
         { label: "Pre Bookings", value: "#" },
@@ -244,6 +244,7 @@ const Navbar = () => {
 
   const toggleGroup = (value) => setOpenGroups(prev => ({ ...prev, [value]: !prev[value] }));
 
+
   // Recursive function for nested subItems
   const renderMenuItems = (items) =>
     items.map(item =>
@@ -261,7 +262,16 @@ const Navbar = () => {
       ) : (
         <Menu.Item
           key={item.value}
-          onClick={() => navigate(`/${item.value}`)}
+          onClick={() => {
+            if (item.value === "create_bookings") {
+              // Absolute URL ya relative to current host
+              const url = `${window.location.origin}/create_bookings`;
+              window.open(url, "_blank"); // "_blank" = new tab
+            } else {
+              navigate(`/${item.value}`);
+            }
+          }}
+
           style={{ backgroundColor: 'transparent', border: 'none', color: '#000' }}
           className="hover:text-[#757cdd]"
         >

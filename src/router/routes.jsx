@@ -69,7 +69,7 @@ function MyRoutes() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         {/* Booking */}
-        <Route path="/create_booking" element={<CreateBooking />} />
+        <Route path="/create_bookings" element={<CreateBooking />} />
         <Route path="/complete_booking" element={<CompleteBooking />} />
         <Route path="/pending_booking" element={<PendingBooking />} />
 

@@ -1,28 +1,61 @@
-import Navbar from "../../components/navbar.jsx";
-import RecentTabsHeader from "../../components/recentTabs.jsx";
 import BookingForm from "../../layout/formMain.jsx";
 import { MapContainer, TileLayer, FeatureGroup } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
+import { useEffect } from "react";
 
 function CreateBooking() {
     const _onCreate = () => { };
     const _onEdit = () => { };
     const _onDelete = () => { };
 
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "F1") {
+                alert("You pressed F1 key and its function is active!");
+                e.preventDefault();
+            } else if (e.key === 'F2') {
+                alert("You pressed F2 key and its function is active!");
+                e.preventDefault();
+            } else if (e.key === 'F6') {
+                alert("You pressed F6 key and its function is active!");
+                e.preventDefault();
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+
+    }, []);
+
     return (
         <div className="bg-gray-50">
-            <Navbar />
-
-            {/* Recent Tabs */}
-            <div className="mt-20">
-                <RecentTabsHeader />
-            </div>
 
             {/* Form Section */}
-            <div className="w-full lg:w-3/4 mx-auto p-6">
-                <div className="bg-white shadow-md rounded-2xl p-6">
+            <div className="w-full lg:w-3/4 mx-auto p-2">
+                <div className="flex flex-col md:flex-row items-center justify-between w-full bg-gray-100 p-4 rounded-md mb-2 shadow-md gap-4">
+                    {/* Left side: Function buttons */}
+                    <div className="flex flex-wrap justify-start md:justify-evenly gap-2 md:gap-4 w-full md:w-[50%]">
+                        <div className="flex items-center gap-1 md:gap-2">
+                            <span className="bg-gray-200 text-gray-800 px-2 py-1 rounded font-bold">F1</span>
+                            <span>Base Address</span>
+                        </div>
+                        <div className="flex items-center gap-1 md:gap-2">
+                            <span className="bg-gray-200 text-gray-800 px-2 py-1 rounded font-bold">F2</span>
+                            <span>Booking Form</span>
+                        </div>
+                        <div className="flex items-center gap-1 md:gap-2">
+                            <span className="bg-gray-200 text-gray-800 px-2 py-1 rounded font-bold">F6</span>
+                            <span>Quotation</span>
+                        </div>
+                    </div>
+                </div>
+                <div className="bg-white shadow-md rounded-2xl p-1">
                     <BookingForm />
                 </div>
             </div>
