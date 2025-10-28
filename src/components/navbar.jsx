@@ -24,7 +24,6 @@ import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { Checkbox, Form, Input } from 'antd';
 
 
-
 const Navbar = () => {
 
   // Extention Button Ka Modal Or Function
@@ -48,7 +47,7 @@ const Navbar = () => {
       value: "bookings",
       icon: <CalendarDays className="w-4 h-4" />,
       subItems: [
-        { label: "Create Bookings", value: "open_create_booking" },
+        { label: "Create Bookings", value: "create_booking" },
         { label: "Complete Bookings", value: "complete_booking" },
         { label: "Pending Bookings", value: "pending_booking" },
         { label: "Pre Bookings", value: "pre_booking" },
@@ -263,17 +262,19 @@ const Navbar = () => {
         <Menu.Item
           key={item.value}
           onClick={() => {
-            if (item.value === "open_create_bookinghh") {
-              window.open(`${window.location.origin}/open_create_booking`, "_blank");
+            if (item.value === "create_booking") {
+              // HashRouter ke liye correct URL
+              window.open(`${window.location.origin}/#/create_booking`, "_blank");
             } else {
-              navigate(`/${item.value}`); // Normal navigation
+              navigate(`/${item.value}`);
             }
+
           }}
-          style={{ backgroundColor: 'transparent', border: 'none', color: '#000' }}
-          className="hover:text-[#757cdd]"
         >
           {item.label}
         </Menu.Item>
+
+
 
       )
     );

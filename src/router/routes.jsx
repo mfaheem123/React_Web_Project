@@ -1,7 +1,7 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import MainPage from "../pages/main";
 // Booking
-import OpenCreateBooking from "../pages/openCreateBooking.jsx";
+import CreateBooking from "../pages/Booking/CreateBooking.jsx";
 import CompleteBooking from "../pages/Booking/completeBooking.jsx";
 import PendingBooking from "../pages/Booking/pendingBooking.jsx";
 import PreBooking from "../pages/Booking/preBooking.jsx";
@@ -71,7 +71,7 @@ function MyRoutes() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         {/* Booking */}
-        <Route path="/open_create_booking" element={<OpenCreateBooking />} />
+        <Route path="/create_booking" element={<CreateBooking />} />
         <Route path="/complete_booking" element={<CompleteBooking />} />
         <Route path="/pending_booking" element={<PendingBooking />} />
         <Route path="/pre_booking" element={<PreBooking />} />
@@ -133,7 +133,7 @@ function MyRoutes() {
         <Route path="/customer_invoices" element={<CustomerInvoices />} />
         <Route path="/create_account_invoices" element={<CreateAccountInvoice />} />
         <Route path="/account_invoices" element={<AccountInvoices />} />
-        
+
 
 
 
