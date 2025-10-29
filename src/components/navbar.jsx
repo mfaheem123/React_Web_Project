@@ -52,7 +52,7 @@ const Navbar = () => {
         { label: "Pending Bookings", value: "pending_booking" },
         { label: "Pre Bookings", value: "pre_booking" },
         { label: "Web Bookings", value: "web_booking" },
-        { label: "App Bookings", value: "#" },
+        { label: "App Bookings", value: "app_booking" },
         { label: "Multi Bookings", value: "#" },
         { label: "Trash Bookings", value: "#" },
       ],
