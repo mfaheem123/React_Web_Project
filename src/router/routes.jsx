@@ -8,6 +8,7 @@ import PreBooking from "../pages/Booking/preBooking.jsx";
 import WebBooking from "../pages/Booking/webBooking.jsx";
 import AppBooking from "../pages/Booking/appBooking.jsx";
 import MultiBooking from "../pages/Booking/multiBooking.jsx";
+import TrashBooking from "../pages/Booking/trashBooking.jsx";
 // Location Pages Import
 import AddLocation from "../pages/Location/AddLoc.jsx";
 import LocationTable from '../pages/Location/LocationList.jsx'
@@ -80,6 +81,7 @@ function MyRoutes() {
         <Route path="/web_booking" element={<WebBooking />} />
         <Route path="/app_booking" element={<AppBooking />} />
         <Route path="/multi_booking" element={<MultiBooking />} />
+        <Route path="/trash_booking" element={<TrashBooking />} />
 
         {/* Location pages Routes */}
         <Route path="/add_location" element={<AddLocation />} />
