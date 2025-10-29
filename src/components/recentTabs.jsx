@@ -18,10 +18,11 @@ const RecentTabsHeader = () => {
         const handleBeforeUnload = (event) => {
             const message = "Do you want to clear your recent tabs before reloading?";
             event.preventDefault();
-            event.returnValue = message; // shows browser dialog
+            event.returnValue = message; // required for most browsers
 
-            // Browser dialog to confirm reload
+            // Browser will show a default confirm dialog
             const userConfirmed = window.confirm(message);
+
             if (userConfirmed) {
                 localStorage.setItem("shouldClearTabs", "true");
             } else {
@@ -31,7 +32,7 @@ const RecentTabsHeader = () => {
 
         window.addEventListener("beforeunload", handleBeforeUnload);
 
-        // 🟢 After reload, check flag and clear tabs + go to home
+        // 🟢 After reload, check flag and clear if confirmed
         if (localStorage.getItem("shouldClearTabs") === "true") {
             localStorage.removeItem("recentTabs");
             localStorage.removeItem("shouldClearTabs");
@@ -42,7 +43,6 @@ const RecentTabsHeader = () => {
             window.removeEventListener("beforeunload", handleBeforeUnload);
         };
     }, [navigate]);
-
 
     // 🔹 Update recentTabs on location change
     useEffect(() => {
@@ -102,7 +102,7 @@ const RecentTabsHeader = () => {
                 <span className="font-semibold text-sm sm:text-base">Home</span>
             </div>
 
-            {/* 🔹 Wrapping Tabs (responsive) */}
+            {/* 🔹 Responsive Tabs */}
             <div className="w-full flex flex-wrap gap-2 py-1 justify-start">
                 {recentTabs.map((tab, index) => {
                     const tabPath = `/${tab.toLowerCase().split(" ").join("-")}`;
@@ -111,8 +111,8 @@ const RecentTabsHeader = () => {
                         <Button
                             key={index}
                             className={`flex items-center px-3 py-1 rounded-md gap-1 whitespace-nowrap text-xs sm:text-sm transition-all duration-200 ${isActive
-                                    ? "bg-[#757cdd] text-white"
-                                    : "bg-gray-200 text-black hover:bg-gray-300"
+                                ? "bg-[#757cdd] text-white"
+                                : "bg-gray-200 text-black hover:bg-gray-300"
                                 }`}
                             onClick={() => handleNavigate(tab)}
                         >
@@ -131,7 +131,6 @@ const RecentTabsHeader = () => {
             </div>
         </div>
     );
-
 };
 
 export default RecentTabsHeader;
