@@ -8,7 +8,7 @@ const RecentTabsHeader = () => {
     const navigate = useNavigate();
     const [recentTabs, setRecentTabs] = useState([]);
 
-    const MAX_TABS = 10;
+    const MAX_TABS = 20;
 
     useEffect(() => {
         const storedTabs = JSON.parse(localStorage.getItem("recentTabs")) || [];
@@ -90,7 +90,8 @@ const RecentTabsHeader = () => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 bg-gray-100 rounded-md shadow-md gap-3 sm:gap-4 mt-[-15px]">
             {/* 🔹 Home Button */}
             <div
-                className={`flex items-center gap-2 cursor-pointer transition-colors duration-200 ${location.pathname === "/" ? "text-[#757cdd]" : "hover:text-[#757cdd]"}`}
+                className={`flex items-center gap-2 cursor-pointer transition-colors duration-200 ${location.pathname === "/" ? "text-[#757cdd]" : "hover:text-[#757cdd]"
+                    }`}
                 onClick={() => {
                     localStorage.removeItem("recentTabs");
                     setRecentTabs([]);
@@ -101,8 +102,8 @@ const RecentTabsHeader = () => {
                 <span className="font-semibold text-sm sm:text-base">Home</span>
             </div>
 
-            {/* 🔹 Scrollable Tabs */}
-            <div className="w-full flex overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 gap-2 py-1">
+            {/* 🔹 Wrapping Tabs (responsive) */}
+            <div className="w-full flex flex-wrap gap-2 py-1 justify-start">
                 {recentTabs.map((tab, index) => {
                     const tabPath = `/${tab.toLowerCase().split(" ").join("-")}`;
                     const isActive = location.pathname === tabPath;
@@ -110,8 +111,8 @@ const RecentTabsHeader = () => {
                         <Button
                             key={index}
                             className={`flex items-center px-3 py-1 rounded-md gap-1 whitespace-nowrap text-xs sm:text-sm transition-all duration-200 ${isActive
-                                ? "bg-[#757cdd] text-white"
-                                : "bg-gray-200 text-black hover:bg-gray-300"
+                                    ? "bg-[#757cdd] text-white"
+                                    : "bg-gray-200 text-black hover:bg-gray-300"
                                 }`}
                             onClick={() => handleNavigate(tab)}
                         >
@@ -130,6 +131,7 @@ const RecentTabsHeader = () => {
             </div>
         </div>
     );
+
 };
 
 export default RecentTabsHeader;
