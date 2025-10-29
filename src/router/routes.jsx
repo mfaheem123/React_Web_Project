@@ -136,9 +136,9 @@ function MyRoutes() {
         <Route path="/complaints" element={<ComplaintList />} />
         {/* Invoice */}
         <Route path="/create_customer_invoice" element={<CreateInvoice />} />
-        <Route path="/customer_invoices" element={<CustomerInvoices />} />
-        <Route path="/create_account_invoices" element={<CreateAccountInvoice />} />
-        <Route path="/account_invoices" element={<AccountInvoices />} />
+        {/* <Route path="/customer_invoices" element={<CustomerInvoices />} /> */}
+        {/* <Route path="/create_account_invoices" element={<CreateAccountInvoice />} /> */}
+        {/* <Route path="/account_invoices" element={<AccountInvoices />} /> */}
 
 
 
