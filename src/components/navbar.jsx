@@ -143,8 +143,8 @@ const Navbar = () => {
           subItems: [
             { label: "Create Account Invoices", value: "create_account_invoices" },
             { label: "Account Invoices", value: "account_invoices" },
-            { label: "Create Account Pre Invoice", value: "#" },
-            { label: "Account Pre Invoices", value: "#" },
+            { label: "Create Account Pre Invoice", value: "create_account_pre_invoice" },
+            { label: "Account Pre Invoices", value: "account_pre_invoice" },
           ],
         },
         { label: "Create Account", value: "create_account" },

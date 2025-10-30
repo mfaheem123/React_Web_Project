@@ -67,6 +67,8 @@ import CreateAccountInvoice from "../pages/Invoices/createAccountInvoice.jsx";
 import AccountInvoices from "../pages/Invoices/accountInvoice.jsx";
 import CreatePreInvoice from "../pages/Invoices/createCustomerPreInvoice.jsx";
 import CustomerPreInvoices from "../pages/Invoices/customerPreInvoice.jsx";
+import CreatePreAccountInvoice from "../pages/Invoices/createAccountPreInvoice.jsx";
+import AccountPreInvoices from "../pages/Invoices/accountPreInvoice.jsx";
 
 
 
@@ -143,6 +145,8 @@ function MyRoutes() {
         <Route path="/account_invoices" element={<AccountInvoices />} />
         <Route path="/create_customer_pre_invoice" element={<CreatePreInvoice />} />
         <Route path="/customer_pre_invoice" element={<CustomerPreInvoices />} />
+        <Route path="/create_account_pre_invoice" element={<CreatePreAccountInvoice />} />
+        <Route path="/account_pre_invoice" element={<AccountPreInvoices />} />
 
 
 
