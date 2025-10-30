@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "antd";
+import { Button, Checkbox, Form } from "antd";
 import { Edit, Trash2 } from "lucide-react";
 import Navbar from "../../components/navbar";
 import RecentTabsHeader from "../../components/recentTabs";
@@ -142,21 +142,32 @@ const CustomerInvoices = () => {
             <div className="w-full overflow-x-auto mt-5 px-2 md:px-0">
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row items-center justify-between w-full mb-4 gap-4">
-                    <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
-                        <h2 className="text-2xl md:text-3xl font-semibold text-center md:text-left">
-                            Customer Invoices (
-                            <span className="text-green-600">{data.length}</span>)
+                    {/* Left side — Title and Checkbox */}
+                    <div className="flex flex-wrap items-center gap-4">
+                        <h2 className="text-2xl md:text-3xl font-semibold">
+                            Customer Invoices (<span className="text-green-600">{data.length}</span>)
                         </h2>
+
+                        <div className="flex items-center px-4 py-2 rounded-md">
+                            <Form layout="horizontal">
+                                <Form.Item name="paid" valuePropName="checked" noStyle>
+                                    <Checkbox>Paid</Checkbox>
+                                </Form.Item>
+                            </Form>
+                        </div>
                     </div>
+
+                    {/* Right side — Refresh Button */}
                     <div className="flex justify-center md:justify-end w-full md:w-auto">
                         <Button
                             type="primary"
-                            className="bg-[#4B5FD4] hover:!bg-[#3a4bb0] px-6 py-2"
+                            className="bg-[#4B5FD4] hover:!bg-[#3a4bb0] px-6 py-2 rounded-md"
                         >
                             Refresh
                         </Button>
                     </div>
                 </div>
+
 
                 {/* Table */}
                 <DynamicTable columns={columns} data={data} />
