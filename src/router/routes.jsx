@@ -65,6 +65,8 @@ import CreateInvoice from "../pages/Invoices/createCustomerInvoice.jsx";
 import CustomerInvoices from "../pages/Invoices/customerInvoices.jsx";
 import CreateAccountInvoice from "../pages/Invoices/createAccountInvoice.jsx";
 import AccountInvoices from "../pages/Invoices/accountInvoice.jsx";
+import CreatePreInvoice from "../pages/Invoices/createCustomerPreInvoice.jsx";
+import CustomerPreInvoices from "../pages/Invoices/customerPreInvoice.jsx";
 
 
 
@@ -135,10 +137,12 @@ function MyRoutes() {
         <Route path="/add_complaint" element={<AddComplaint />} />
         <Route path="/complaints" element={<ComplaintList />} />
         {/* Invoice */}
-        <Route path="/create_customer_invoice" element={<CreateInvoice />} />
-        {/* <Route path="/customer_invoices" element={<CustomerInvoices />} /> */}
-        {/* <Route path="/create_account_invoices" element={<CreateAccountInvoice />} /> */}
-        {/* <Route path="/account_invoices" element={<AccountInvoices />} /> */}
+        <Route path="/create_customer_invoice" element={<CreateInvoice />} /> 
+        <Route path="/customer_invoices" element={<CustomerInvoices />} />
+        <Route path="/create_account_invoices" element={<CreateAccountInvoice />} />
+        <Route path="/account_invoices" element={<AccountInvoices />} />
+        <Route path="/create_customer_pre_invoice" element={<CreatePreInvoice />} />
+        <Route path="/customer_pre_invoice" element={<CustomerPreInvoices />} />
 
 
 

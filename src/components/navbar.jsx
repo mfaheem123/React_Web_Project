@@ -7,7 +7,6 @@ import {
   MapPin,
   Car,
   Wallet,
-  FileText,
   Truck,
   BarChart3,
   Settings,
@@ -39,8 +38,6 @@ const Navbar = () => {
     console.log('Success:', values);
   };
 
-
-
   const navGroups = [
     {
       label: "Bookings",
@@ -68,8 +65,8 @@ const Navbar = () => {
           subItems: [
             { label: "Create Customer Invoices", value: "create_customer_invoice" },
             { label: "Customer Invoices", value: "customer_invoices" },
-            { label: "Create Customer Pre Invoice", value: "#" },
-            { label: "Customer Pre Invoices", value: "#" },
+            { label: "Create Customer Pre Invoice", value: "create_customer_pre_invoice" },
+            { label: "Customer Pre Invoices", value: "customer_pre_invoice" },
           ],
         },
         { label: "Add Customer", value: "add_customers" },
@@ -331,6 +328,7 @@ const Navbar = () => {
                   overlay={<Menu mode="vertical">{renderMenuItems(group.subItems)}</Menu>}
                   placement="bottomLeft"
                   arrow
+                  trigger={['click']}  // ✅ This line makes it open on click/tap
                 >
                   <Button
                     className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-white lg:text-sm hover:text-[#757cdd] border-none p-1 min-w-[80px]"
@@ -338,9 +336,9 @@ const Navbar = () => {
                   >
                     {group.icon}
                     <span className="whitespace-nowrap">{group.label}</span>
-                    <DownOutlined className="mt-1 sm:mt-0" />
                   </Button>
                 </Dropdown>
+
               ) : (
                 <Button
                   key={group.value}
