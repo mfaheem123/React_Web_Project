@@ -320,7 +320,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Nav Items (Large screens) */}
-          <div className="hidden lg:flex flex-wrap items-center gap-2 w-[80%]">
+          <div className="hidden lg:flex flex-wrap items-center gap-4 w-[80%]">
             {navGroups.map(group =>
               group.subItems ? (
                 <Dropdown
@@ -356,13 +356,13 @@ const Navbar = () => {
 
           {/* Desktop Secondary Nav (Large screens) */}
           <>
-            <div className="hidden lg:flex items-center space-x-2 w-[20%]">
+            <div className="hidden lg:flex items-center space-x-4 w-[20%]">
               {secondNav.map(({ label, icon }) => (
 
                 <button
                   key={label}
                   title={label}
-                  className="flex items-center gap-1 rounded-md text-white hover:text-[#757cdd] transition-colors duration-200"
+                  className="flex items-center gap-4 rounded-md text-white hover:text-[#757cdd] transition-colors duration-200"
                 >
 
                   {icon}

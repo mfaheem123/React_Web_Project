@@ -164,23 +164,27 @@ export default function CreateInvoice() {
 
                                 <Form.Item label="Name" name="name">
                                     <Input
+                                        placeholder="Enter Your Name"
                                         className="border border-gray-300 rounded px-2 py-1"
                                     />
                                 </Form.Item>
                                 <Form.Item label="Email" name="email">
                                     <Input
+                                        placeholder="Enter Email"
                                         type="email"
                                         className="border border-gray-300 rounded px-2 py-1"
                                     />
                                 </Form.Item>
                                 <Form.Item label="Mobile" name="mobile">
                                     <Input
+                                        placeholder="Enter Mobile Number"
                                         type="number"
                                         className="border border-gray-300 rounded px-2 py-1"
                                     />
                                 </Form.Item>
                                 <Form.Item label="Telephone" name="telephone">
                                     <Input
+                                        placeholder="Enter Telephone Number"
                                         type="number"
                                         className="border border-gray-300 rounded px-2 py-1"
                                     />
@@ -208,7 +212,7 @@ export default function CreateInvoice() {
                                     </Form.Item>
                                 </div>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-6">
+                                <div className="grid grid-cols-4 sm:grid-cols-6">
 
                                     <Form.Item label="Cash" name="cash">
                                         <Checkbox />
@@ -258,9 +262,9 @@ export default function CreateInvoice() {
 
 
             {/* Dynamic Table */}
-            <div className="w-full overflow-x-auto">
+            {/* <div className="w-full overflow-x-auto">
                 <DynamicTable data={enhancedData} />
-            </div>
+            </div> */}
 
         </div>
     )
