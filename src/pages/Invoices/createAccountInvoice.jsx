@@ -77,13 +77,47 @@ const usersData = [
 export default function CreateAccountInvoice() {
 
 
-    const onFinish = values => {
-        console.log('Success:', values);
+    const onFinish = (values) => {
+        console.log("Success:", values);
     };
 
-
-
-    const [data, setData] = useState(usersData);
+    // ✅ Dummy Booking Data
+    const [data, setData] = useState([
+        {
+            key: 1,
+            ref: "REF001",
+            datetime: "2025-10-30 10:00 AM",
+            pickup: "New York",
+            dropoff: "Los Angeles",
+            veh: "SUV",
+            jt: "Yes",
+            pt: "Cash",
+            fare: 120,
+            pc: 10,
+            wc: 5,
+            edc: 3,
+            mg: 2,
+            cc: 4,
+            total: 144,
+        },
+        {
+            key: 2,
+            ref: "REF002",
+            datetime: "2025-10-30 12:30 PM",
+            pickup: "Chicago",
+            dropoff: "Boston",
+            veh: "Sedan",
+            jt: "No",
+            pt: "Card",
+            fare: 95,
+            pc: 8,
+            wc: 2,
+            edc: 4,
+            mg: 1,
+            cc: 3,
+            total: 113,
+        },
+    ]);
 
     const handleUpdate = (record) => {
         console.log("Update", record);
@@ -91,26 +125,53 @@ export default function CreateAccountInvoice() {
 
     const handleDelete = (record) => {
         console.log("Delete", record);
-        setData(data.filter((item) => item.key !== record.key));
+        setData((prev) => prev.filter((item) => item.key !== record.key));
     };
 
-    const enhancedData = data.map((row) => ({
-        ...row,
-        action: (
-            <div className="flex gap-2 justify-center">
-                <Button
-                    className="bg-[#424899] text-white"
-                    icon={<Edit size={16} />}
-                    onClick={() => handleUpdate(row)}
-                />
-                <Button
-                    className="bg-red-700 text-white"
-                    icon={<Trash2 size={16} />}
-                    onClick={() => handleDelete(row)}
-                />
-            </div>
-        ),
-    }));
+    // ✅ Columns with Checkbox + Action Buttons
+    const columns = [
+        {
+            title: <Checkbox />,
+            dataIndex: "checkbox",
+            key: "checkbox",
+            align: "center",
+            render: (_, record) => <Checkbox />,
+        },
+        { title: "REF #", dataIndex: "ref", key: "ref", align: "center" },
+        { title: "DATETIME", dataIndex: "datetime", key: "datetime", align: "center" },
+        { title: "PICKUP", dataIndex: "pickup", key: "pickup", align: "center" },
+        { title: "DROPOFF", dataIndex: "dropoff", key: "dropoff", align: "center" },
+        { title: "VEH", dataIndex: "veh", key: "veh", align: "center" },
+        { title: "J/T", dataIndex: "jt", key: "jt", align: "center" },
+        { title: "P/T", dataIndex: "pt", key: "pt", align: "center" },
+        { title: "FARE", dataIndex: "fare", key: "fare", align: "center" },
+        { title: "PC", dataIndex: "pc", key: "pc", align: "center" },
+        { title: "WC", dataIndex: "wc", key: "wc", align: "center" },
+        { title: "EDC", dataIndex: "edc", key: "edc", align: "center" },
+        { title: "M&G", dataIndex: "mg", key: "mg", align: "center" },
+        { title: "CC", dataIndex: "cc", key: "cc", align: "center" },
+        { title: "TOTAL", dataIndex: "total", key: "total", align: "center" },
+        {
+            title: "ACTIONS",
+            key: "actions",
+            align: "center",
+            render: (_, record) => (
+                <div className="flex gap-2 justify-center">
+                    <Button
+                        className="bg-[#424899] text-white"
+                        icon={<Edit size={16} />}
+                        onClick={() => handleUpdate(record)}
+                    />
+                    <Button
+                        className="bg-red-700 text-white"
+                        icon={<Trash2 size={16} />}
+                        onClick={() => handleDelete(record)}
+                    />
+                </div>
+            ),
+        },
+    ];
+
     return (
         <div>
             <Navbar />
@@ -276,7 +337,7 @@ export default function CreateAccountInvoice() {
 
             {/* Dynamic Table */}
             <div className="w-full overflow-x-auto">
-                <DynamicTable data={enhancedData} />
+                <DynamicTable columns={columns} data={data} />
             </div>
 
         </div>
