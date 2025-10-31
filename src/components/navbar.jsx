@@ -191,7 +191,7 @@ const Navbar = () => {
             { label: "Log", value: "driver_log" },
             { label: "Earnings & Info", value: "earning_info" },
             { label: "Statistics", value: "#" },
-            { label: "Feedback", value: "#" },
+            { label: "Feedback", value: "feedback" },
           ],
         },
         {
