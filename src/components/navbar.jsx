@@ -185,10 +185,10 @@ const Navbar = () => {
       icon: <BarChart3 className="w-4 h-4" />,
       subItems: [
         {
-          label: "Driver", value: "#",
+          label: "Driver", value: "Driver",
           subItems: [
-            { label: "Login", value: "#" },
-            { label: "Log", value: "#" },
+            { label: "Login", value: "driver_login" },
+            { label: "Log", value: "driver_log" },
             { label: "Earnings & Info", value: "#" },
             { label: "Statistics", value: "#" },
             { label: "Feedback", value: "#" },
