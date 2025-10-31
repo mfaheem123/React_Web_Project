@@ -189,7 +189,7 @@ const Navbar = () => {
           subItems: [
             { label: "Login", value: "driver_login" },
             { label: "Log", value: "driver_log" },
-            { label: "Earnings & Info", value: "#" },
+            { label: "Earnings & Info", value: "earning_info" },
             { label: "Statistics", value: "#" },
             { label: "Feedback", value: "#" },
           ],

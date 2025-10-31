@@ -70,8 +70,10 @@ import CustomerPreInvoices from "../pages/Invoices/customerPreInvoice.jsx";
 import CreatePreAccountInvoice from "../pages/Invoices/createAccountPreInvoice.jsx";
 import AccountPreInvoices from "../pages/Invoices/accountPreInvoice.jsx";
 // Reports
+// Drivers
 import DriverLogin from "../pages/Reports/Driver/login.jsx";
 import DriverLog from "../pages/Reports/Driver/log.jsx";
+import EarningAndInfo from "../pages/Reports/Driver/earningAndInfo.jsx";
 
 
 
@@ -151,8 +153,10 @@ function MyRoutes() {
         <Route path="/create_account_pre_invoice" element={<CreatePreAccountInvoice />} />
         <Route path="/account_pre_invoice" element={<AccountPreInvoices />} />
         {/* Reports */}
+        {/* Driver */}
         <Route path="/driver_login" element={<DriverLogin />} />
         <Route path="/driver_log" element={<DriverLog />} />
+        <Route path="/earning_info" element={<EarningAndInfo />} />
 
       </Routes>
     </Router>
