@@ -124,6 +124,7 @@ export default function TemplateSettings() {
 
     const handleTagClick = tag => editor && editor.chain().focus().insertContent(`{{${tag}}}`).run();
 
+    // Toolbar buttons
     const toolbarButtons = [
         { label: "B", type: "bold" }, { label: "I", type: "italic" },
         { label: "U", type: "underline" }, { label: "Highlight", type: "highlight" },
@@ -153,6 +154,8 @@ export default function TemplateSettings() {
     };
 
     const insertTable = (rows, cols) => editor && editor.chain().focus().insertTable({ rows, cols, withHeaderRow: true }).run();
+    const setFontSize = size => editor && editor.chain().focus().setMark('textStyle', { fontSize: size }).run();
+    const setTextColor = color => editor && editor.chain().focus().setColor(color).run();
 
     return (
         <div>
@@ -165,6 +168,7 @@ export default function TemplateSettings() {
             <div className="flex flex-col md:flex-row gap-4 p-2">
                 {/* Editor panel */}
                 <div className="w-full md:w-3/4 border rounded p-2 bg-white shadow-md">
+
                     <div className="flex flex-col md:flex-row items-center gap-4 px-4 mt-2 mb-4">
                         <select className="border p-2 rounded w-full" value={templateType} onChange={e => { setTemplateType(e.target.value); setTemplateName(""); }}>
                             <option value="">Select Template Type</option>
@@ -179,23 +183,41 @@ export default function TemplateSettings() {
 
                     {/* Toolbar */}
                     <div className="toolbar mb-2 flex flex-wrap gap-1 p-2 rounded border border-gray-300 bg-gray-100">
+
                         {/* Heading Dropdown */}
                         <div className="relative inline-block">
-                            <button
-                                onClick={() => setShowHeadingDropdown(prev => !prev)}
-                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
-                            >H</button>
+                            <button onClick={() => setShowHeadingDropdown(prev => !prev)} className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]">H</button>
                             {showHeadingDropdown && (
                                 <div className="absolute mt-2 bg-white border rounded shadow-md z-50">
                                     {[1, 2, 3, 4, 5, 6].map(level => (
-                                        <button
-                                            key={level}
-                                            onClick={() => {
-                                                editor.chain().focus().toggleHeading({ level }).run();
-                                                setShowHeadingDropdown(false);
-                                            }}
-                                            className="block w-full text-left px-3 py-1 text-sm text-[#757cdd] hover:bg-[#757cdd] hover:text-white"
-                                        >H{level}</button>
+                                        <button key={level} onClick={() => { editor.chain().focus().toggleHeading({ level }).run(); setShowHeadingDropdown(false); }}
+                                            className="block w-full text-left px-3 py-1 text-sm text-[#757cdd] hover:bg-[#757cdd] hover:text-white">H{level}</button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Font Size Dropdown */}
+                        <div className="relative inline-block">
+                            <button onClick={() => setShowFontSizeDropdown(prev => !prev)} className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]">Font</button>
+                            {showFontSizeDropdown && (
+                                <div className="absolute mt-2 bg-white border rounded shadow-md z-50 max-h-40 overflow-y-auto">
+                                    {[12, 14, 16, 18, 20, 24, 28, 32].map(size => (
+                                        <button key={size} onClick={() => { setFontSize(`${size}px`); setShowFontSizeDropdown(false); }}
+                                            className="block w-full text-left px-3 py-1 text-sm text-[#757cdd] hover:bg-[#757cdd] hover:text-white">{size}px</button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Color Picker */}
+                        <div className="relative inline-block">
+                            <button onClick={() => setShowColorPicker(prev => !prev)} className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]">Color</button>
+                            {showColorPicker && (
+                                <div className="absolute mt-2 bg-white border rounded shadow-md z-50 p-2 flex flex-wrap gap-1 w-36">
+                                    {["#000000", "#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffa500", "#800080"].map(c => (
+                                        <button key={c} onClick={() => { setTextColor(c); setShowColorPicker(false); }}
+                                            className="w-6 h-6 rounded" style={{ backgroundColor: c }} />
                                     ))}
                                 </div>
                             )}
@@ -203,17 +225,11 @@ export default function TemplateSettings() {
 
                         {/* Table Dropdown */}
                         <div className="relative inline-block">
-                            <button
-                                onClick={() => setShowTableGrid(prev => !prev)}
-                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
-                            >Table</button>
+                            <button onClick={() => setShowTableGrid(prev => !prev)} className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]">Table</button>
                             {showTableGrid && (
                                 <div className="absolute mt-2 bg-white border rounded shadow-lg p-2 z-50">
                                     <TableGridSelector
-                                        onInsert={(r, c) => {
-                                            insertTable(r, c);
-                                            setShowTableGrid(false);
-                                        }}
+                                        onInsert={(r, c) => { insertTable(r, c); setShowTableGrid(false); }}
                                     />
                                 </div>
                             )}
@@ -221,11 +237,7 @@ export default function TemplateSettings() {
 
                         {/* Other buttons */}
                         {toolbarButtons.map((btn, i) => (
-                            <button
-                                key={i}
-                                onClick={() => performAction(btn)}
-                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
-                            >{btn.label}</button>
+                            <button key={i} onClick={() => performAction(btn)} className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]">{btn.label}</button>
                         ))}
                     </div>
 
@@ -240,11 +252,7 @@ export default function TemplateSettings() {
                     <h2 className="text-2xl font-semibold mb-4 text-[#757cdd] text-center">Tags</h2>
                     <div className="flex-1 overflow-y-scroll">
                         {tags.map(t => (
-                            <button
-                                key={t}
-                                onClick={() => handleTagClick(t)}
-                                className="w-full mb-2 p-1 text-sm rounded border border-gray-300 text-[#757cdd] bg-white hover:bg-[#757cdd] hover:text-white transition-colors"
-                            >{t}</button>
+                            <button key={t} onClick={() => handleTagClick(t)} className="w-full mb-2 p-1 text-sm rounded border border-gray-300 text-[#757cdd] bg-white hover:bg-[#757cdd] hover:text-white transition-colors">{t}</button>
                         ))}
                     </div>
                 </div>
