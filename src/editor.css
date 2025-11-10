@@ -1,7 +1,7 @@
 .toolbar {
     border: 1px solid #ddd;
     display: flex;
-    gap: 6px;
+    gap: 20px;
     padding: 5px;
     background: #fafafa;
     border-radius: 5px;
@@ -15,6 +15,7 @@
     font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
+    width: full;
 }
 
 .toolbar button:hover {
@@ -33,4 +34,95 @@
     min-height: 250px;
     padding: 5px;
     transition: border-bottom 0.2s;
+}
+
+/* Basic ProseMirror styles */
+.ProseMirror {
+    min-height: 220px;
+    outline: none;
+    padding: 8px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Make tiptap table show visible borders like in your screenshot */
+.ProseMirror table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+}
+
+.ProseMirror th,
+.ProseMirror td {
+    border: 1px solid #d1d5db;
+    /* light-gray */
+    padding: 8px;
+    vertical-align: top;
+}
+
+/* Header row highlight */
+.ProseMirror th {
+    background: #f3f4f6;
+    font-weight: 600;
+}
+
+/* Toolbar / grid popup styling */
+.table-grid-selector .grid-popup {
+    position: relative;
+    z-index: 50;
+    display: inline-block;
+    user-select: none;
+}
+
+.table-grid-selector .grid-popup .w-6 {
+    width: 20px;
+    height: 20px;
+}
+
+/* small responsive fix */
+@media (max-width: 768px) {
+    .table-grid-selector .grid-popup {
+        transform: scale(0.9);
+    }
+}
+
+/* optional: make inserted table cells show placeholder cursor */
+.ProseMirror td.is-empty::before {
+    content: attr(data-placeholder);
+    color: #9ca3af;
+}
+
+/* scrollbar for tags panel */
+/* Scrollbar for tags panel */
+.tags-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tags-panel::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 6px;
+}
+
+/* Table hover and selection */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td,
+table th {
+    border: 1px solid #cbd5e1;
+    padding: 8px;
+}
+
+table td.selected,
+table th.selected {
+    outline: 2px solid #757cdd;
+    /* highlight selected cell */
+    background-color: rgba(117, 124, 221, 0.1);
+}
+
+table td:hover,
+table th:hover {
+    background-color: rgba(117, 124, 221, 0.05);
 }
