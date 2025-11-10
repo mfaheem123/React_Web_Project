@@ -1,0 +1,36 @@
+.toolbar {
+    border: 1px solid #ddd;
+    display: flex;
+    gap: 6px;
+    padding: 5px;
+    background: #fafafa;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.toolbar button {
+    border: 1px solid #ccc;
+    padding: 4px 8px;
+    background: white;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.toolbar button:hover {
+    background: #e4e4e4;
+}
+
+/* Remove default focus outline of Tiptap editor */
+.ProseMirror:focus {
+    outline: none;
+    border-bottom: 1px solid #757cdd;
+    /* Single-line border on focus */
+}
+
+/* Optional: add a subtle background highlight on focus */
+.ProseMirror {
+    min-height: 250px;
+    padding: 5px;
+    transition: border-bottom 0.2s;
+}
