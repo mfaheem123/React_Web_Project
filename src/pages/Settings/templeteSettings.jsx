@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
-import { BubbleMenu } from "@tiptap/react/menus";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import { TextStyle } from "@tiptap/extension-text-style";
@@ -15,6 +14,7 @@ import { TableRow } from "@tiptap/extension-table-row";
 import { TableCell } from "@tiptap/extension-table-cell";
 import { TableHeader } from "@tiptap/extension-table-header";
 import ListItem from "@tiptap/extension-list-item";
+import { HorizontalRule } from "@tiptap/extension-horizontal-rule";
 
 import "../../editor.css";
 import Navbar from "../../components/navbar";
@@ -62,10 +62,10 @@ function TableGridSelector({ onInsert }) {
 export default function TemplateSettings() {
     const [templateType, setTemplateType] = useState("");
     const [templateName, setTemplateName] = useState("");
-    const [htmlContent, setHtmlContent] = useState("");
     const [showTableGrid, setShowTableGrid] = useState(false);
     const [showHeadingDropdown, setShowHeadingDropdown] = useState(false);
-
+    const [showFontSizeDropdown, setShowFontSizeDropdown] = useState(false);
+    const [showColorPicker, setShowColorPicker] = useState(false);
 
     const tags = useMemo(() => [
         "REFERENCE_NUMBER", "PICKUP_DOOR_NUMBER", "DROPOFF_DOOR_NUMBER", "PICKUP_POINT", "DROPOFF_POINT",
@@ -114,26 +114,25 @@ export default function TemplateSettings() {
             StarterKit.configure({ bulletList: true, orderedList: true, listItem: false }),
             ListItem, Underline, Heading.configure({ levels: [1, 2, 3, 4] }),
             TextStyle, Color, Highlight, TextAlign.configure({ types: ["heading", "paragraph"] }),
-            Blockquote, CodeBlock, Table.configure({ resizable: true }),
-            TableRow, TableHeader, TableCell
+            Blockquote, CodeBlock,
+            Table.configure({ resizable: true }),
+            TableRow, TableHeader, TableCell,
+            HorizontalRule
         ],
-        content: "",
-        onUpdate: ({ editor }) => setHtmlContent(editor.getHTML())
+        content: "<p>Hello, start editing...</p>"
     });
 
     const handleTagClick = tag => editor && editor.chain().focus().insertContent(`{{${tag}}}`).run();
 
     const toolbarButtons = [
-        { label: "H1", type: "heading", attrs: { level: 1 } },
-        { label: "H2", type: "heading", attrs: { level: 2 } },
-        { label: "H3", type: "heading", attrs: { level: 3 } },
         { label: "B", type: "bold" }, { label: "I", type: "italic" },
         { label: "U", type: "underline" }, { label: "Highlight", type: "highlight" },
         { label: "Left", type: "textAlign", attrs: { align: "left" } },
         { label: "Center", type: "textAlign", attrs: { align: "center" } },
         { label: "Right", type: "textAlign", attrs: { align: "right" } },
         { label: "• List", type: "bulletList" }, { label: "1. List", type: "orderedList" },
-        { label: "❝ Quote", type: "blockquote" }, { label: "Code", type: "codeBlock" }
+        { label: "❝ Quote", type: "blockquote" }, { label: "Code", type: "codeBlock" },
+        { label: "HR", type: "horizontalRule" }
     ];
 
     const performAction = btn => {
@@ -143,12 +142,12 @@ export default function TemplateSettings() {
             case "italic": editor.chain().focus().toggleItalic().run(); break;
             case "underline": editor.chain().focus().toggleUnderline().run(); break;
             case "highlight": editor.chain().focus().toggleHighlight().run(); break;
-            case "heading": editor.chain().focus().toggleHeading(btn.attrs).run(); break;
             case "textAlign": editor.chain().focus().setTextAlign(btn.attrs.align).run(); break;
             case "bulletList": editor.chain().focus().toggleBulletList().run(); break;
             case "orderedList": editor.chain().focus().toggleOrderedList().run(); break;
             case "blockquote": editor.chain().focus().toggleBlockquote().run(); break;
             case "codeBlock": editor.chain().focus().toggleCodeBlock().run(); break;
+            case "horizontalRule": editor.chain().focus().setHorizontalRule().run(); break;
             default: break;
         }
     };
@@ -166,7 +165,6 @@ export default function TemplateSettings() {
             <div className="flex flex-col md:flex-row gap-4 p-2">
                 {/* Editor panel */}
                 <div className="w-full md:w-3/4 border rounded p-2 bg-white shadow-md">
-                    {/* Template select */}
                     <div className="flex flex-col md:flex-row items-center gap-4 px-4 mt-2 mb-4">
                         <select className="border p-2 rounded w-full" value={templateType} onChange={e => { setTemplateType(e.target.value); setTemplateName(""); }}>
                             <option value="">Select Template Type</option>
@@ -181,16 +179,12 @@ export default function TemplateSettings() {
 
                     {/* Toolbar */}
                     <div className="toolbar mb-2 flex flex-wrap gap-1 p-2 rounded border border-gray-300 bg-gray-100">
-
-                        {/* Headings Dropdown */}
+                        {/* Heading Dropdown */}
                         <div className="relative inline-block">
                             <button
                                 onClick={() => setShowHeadingDropdown(prev => !prev)}
                                 className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
-                            >
-                                H
-                            </button>
-
+                            >H</button>
                             {showHeadingDropdown && (
                                 <div className="absolute mt-2 bg-white border rounded shadow-md z-50">
                                     {[1, 2, 3, 4, 5, 6].map(level => (
@@ -201,36 +195,18 @@ export default function TemplateSettings() {
                                                 setShowHeadingDropdown(false);
                                             }}
                                             className="block w-full text-left px-3 py-1 text-sm text-[#757cdd] hover:bg-[#757cdd] hover:text-white"
-                                        >
-                                            H{level}
-                                        </button>
+                                        >H{level}</button>
                                     ))}
                                 </div>
                             )}
                         </div>
-
-                        {/* Other toolbar buttons */}
-                        {toolbarButtons
-                            .filter(btn => btn.type !== "heading") // remove H1, H2, H3
-                            .map((btn, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => performAction(btn)}
-                                    className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
-                                >
-                                    {btn.label}
-                                </button>
-                            ))}
 
                         {/* Table Dropdown */}
                         <div className="relative inline-block">
                             <button
                                 onClick={() => setShowTableGrid(prev => !prev)}
                                 className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
-                            >
-                                Table
-                            </button>
-
+                            >Table</button>
                             {showTableGrid && (
                                 <div className="absolute mt-2 bg-white border rounded shadow-lg p-2 z-50">
                                     <TableGridSelector
@@ -243,40 +219,19 @@ export default function TemplateSettings() {
                             )}
                         </div>
 
-                        <button
-                            onClick={() => editor && editor.chain().focus().addColumnAfter().run()}
-                            className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
-                        >
-                            + Col
-                        </button>
-
-                        <button
-                            onClick={() => editor && editor.chain().focus().addRowAfter().run()}
-                            className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
-                        >
-                            + Row
-                        </button>
+                        {/* Other buttons */}
+                        {toolbarButtons.map((btn, i) => (
+                            <button
+                                key={i}
+                                onClick={() => performAction(btn)}
+                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
+                            >{btn.label}</button>
+                        ))}
                     </div>
-
-
-                    {/* BubbleMenu */}
-                    {editor && (
-                        <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
-                            <button onClick={() => editor.chain().focus().addColumnAfter().run()}>+ Col</button>
-                            <button onClick={() => editor.chain().focus().addRowAfter().run()}>+ Row</button>
-                            <button onClick={() => editor.chain().focus().deleteTable().run()}>Delete Table</button>
-                        </BubbleMenu>
-                    )}
 
                     {/* Editor */}
                     <div className="prosemirror-wrapper border-b border-gray-400 min-h-[250px] p-2 focus:outline-none">
                         <EditorContent editor={editor} className="ProseMirror" />
-                    </div>
-
-                    {/* HTML Preview */}
-                    <div className="mt-4 p-2 border rounded bg-gray-50 min-h-[150px]">
-                        <h3 className="font-semibold mb-2 text-[#757cdd]">HTML Preview:</h3>
-                        <div className="overflow-auto text-sm" dangerouslySetInnerHTML={{ __html: htmlContent }} />
                     </div>
                 </div>
 
@@ -285,9 +240,11 @@ export default function TemplateSettings() {
                     <h2 className="text-2xl font-semibold mb-4 text-[#757cdd] text-center">Tags</h2>
                     <div className="flex-1 overflow-y-scroll">
                         {tags.map(t => (
-                            <button key={t} onClick={() => handleTagClick(t)} className="w-full mb-2 p-1 text-sm rounded border border-gray-300 text-[#757cdd] bg-white hover:bg-[#757cdd] hover:text-white transition-colors">
-                                {t}
-                            </button>
+                            <button
+                                key={t}
+                                onClick={() => handleTagClick(t)}
+                                className="w-full mb-2 p-1 text-sm rounded border border-gray-300 text-[#757cdd] bg-white hover:bg-[#757cdd] hover:text-white transition-colors"
+                            >{t}</button>
                         ))}
                     </div>
                 </div>
