@@ -13,7 +13,6 @@ import { Table } from "@tiptap/extension-table";
 import { TableRow } from "@tiptap/extension-table-row";
 import { TableCell } from "@tiptap/extension-table-cell";
 import { TableHeader } from "@tiptap/extension-table-header";
-import ListItem from "@tiptap/extension-list-item";
 import { HorizontalRule } from "@tiptap/extension-horizontal-rule";
 
 import "../../editor.css";
@@ -111,23 +110,35 @@ export default function TemplateSettings() {
 
     const editor = useEditor({
         extensions: [
-            StarterKit.configure({ bulletList: true, orderedList: true, listItem: false }),
-            ListItem, Underline, Heading.configure({ levels: [1, 2, 3, 4] }),
-            TextStyle, Color, Highlight, TextAlign.configure({ types: ["heading", "paragraph"] }),
-            Blockquote, CodeBlock,
+            StarterKit.configure({
+                bulletList: true,
+                orderedList: true,
+            }),
+            Underline,
+            Heading.configure({ levels: [1, 2, 3, 4] }),
+            TextStyle,
+            Color,
+            Highlight,
+            TextAlign.configure({ types: ["heading", "paragraph"] }),
+            Blockquote,
+            CodeBlock,
             Table.configure({ resizable: true }),
-            TableRow, TableHeader, TableCell,
+            TableRow,
+            TableHeader,
+            TableCell,
             HorizontalRule
         ],
-        content: "<p>Hello, start editing...</p>"
-    });
+
+        content: '',
+    })
+
 
     const handleTagClick = tag => editor && editor.chain().focus().insertContent(`{{${tag}}}`).run();
 
     // Toolbar buttons
     const toolbarButtons = [
         { label: "B", type: "bold" }, { label: "I", type: "italic" },
-        { label: "U", type: "underline" }, { label: "Highlight", type: "highlight" },
+        { label: "U", type: "underline" },
         { label: "Left", type: "textAlign", attrs: { align: "left" } },
         { label: "Center", type: "textAlign", attrs: { align: "center" } },
         { label: "Right", type: "textAlign", attrs: { align: "right" } },
@@ -138,20 +149,43 @@ export default function TemplateSettings() {
 
     const performAction = btn => {
         if (!editor) return;
+
         switch (btn.type) {
-            case "bold": editor.chain().focus().toggleBold().run(); break;
-            case "italic": editor.chain().focus().toggleItalic().run(); break;
-            case "underline": editor.chain().focus().toggleUnderline().run(); break;
-            case "highlight": editor.chain().focus().toggleHighlight().run(); break;
-            case "textAlign": editor.chain().focus().setTextAlign(btn.attrs.align).run(); break;
-            case "bulletList": editor.chain().focus().toggleBulletList().run(); break;
-            case "orderedList": editor.chain().focus().toggleOrderedList().run(); break;
-            case "blockquote": editor.chain().focus().toggleBlockquote().run(); break;
-            case "codeBlock": editor.chain().focus().toggleCodeBlock().run(); break;
-            case "horizontalRule": editor.chain().focus().setHorizontalRule().run(); break;
-            default: break;
+            case "bold":
+                editor.chain().focus().toggleBold().run();
+                break;
+            case "italic":
+                editor.chain().focus().toggleItalic().run();
+                break;
+            case "underline":
+                editor.chain().focus().toggleUnderline().run();
+                break;
+            case "highlight":
+                editor.chain().focus().toggleHighlight().run();
+                break;
+            case "textAlign":
+                editor.chain().focus().setTextAlign(btn.attrs.align).run();
+                break;
+            case "bulletList":
+                editor.chain().focus().toggleBulletList().run();
+                break;
+            case "orderedList":
+                editor.chain().focus().toggleOrderedList().run();
+                break;
+            case "blockquote":
+                editor.chain().focus().toggleBlockquote().run();
+                break;
+            case "codeBlock":
+                editor.chain().focus().toggleCodeBlock().run();
+                break;
+            case "horizontalRule":
+                editor.chain().focus().setHorizontalRule().run();
+                break;
+            default:
+                break;
         }
     };
+
 
     const insertTable = (rows, cols) => editor && editor.chain().focus().insertTable({ rows, cols, withHeaderRow: true }).run();
     const setFontSize = size => editor && editor.chain().focus().setMark('textStyle', { fontSize: size }).run();
@@ -236,9 +270,24 @@ export default function TemplateSettings() {
                         </div>
 
                         {/* Other buttons */}
-                        {toolbarButtons.map((btn, i) => (
-                            <button key={i} onClick={() => performAction(btn)} className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]">{btn.label}</button>
-                        ))}
+                        {toolbarButtons.map((btn, i) => {
+                            // List buttons ke liye active check
+                            let isActive = false;
+                            if (btn.type === 'bulletList') isActive = editor?.isActive('bulletList');
+                            if (btn.type === 'orderedList') isActive = editor?.isActive('orderedList');
+
+                            return (
+                                <button
+                                    key={i}
+                                    onClick={() => performAction(btn)}
+                                    className={`px-2 py-1 rounded border border-[#757cdd] ${isActive ? 'bg-[#757cdd] text-white' : 'bg-white text-[#757cdd]'
+                                        }`}
+                                >
+                                    {btn.label}
+                                </button>
+                            );
+                        })}
+
                     </div>
 
                     {/* Editor */}
