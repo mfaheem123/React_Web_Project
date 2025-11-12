@@ -70,12 +70,18 @@ export default function TemplateSettings() {
     const [showColorPicker, setShowColorPicker] = useState(false);
     const [, setEditorUpdate] = useState(0);
 
-    // Remove CustomListItem and StarterKit.configure({ listItem: false }) to fix headings & lists
+    // Font Sizes with greater step for visible difference
+    const fontSizes = [12, 16, 20, 24, 32, 40];
+
+    // Editor configuration: Added unique classes for headings and font sizes for more visible effect
     const editor = useEditor({
         extensions: [
             StarterKit,
             Underline,
-            Heading.configure({ levels: [1, 2, 3, 4, 5, 6] }),
+            Heading.configure({ 
+                levels: [1, 2, 3, 4, 5, 6], 
+                HTMLAttributes: { class: "template-heading" }
+            }),
             TextStyle,
             Color,
             Highlight,
@@ -89,6 +95,11 @@ export default function TemplateSettings() {
             HorizontalRule,
         ],
         content: "",
+        editorProps: {
+            attributes: {
+                class: 'focus:outline-none p-1 min-h-[200px]'
+            }
+        }
     });
 
     useEffect(() => {
@@ -154,6 +165,7 @@ export default function TemplateSettings() {
                 { value: "BOOKING_CONFIRM", label: "Booking Confirmation Email" },
                 { value: "BOOKING_CANCEL", label: "Booking Cancellation Email" },
                 { value: "REMINDER_EMAIL", label: "Reminder Email" },
+                { value: "QUOTATION_EMAIL", label: "Quotation Email" }, // Added Quotation option for EMAIL
             ],
             SMS: [
                 { value: "Driver_Dispatch", label: "Driver Dispatch SMS" },
@@ -167,23 +179,36 @@ export default function TemplateSettings() {
                     value: "Multi_Booking_Confirmation",
                     label: "Multi Booking Confirmation SMS",
                 },
-                { value: "booking_Quotation", label: "Booking Quotation SMS" },
+                { value: "booking_Quotation", label: "Booking Quotation SMS" }, // Already present
             ],
             NOTIFICATION: [
                 { value: "APP_BOOKING_ALERT", label: "Booking Push Notification" },
                 { value: "REMINDER_NOTIFY", label: "Reminder Notification" },
+                { value: "QUOTATION_NOTIFICATION", label: "Quotation Notification" }, // Added Quotation Notification
             ],
             INVOICE: [
                 { value: "INVOICE_TEMPLATE_1", label: "Invoice Template 1" },
                 { value: "INVOICE_TEMPLATE_2", label: "Invoice Template 2" },
+                { value: "QUOTATION_INVOICE", label: "Quotation Invoice" }, // Added Quotation Invoice
             ],
             REPORT: [
                 { value: "DAILY_REPORT", label: "Daily Booking Report" },
                 { value: "WEEKLY_REPORT", label: "Weekly Report" },
+                { value: "QUOTATION_REPORT", label: "Quotation Report" }, // Added Quotation Report
+            ],
+            QUOTATION: [
+                { value: "QUOTATION_EMAIL", label: "Quotation Email" },
+                { value: "QUOTATION_SMS", label: "Quotation SMS" },
+                { value: "QUOTATION_NOTIFICATION", label: "Quotation Notification" },
+                { value: "QUOTATION_INVOICE", label: "Quotation Invoice" },
+                { value: "QUOTATION_REPORT", label: "Quotation Report" }
             ],
         }),
         []
     );
+
+    // Add "QUOTATION" as a tab to selection types
+    const templateTypes = ["EMAIL", "SMS", "NOTIFICATION", "INVOICE", "REPORT", "QUOTATION"];
 
     const handleTagClick = (tag) =>
         editor && editor.chain().focus().insertContent(`{{${tag}}}`).run();
@@ -231,10 +256,19 @@ export default function TemplateSettings() {
         editor.chain().focus().insertTable({ rows, cols, withHeaderRow: true }).run();
 
     const setFontSize = (size) =>
-        editor && editor.chain().focus().setMark("textStyle", { fontSize: size }).run();
+        editor && editor.chain().focus().setMark("textStyle", { fontSize: `${size}px` }).run();
 
     const setTextColor = (color) =>
         editor && editor.chain().focus().setColor(color).run();
+
+    // --- Style helpers for toolbar buttons ---
+    const getToolbarButtonStyle = (isActive) => {
+        if (isActive) {
+            return "bg-white text-[#757cdd] border-[#757cdd] shadow-md scale-105";
+        } else {
+            return "bg-white text-[#757cdd] border-[#757cdd] hover:bg-[#e0e2ff]";
+        }
+    };
 
     const toolbarButtons = [
         { label: "B", type: "bold" },
@@ -249,6 +283,30 @@ export default function TemplateSettings() {
         { label: "Code", type: "codeBlock" },
         { label: "HR", type: "horizontalRule" },
     ];
+
+    useEffect(() => {
+        let style = document.getElementById("template-editor-headings-fontsize-style");
+        if (!style) {
+            style = document.createElement("style");
+            style.id = "template-editor-headings-fontsize-style";
+            style.innerHTML = `
+                .ProseMirror .template-heading { font-weight: bold; color: #000000; }
+                .ProseMirror h1 { font-size: 2.2rem !important; margin-bottom: 0.5em; }
+                .ProseMirror h2 { font-size: 1.8rem !important; margin-bottom: 0.4em; }
+                .ProseMirror h3 { font-size: 1.5rem !important; margin-bottom: 0.3em; }
+                .ProseMirror h4 { font-size: 1.2rem !important; margin-bottom: 0.2em; }
+                .ProseMirror h5 { font-size: 1rem !important; margin-bottom: 0.2em; }
+                .ProseMirror h6 { font-size: 0.9rem !important; margin-bottom: 0.2em; }
+                .ProseMirror [style*="font-size:12px"] { font-size:12px !important; }
+                .ProseMirror [style*="font-size:16px"] { font-size:16px !important; }
+                .ProseMirror [style*="font-size:20px"] { font-size:20px !important; }
+                .ProseMirror [style*="font-size:24px"] { font-size:24px !important; }
+                .ProseMirror [style*="font-size:32px"] { font-size:32px !important; }
+                .ProseMirror [style*="font-size:40px"] { font-size:40px !important; }
+            `;
+            document.head.appendChild(style);
+        }
+    }, []);
 
     return (
         <div>
@@ -277,7 +335,7 @@ export default function TemplateSettings() {
                             }}
                         >
                             <option value="">Select Template Type</option>
-                            {["EMAIL", "SMS", "NOTIFICATION", "INVOICE", "REPORT"].map((t) => (
+                            {templateTypes.map((t) => (
                                 <option key={t} value={t}>
                                     {t}
                                 </option>
@@ -309,7 +367,7 @@ export default function TemplateSettings() {
                         <div className="relative inline-block">
                             <button
                                 onClick={() => setShowHeadingDropdown((prev) => !prev)}
-                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
+                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd] font-semibold"
                             >
                                 H
                             </button>
@@ -322,7 +380,7 @@ export default function TemplateSettings() {
                                                 editor.chain().focus().toggleHeading({ level }).run();
                                                 setShowHeadingDropdown(false);
                                             }}
-                                            className="block w-full text-left px-3 py-1 text-sm text-[#757cdd] hover:bg-[#757cdd] hover:text-white"
+                                            className="block w-full text-left px-3 py-1 text-sm text-[#757cdd] hover:bg-[#757cdd] hover:text-white font-semibold"
                                         >
                                             H{level}
                                         </button>
@@ -335,20 +393,21 @@ export default function TemplateSettings() {
                         <div className="relative inline-block">
                             <button
                                 onClick={() => setShowFontSizeDropdown((prev) => !prev)}
-                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
+                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd] font-semibold"
                             >
                                 Font
                             </button>
                             {showFontSizeDropdown && (
                                 <div className="absolute mt-2 bg-white border rounded shadow-md z-50 max-h-40 overflow-y-auto">
-                                    {[12, 14, 16, 18, 20, 24, 28, 32].map((size) => (
+                                    {fontSizes.map((size) => (
                                         <button
                                             key={size}
                                             onClick={() => {
-                                                setFontSize(`${size}px`);
+                                                setFontSize(size);
                                                 setShowFontSizeDropdown(false);
                                             }}
-                                            className="block w-full text-left px-3 py-1 text-sm text-[#757cdd] hover:bg-[#757cdd] hover:text-white"
+                                            className={`block w-full text-left px-3 py-1 font-semibold text-sm text-[#757cdd] hover:bg-[#757cdd] hover:text-white`}
+                                            style={{ fontSize: `${size}px` }}
                                         >
                                             {size}px
                                         </button>
@@ -361,7 +420,7 @@ export default function TemplateSettings() {
                         <div className="relative inline-block">
                             <button
                                 onClick={() => setShowColorPicker((prev) => !prev)}
-                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
+                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd] font-semibold"
                             >
                                 Color
                             </button>
@@ -383,7 +442,7 @@ export default function TemplateSettings() {
                                                 setTextColor(c);
                                                 setShowColorPicker(false);
                                             }}
-                                            className="w-6 h-6 rounded"
+                                            className="w-6 h-6 rounded border border-gray-200"
                                             style={{ backgroundColor: c }}
                                         />
                                     ))}
@@ -395,7 +454,7 @@ export default function TemplateSettings() {
                         <div className="relative inline-block">
                             <button
                                 onClick={() => setShowTableGrid((prev) => !prev)}
-                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
+                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd] font-semibold"
                             >
                                 Table
                             </button>
@@ -436,15 +495,11 @@ export default function TemplateSettings() {
                                         return false;
                                 }
                             })();
-
                             return (
                                 <button
                                     key={i}
                                     onClick={() => performAction(btn)}
-                                    className={`px-2 py-1 rounded border border-[#757cdd] font-medium transition-all duration-200 ${isActive
-                                            ? "bg-[#757cdd] text-white shadow-md scale-105"
-                                            : "bg-white text-[#757cdd] hover:bg-[#e0e2ff]"
-                                        }`}
+                                    className={`px-2 py-1 rounded border font-medium transition-all duration-200 ${getToolbarButtonStyle(isActive)}`}
                                 >
                                     {btn.label}
                                 </button>
