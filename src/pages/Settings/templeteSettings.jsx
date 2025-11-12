@@ -1,30 +1,29 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
-import { TextStyle } from "@tiptap/extension-text-style";
-import { Color } from "@tiptap/extension-color";
+import Color from "@tiptap/extension-color";
 import Highlight from "@tiptap/extension-highlight";
 import Heading from "@tiptap/extension-heading";
 import TextAlign from "@tiptap/extension-text-align";
 import Blockquote from "@tiptap/extension-blockquote";
 import CodeBlock from "@tiptap/extension-code-block";
+import { TextStyle } from "@tiptap/extension-text-style";
 import { Table } from "@tiptap/extension-table";
-import { TableRow } from "@tiptap/extension-table-row";
-import { TableCell } from "@tiptap/extension-table-cell";
-import { TableHeader } from "@tiptap/extension-table-header";
-import { HorizontalRule } from "@tiptap/extension-horizontal-rule";
+import TableRow from "@tiptap/extension-table-row";
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
+import HorizontalRule from "@tiptap/extension-horizontal-rule";
 
 import "../../editor.css";
 import Navbar from "../../components/navbar";
 import RecentTabsHeader from "../../components/recentTabs";
 
-// Table grid selector component
+// Table grid selector
 function TableGridSelector({ onInsert }) {
     const max = 6;
     const [hoverR, setHoverR] = useState(0);
     const [hoverC, setHoverC] = useState(0);
-
     const cells = [];
     for (let r = 1; r <= max; r++) {
         const row = [];
@@ -37,14 +36,18 @@ function TableGridSelector({ onInsert }) {
             <div className="grid-popup p-2 bg-white border shadow rounded">
                 {cells.map((row, i) => (
                     <div key={i} className="flex">
-                        {row.map(cell => {
+                        {row.map((cell) => {
                             const active = cell.r <= hoverR && cell.c <= hoverC;
                             return (
                                 <div
                                     key={`${cell.r}-${cell.c}`}
-                                    onMouseEnter={() => { setHoverR(cell.r); setHoverC(cell.c); }}
+                                    onMouseEnter={() => {
+                                        setHoverR(cell.r);
+                                        setHoverC(cell.c);
+                                    }}
                                     onClick={() => onInsert(cell.r, cell.c)}
-                                    className={`w-6 h-6 m-1 border rounded-sm cursor-pointer ${active ? "bg-[#757cdd]" : "bg-white"}`}
+                                    className={`w-6 h-6 m-1 border rounded-sm cursor-pointer ${active ? "bg-[#757cdd]" : "bg-white"
+                                        }`}
                                 />
                             );
                         })}
@@ -65,57 +68,14 @@ export default function TemplateSettings() {
     const [showHeadingDropdown, setShowHeadingDropdown] = useState(false);
     const [showFontSizeDropdown, setShowFontSizeDropdown] = useState(false);
     const [showColorPicker, setShowColorPicker] = useState(false);
+    const [, setEditorUpdate] = useState(0);
 
-    const tags = useMemo(() => [
-        "REFERENCE_NUMBER", "PICKUP_DOOR_NUMBER", "DROPOFF_DOOR_NUMBER", "PICKUP_POINT", "DROPOFF_POINT",
-        "VIAPOINTS", "CUSTOMER", "CUSTOMER_EMAIL", "CUSTOMER_MOBILE", "CUSTOMER_TELEPHONE", "DATETIME",
-        "DATE", "TIME", "JOURNEY_TYPE", "ACCOUNT", "VEHICLE_TYPE", "VEHICLE_MAKE", "VEHICLE_MODEL",
-        "VEHICLE_COLOR", "VEHICLE_NUMBER", "DRIVER_NAME", "PASSENGERS", "CHILD_SEAT", "LUGGAGES",
-        "HAND_LUGGAGES", "NOTES", "PAYMENT_TYPE", "FARES", "COMPANY_CHARGES", "PARKING_CHARGES",
-        "CONGESTION_CHARGES", "MEET_AND_GREET_CHARGES", "WAITING_CHARGES", "EXTRA_DROP_CHARGES",
-        "CREDIT_CARD_CHARGES", "TOTAL_FARES", "RETURN_FARES", "MILES", "COMPANY_NAME", "COMPANY_TELEPHONE",
-        "COMPANY_EMAIL", "COMPANY_ADDRESS", "FLIGHT_NUMBER", "ARRIVING_FROM"
-    ], []);
-
-    const templateOptions = useMemo(() => ({
-        EMAIL: [
-            { value: "BOOKING_CONFIRM", label: "Booking Confirmation Email" },
-            { value: "BOOKING_CANCEL", label: "Booking Cancellation Email" },
-            { value: "REMINDER_EMAIL", label: "Reminder Email" },
-        ],
-        SMS: [
-            { value: "Driver_Dispatch", label: "Driver Dispatch SMS" },
-            { value: "Customer_Dispatch", label: "Customer Dispatch SMS" },
-            { value: "Normal_Arrival", label: "Normal Arrival SMS" },
-            { value: "Airport_Arrival", label: "Airport Arrival SMS" },
-            { value: "Booking_Confirmation", label: "Booking Confirmation SMS" },
-            { value: "Booking_Cancellation", label: "Booking Cancellation SMS" },
-            { value: "Booking_Complete", label: "Booking Completed SMS" },
-            { value: "Multi_Booking_Confirmation", label: "Multi Booking Confirmation SMS" },
-            { value: "booking_Quotation", label: "Booking Quotation SMS" },
-        ],
-        NOTIFICATION: [
-            { value: "APP_BOOKING_ALERT", label: "Booking Push Notification" },
-            { value: "REMINDER_NOTIFY", label: "Reminder Notification" },
-        ],
-        INVOICE: [
-            { value: "INVOICE_TEMPLATE_1", label: "Invoice Template 1" },
-            { value: "INVOICE_TEMPLATE_2", label: "Invoice Template 2" },
-        ],
-        REPORT: [
-            { value: "DAILY_REPORT", label: "Daily Booking Report" },
-            { value: "WEEKLY_REPORT", label: "Weekly Report" },
-        ]
-    }), []);
-
+    // Remove CustomListItem and StarterKit.configure({ listItem: false }) to fix headings & lists
     const editor = useEditor({
         extensions: [
-            StarterKit.configure({
-                bulletList: true,
-                orderedList: true,
-            }),
+            StarterKit,
             Underline,
-            Heading.configure({ levels: [1, 2, 3, 4] }),
+            Heading.configure({ levels: [1, 2, 3, 4, 5, 6] }),
             TextStyle,
             Color,
             Highlight,
@@ -126,30 +86,110 @@ export default function TemplateSettings() {
             TableRow,
             TableHeader,
             TableCell,
-            HorizontalRule
+            HorizontalRule,
         ],
+        content: "",
+    });
 
-        content: '',
-    })
-
-
-    const handleTagClick = tag => editor && editor.chain().focus().insertContent(`{{${tag}}}`).run();
-
-    // Toolbar buttons
-    const toolbarButtons = [
-        { label: "B", type: "bold" }, { label: "I", type: "italic" },
-        { label: "U", type: "underline" },
-        { label: "Left", type: "textAlign", attrs: { align: "left" } },
-        { label: "Center", type: "textAlign", attrs: { align: "center" } },
-        { label: "Right", type: "textAlign", attrs: { align: "right" } },
-        { label: "• List", type: "bulletList" }, { label: "1. List", type: "orderedList" },
-        { label: "❝ Quote", type: "blockquote" }, { label: "Code", type: "codeBlock" },
-        { label: "HR", type: "horizontalRule" }
-    ];
-
-    const performAction = btn => {
+    useEffect(() => {
         if (!editor) return;
+        const update = () => setEditorUpdate((x) => x + 1);
+        editor.on("transaction", update);
+        return () => editor.off("transaction", update);
+    }, [editor]);
 
+    const tags = useMemo(
+        () => [
+            "REFERENCE_NUMBER",
+            "PICKUP_DOOR_NUMBER",
+            "DROPOFF_DOOR_NUMBER",
+            "PICKUP_POINT",
+            "DROPOFF_POINT",
+            "VIAPOINTS",
+            "CUSTOMER",
+            "CUSTOMER_EMAIL",
+            "CUSTOMER_MOBILE",
+            "CUSTOMER_TELEPHONE",
+            "DATETIME",
+            "DATE",
+            "TIME",
+            "JOURNEY_TYPE",
+            "ACCOUNT",
+            "VEHICLE_TYPE",
+            "VEHICLE_MAKE",
+            "VEHICLE_MODEL",
+            "VEHICLE_COLOR",
+            "VEHICLE_NUMBER",
+            "DRIVER_NAME",
+            "PASSENGERS",
+            "CHILD_SEAT",
+            "LUGGAGES",
+            "HAND_LUGGAGES",
+            "NOTES",
+            "PAYMENT_TYPE",
+            "FARES",
+            "COMPANY_CHARGES",
+            "PARKING_CHARGES",
+            "CONGESTION_CHARGES",
+            "MEET_AND_GREET_CHARGES",
+            "WAITING_CHARGES",
+            "EXTRA_DROP_CHARGES",
+            "CREDIT_CARD_CHARGES",
+            "TOTAL_FARES",
+            "RETURN_FARES",
+            "MILES",
+            "COMPANY_NAME",
+            "COMPANY_TELEPHONE",
+            "COMPANY_EMAIL",
+            "COMPANY_ADDRESS",
+            "FLIGHT_NUMBER",
+            "ARRIVING_FROM",
+        ],
+        []
+    );
+
+    const templateOptions = useMemo(
+        () => ({
+            EMAIL: [
+                { value: "BOOKING_CONFIRM", label: "Booking Confirmation Email" },
+                { value: "BOOKING_CANCEL", label: "Booking Cancellation Email" },
+                { value: "REMINDER_EMAIL", label: "Reminder Email" },
+            ],
+            SMS: [
+                { value: "Driver_Dispatch", label: "Driver Dispatch SMS" },
+                { value: "Customer_Dispatch", label: "Customer Dispatch SMS" },
+                { value: "Normal_Arrival", label: "Normal Arrival SMS" },
+                { value: "Airport_Arrival", label: "Airport Arrival SMS" },
+                { value: "Booking_Confirmation", label: "Booking Confirmation SMS" },
+                { value: "Booking_Cancellation", label: "Booking Cancellation SMS" },
+                { value: "Booking_Complete", label: "Booking Completed SMS" },
+                {
+                    value: "Multi_Booking_Confirmation",
+                    label: "Multi Booking Confirmation SMS",
+                },
+                { value: "booking_Quotation", label: "Booking Quotation SMS" },
+            ],
+            NOTIFICATION: [
+                { value: "APP_BOOKING_ALERT", label: "Booking Push Notification" },
+                { value: "REMINDER_NOTIFY", label: "Reminder Notification" },
+            ],
+            INVOICE: [
+                { value: "INVOICE_TEMPLATE_1", label: "Invoice Template 1" },
+                { value: "INVOICE_TEMPLATE_2", label: "Invoice Template 2" },
+            ],
+            REPORT: [
+                { value: "DAILY_REPORT", label: "Daily Booking Report" },
+                { value: "WEEKLY_REPORT", label: "Weekly Report" },
+            ],
+        }),
+        []
+    );
+
+    const handleTagClick = (tag) =>
+        editor && editor.chain().focus().insertContent(`{{${tag}}}`).run();
+
+    const performAction = (btn) => {
+        if (!editor) return;
         switch (btn.type) {
             case "bold":
                 editor.chain().focus().toggleBold().run();
@@ -186,84 +226,186 @@ export default function TemplateSettings() {
         }
     };
 
+    const insertTable = (rows, cols) =>
+        editor &&
+        editor.chain().focus().insertTable({ rows, cols, withHeaderRow: true }).run();
 
-    const insertTable = (rows, cols) => editor && editor.chain().focus().insertTable({ rows, cols, withHeaderRow: true }).run();
-    const setFontSize = size => editor && editor.chain().focus().setMark('textStyle', { fontSize: size }).run();
-    const setTextColor = color => editor && editor.chain().focus().setColor(color).run();
+    const setFontSize = (size) =>
+        editor && editor.chain().focus().setMark("textStyle", { fontSize: size }).run();
+
+    const setTextColor = (color) =>
+        editor && editor.chain().focus().setColor(color).run();
+
+    const toolbarButtons = [
+        { label: "B", type: "bold" },
+        { label: "I", type: "italic" },
+        { label: "U", type: "underline" },
+        { label: "Left", type: "textAlign", attrs: { align: "left" } },
+        { label: "Center", type: "textAlign", attrs: { align: "center" } },
+        { label: "Right", type: "textAlign", attrs: { align: "right" } },
+        { label: "• List", type: "bulletList" },
+        { label: "1. List", type: "orderedList" },
+        { label: "❝ Quote", type: "blockquote" },
+        { label: "Code", type: "codeBlock" },
+        { label: "HR", type: "horizontalRule" },
+    ];
 
     return (
         <div>
             <Navbar />
-            <div className="mt-20"><RecentTabsHeader /></div>
+            <div className="mt-20">
+                <RecentTabsHeader />
+            </div>
+
             <div className="flex justify-center mt-5">
-                <h2 className="text-3xl font-semibold mb-6 text-[#757cdd] text-center">Template Settings</h2>
+                <h2 className="text-3xl font-semibold mb-6 text-[#757cdd] text-center">
+                    Template Settings
+                </h2>
             </div>
 
             <div className="flex flex-col md:flex-row gap-4 p-2">
                 {/* Editor panel */}
                 <div className="w-full md:w-3/4 border rounded p-2 bg-white shadow-md">
-
+                    {/* Top selectors */}
                     <div className="flex flex-col md:flex-row items-center gap-4 px-4 mt-2 mb-4">
-                        <select className="border p-2 rounded w-full" value={templateType} onChange={e => { setTemplateType(e.target.value); setTemplateName(""); }}>
+                        <select
+                            className="border p-2 rounded w-full"
+                            value={templateType}
+                            onChange={(e) => {
+                                setTemplateType(e.target.value);
+                                setTemplateName("");
+                            }}
+                        >
                             <option value="">Select Template Type</option>
-                            {["EMAIL", "SMS", "NOTIFICATION", "INVOICE", "REPORT"].map(t => <option key={t} value={t}>{t}</option>)}
+                            {["EMAIL", "SMS", "NOTIFICATION", "INVOICE", "REPORT"].map((t) => (
+                                <option key={t} value={t}>
+                                    {t}
+                                </option>
+                            ))}
                         </select>
-                        <select className="border p-2 rounded w-full" value={templateName} onChange={e => setTemplateName(e.target.value)} disabled={!templateType}>
+
+                        <select
+                            className="border p-2 rounded w-full"
+                            value={templateName}
+                            onChange={(e) => setTemplateName(e.target.value)}
+                            disabled={!templateType}
+                        >
                             <option value="">Select Template</option>
-                            {templateType && templateOptions[templateType]?.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+                            {templateType &&
+                                templateOptions[templateType]?.map((opt) => (
+                                    <option key={opt.value} value={opt.value}>
+                                        {opt.label}
+                                    </option>
+                                ))}
                         </select>
-                        <button className="bg-[#757cdd] text-white px-5 py-2 rounded font-semibold">SAVE</button>
+                        <button className="bg-[#757cdd] text-white px-5 py-2 rounded font-semibold">
+                            SAVE
+                        </button>
                     </div>
 
                     {/* Toolbar */}
                     <div className="toolbar mb-2 flex flex-wrap gap-1 p-2 rounded border border-gray-300 bg-gray-100">
-
-                        {/* Heading Dropdown */}
+                        {/* Heading dropdown */}
                         <div className="relative inline-block">
-                            <button onClick={() => setShowHeadingDropdown(prev => !prev)} className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]">H</button>
+                            <button
+                                onClick={() => setShowHeadingDropdown((prev) => !prev)}
+                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
+                            >
+                                H
+                            </button>
                             {showHeadingDropdown && (
                                 <div className="absolute mt-2 bg-white border rounded shadow-md z-50">
-                                    {[1, 2, 3, 4, 5, 6].map(level => (
-                                        <button key={level} onClick={() => { editor.chain().focus().toggleHeading({ level }).run(); setShowHeadingDropdown(false); }}
-                                            className="block w-full text-left px-3 py-1 text-sm text-[#757cdd] hover:bg-[#757cdd] hover:text-white">H{level}</button>
+                                    {[1, 2, 3, 4, 5, 6].map((level) => (
+                                        <button
+                                            key={level}
+                                            onClick={() => {
+                                                editor.chain().focus().toggleHeading({ level }).run();
+                                                setShowHeadingDropdown(false);
+                                            }}
+                                            className="block w-full text-left px-3 py-1 text-sm text-[#757cdd] hover:bg-[#757cdd] hover:text-white"
+                                        >
+                                            H{level}
+                                        </button>
                                     ))}
                                 </div>
                             )}
                         </div>
 
-                        {/* Font Size Dropdown */}
+                        {/* Font size */}
                         <div className="relative inline-block">
-                            <button onClick={() => setShowFontSizeDropdown(prev => !prev)} className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]">Font</button>
+                            <button
+                                onClick={() => setShowFontSizeDropdown((prev) => !prev)}
+                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
+                            >
+                                Font
+                            </button>
                             {showFontSizeDropdown && (
                                 <div className="absolute mt-2 bg-white border rounded shadow-md z-50 max-h-40 overflow-y-auto">
-                                    {[12, 14, 16, 18, 20, 24, 28, 32].map(size => (
-                                        <button key={size} onClick={() => { setFontSize(`${size}px`); setShowFontSizeDropdown(false); }}
-                                            className="block w-full text-left px-3 py-1 text-sm text-[#757cdd] hover:bg-[#757cdd] hover:text-white">{size}px</button>
+                                    {[12, 14, 16, 18, 20, 24, 28, 32].map((size) => (
+                                        <button
+                                            key={size}
+                                            onClick={() => {
+                                                setFontSize(`${size}px`);
+                                                setShowFontSizeDropdown(false);
+                                            }}
+                                            className="block w-full text-left px-3 py-1 text-sm text-[#757cdd] hover:bg-[#757cdd] hover:text-white"
+                                        >
+                                            {size}px
+                                        </button>
                                     ))}
                                 </div>
                             )}
                         </div>
 
-                        {/* Color Picker */}
+                        {/* Color picker */}
                         <div className="relative inline-block">
-                            <button onClick={() => setShowColorPicker(prev => !prev)} className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]">Color</button>
+                            <button
+                                onClick={() => setShowColorPicker((prev) => !prev)}
+                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
+                            >
+                                Color
+                            </button>
                             {showColorPicker && (
                                 <div className="absolute mt-2 bg-white border rounded shadow-md z-50 p-2 flex flex-wrap gap-1 w-36">
-                                    {["#000000", "#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffa500", "#800080"].map(c => (
-                                        <button key={c} onClick={() => { setTextColor(c); setShowColorPicker(false); }}
-                                            className="w-6 h-6 rounded" style={{ backgroundColor: c }} />
+                                    {[
+                                        "#000000",
+                                        "#ff0000",
+                                        "#00ff00",
+                                        "#0000ff",
+                                        "#ff00ff",
+                                        "#00ffff",
+                                        "#ffa500",
+                                        "#800080",
+                                    ].map((c) => (
+                                        <button
+                                            key={c}
+                                            onClick={() => {
+                                                setTextColor(c);
+                                                setShowColorPicker(false);
+                                            }}
+                                            className="w-6 h-6 rounded"
+                                            style={{ backgroundColor: c }}
+                                        />
                                     ))}
                                 </div>
                             )}
                         </div>
 
-                        {/* Table Dropdown */}
+                        {/* Table selector */}
                         <div className="relative inline-block">
-                            <button onClick={() => setShowTableGrid(prev => !prev)} className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]">Table</button>
+                            <button
+                                onClick={() => setShowTableGrid((prev) => !prev)}
+                                className="px-2 py-1 rounded bg-white text-[#757cdd] border border-[#757cdd]"
+                            >
+                                Table
+                            </button>
                             {showTableGrid && (
                                 <div className="absolute mt-2 bg-white border rounded shadow-lg p-2 z-50">
                                     <TableGridSelector
-                                        onInsert={(r, c) => { insertTable(r, c); setShowTableGrid(false); }}
+                                        onInsert={(r, c) => {
+                                            insertTable(r, c);
+                                            setShowTableGrid(false);
+                                        }}
                                     />
                                 </div>
                             )}
@@ -271,23 +413,43 @@ export default function TemplateSettings() {
 
                         {/* Other buttons */}
                         {toolbarButtons.map((btn, i) => {
-                            // List buttons ke liye active check
-                            let isActive = false;
-                            if (btn.type === 'bulletList') isActive = editor?.isActive('bulletList');
-                            if (btn.type === 'orderedList') isActive = editor?.isActive('orderedList');
+                            if (!editor) return null;
+                            const isActive = (() => {
+                                switch (btn.type) {
+                                    case "bold":
+                                        return editor.isActive("bold");
+                                    case "italic":
+                                        return editor.isActive("italic");
+                                    case "underline":
+                                        return editor.isActive("underline");
+                                    case "textAlign":
+                                        return editor.isActive({ textAlign: btn.attrs.align });
+                                    case "bulletList":
+                                        return editor.isActive("bulletList");
+                                    case "orderedList":
+                                        return editor.isActive("orderedList");
+                                    case "blockquote":
+                                        return editor.isActive("blockquote");
+                                    case "codeBlock":
+                                        return editor.isActive("codeBlock");
+                                    default:
+                                        return false;
+                                }
+                            })();
 
                             return (
                                 <button
                                     key={i}
                                     onClick={() => performAction(btn)}
-                                    className={`px-2 py-1 rounded border border-[#757cdd] ${isActive ? 'bg-[#757cdd] text-white' : 'bg-white text-[#757cdd]'
+                                    className={`px-2 py-1 rounded border border-[#757cdd] font-medium transition-all duration-200 ${isActive
+                                            ? "bg-[#757cdd] text-white shadow-md scale-105"
+                                            : "bg-white text-[#757cdd] hover:bg-[#e0e2ff]"
                                         }`}
                                 >
                                     {btn.label}
                                 </button>
                             );
                         })}
-
                     </div>
 
                     {/* Editor */}
@@ -298,10 +460,18 @@ export default function TemplateSettings() {
 
                 {/* Tags panel */}
                 <div className="w-full md:w-1/4 border rounded p-2 bg-white flex flex-col h-[55vh]">
-                    <h2 className="text-2xl font-semibold mb-4 text-[#757cdd] text-center">Tags</h2>
+                    <h2 className="text-2xl font-semibold mb-4 text-[#757cdd] text-center">
+                        Tags
+                    </h2>
                     <div className="flex-1 overflow-y-scroll">
-                        {tags.map(t => (
-                            <button key={t} onClick={() => handleTagClick(t)} className="w-full mb-2 p-1 text-sm rounded border border-gray-300 text-[#757cdd] bg-white hover:bg-[#757cdd] hover:text-white transition-colors">{t}</button>
+                        {tags.map((t) => (
+                            <button
+                                key={t}
+                                onClick={() => handleTagClick(t)}
+                                className="w-full mb-2 p-1 text-sm rounded border border-gray-300 text-[#757cdd] bg-white hover:bg-[#757cdd] hover:text-white transition-colors"
+                            >
+                                {t}
+                            </button>
                         ))}
                     </div>
                 </div>
